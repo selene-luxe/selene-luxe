@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 1. SEO & PINTEREST RICH PIN TAGS (Crucial!) -->
+    <title>Selene Luxe | Curated Fashion & Aesthetic Finds</title>
+    <meta name="description" content="Top rated aesthetic fashion, home decor, and luxury finds curated by Selene Luxe.">
+    <meta property="og:title" content="Selene Luxe | Curated Fashion">
+    <meta property="og:description" content="Discover the best luxury aesthetic finds.">
+    <meta property="og:image" content="https://selene-luxe.github.io/images/banner.jpg"> <!-- Upload an image later -->
+    <meta property="og:url" content="https://selene-luxe.github.io">
+    <meta property="og:type" content="website">
+
+    <!-- 2. The "Make it Pretty" Framework (Pico.css) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    
+    <!-- Custom CSS for "Selene Luxe" vibes -->
+    <style>
+        :root {
+            --primary: #c6a87c; /* Gold/Beige Luxury Color */
+            --primary-hover: #b08d55;
+        }
+        body { font-family: 'Helvetica Neue', sans-serif; }
+        header { text-align: center; padding: 3rem 0; border-bottom: 1px solid #eee; }
+        .brand-name { font-size: 2.5rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; color: #333; }
+        .product-card { padding: 20px; border: 1px solid #f0f0f0; border-radius: 8px; text-align: center; transition: transform 0.2s; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .product-img { width: 100%; height: 300px; object-fit: cover; border-radius: 4px; margin-bottom: 15px; }
+        .cta-button { width: 100%; margin-top: 10px; }
+        /* Clean Link Styling */
+        a { text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="container">
+        <div class="brand-name">Selene Luxe</div>
+        <p>Curated Aesthetics for the Modern Lifestyle</p>
+        <nav>
+            <ul>
+                <li><a href="#fashion">Fashion</a></li>
+                <li><a href="#decor">Home Decor</a></li>
+                <li><a href="#beauty">Beauty</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT GRID -->
+    <main class="container">
+        <h3>Trending Now</h3>
+        
+        <!-- GRID SYSTEM (Automatic responsiveness) -->
+        <div class="grid">
+            
+            <!-- PRODUCT 1 -->
+            <article class="product-card">
+                <!-- Replace src with your image -->
+                <img src="https://via.placeholder.com/400x500" alt="Beige Trench Coat" class="product-img">
+                <h5>Classic Beige Trench Coat</h5>
+                <p>⭐⭐⭐⭐⭐ (1.2k Reviews)</p>
+                <!-- AFFILIATE LINK HERE -->
+                <a href="https://amzn.to/EXAMPLE" target="_blank" role="button" class="cta-button">Shop Now</a>
+            </article>
+
+            <!-- PRODUCT 2 -->
+            <article class="product-card">
+                <img src="https://via.placeholder.com/400x500" alt="Gold Jewelry Set" class="product-img">
+                <h5>Vintage Gold Jewelry Set</h5>
+                <p>⭐⭐⭐⭐⭐ (850 Reviews)</p>
+                <a href="https://amzn.to/EXAMPLE" target="_blank" role="button" class="cta-button">Shop Now</a>
+            </article>
+
+            <!-- PRODUCT 3 -->
+            <article class="product-card">
+                <img src="https://via.placeholder.com/400x500" alt="Silk Scarf" class="product-img">
+                <h5>100% Mulberry Silk Scarf</h5>
+                <p>⭐⭐⭐⭐⭐ (200 Reviews)</p>
+                <a href="https://amzn.to/EXAMPLE" target="_blank" role="button" class="cta-button">Shop Now</a>
+            </article>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="container" style="text-align: center; margin-top: 50px; font-size: 0.8rem; color: #777;">
+        <p>&copy; 2026 Selene Luxe. All rights reserved.</p>
+        <p>Disclaimer: This site contains affiliate links. We may earn a commission if you buy something.</p>
+    </footer>
+
+</body>
+</html>
