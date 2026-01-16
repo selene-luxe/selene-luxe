@@ -1,65 +1,204 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- 1. SEO & PINTEREST RICH PIN TAGS (Crucial!) -->
-    <title>Selene Luxe | Curated Fashion & Aesthetic Finds</title>
-    <meta name="description" content="Top rated aesthetic fashion, home decor, and luxury finds curated by Selene Luxe.">
-    <meta property="og:title" content="Selene Luxe | Curated Fashion">
-    <meta property="og:description" content="Discover the best luxury aesthetic finds.">
-    <meta property="og:image" content="https://selene-luxe.github.io/images/banner.jpg"> <!-- Upload an image later -->
-    <meta property="og:url" content="https://selene-luxe.github.io">
-    <meta property="og:type" content="website">
+    <!-- SEO & Pinterest Data -->
+    <title>Selene Luxe | Curated Aesthetic Fashion</title>
+    <meta name="description" content="Discover luxury fashion finds, aesthetic home decor, and beauty essentials curated by Selene Luxe.">
 
-    <!-- 2. The "Make it Pretty" Framework (Pico.css) -->
+    <!-- 1. PICO CSS (Structure) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     
-    <!-- Custom CSS for "Selene Luxe" vibes -->
+    <!-- 2. GOOGLE FONTS (The "Trust" Factor) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <!-- 3. CUSTOM LUXURY STYLES -->
     <style>
         :root {
-            --primary: #c6a87c; /* Gold/Beige Luxury Color */
-            --primary-hover: #b08d55;
+            /* LUXURY COLOR PALETTE */
+            --background: #FAFAF9; /* Warm Stone/Cream (Not pure white) */
+            --text-main: #2C2C2C;    /* Soft Black (Charcoal) */
+            --gold-accent: #C5A059;  /* Muted Gold */
+            --card-bg: #FFFFFF;
         }
-        body { font-family: 'Helvetica Neue', sans-serif; }
-        header { text-align: center; padding: 3rem 0; border-bottom: 1px solid #eee; }
-        .brand-name { font-size: 2.5rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; color: #333; }
-        .product-card { padding: 20px; border: 1px solid #f0f0f0; border-radius: 8px; text-align: center; transition: transform 0.2s; }
-        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .product-img { width: 100%; height: 300px; object-fit: cover; border-radius: 4px; margin-bottom: 15px; }
-        .cta-button { width: 100%; margin-top: 10px; }
-        /* Clean Link Styling */
-        a { text-decoration: none; }
+
+        body {
+            background-color: var(--background);
+            color: var(--text-main);
+            font-family: 'Lato', sans-serif; /* Clean body text */
+        }
+
+        /* HEADINGS - Magazine Style */
+        h1, h2, h3, .brand-logo {
+            font-family: 'Playfair Display', serif;
+            color: #1a1a1a;
+            letter-spacing: -0.5px;
+        }
+
+        /* NAVIGATION */
+        nav {
+            background: #fff;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e5e5e5;
+            margin-bottom: 0;
+        }
+        .brand-logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* HERO SECTION (The Big Banner) */
+        .hero {
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop'); 
+            background-size: cover;
+            background-position: center 30%;
+            height: 60vh; /* Takes up 60% of the screen height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+        /* Dark overlay so text is readable */
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.3);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            background: rgba(255,255,255,0.9);
+            padding: 2rem 3rem;
+            max-width: 600px;
+            border-radius: 4px;
+        }
+        .hero h2 { color: #222; margin-bottom: 0.5rem; }
+
+        /* PRODUCT CARDS */
+        .product-card {
+            background: var(--card-bg);
+            border: none;
+            border-radius: 0; /* Sharp corners look more expensive */
+            padding: 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        .product-img {
+            width: 100%;
+            height: 400px; /* Taller images are better for fashion */
+            object-fit: cover;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .card-details { padding: 1.5rem; text-align: center; }
+        .price { color: var(--gold-accent); font-weight: bold; margin-bottom: 1rem; display: block; }
+        
+        /* GOLD BUTTONS */
+        a[role="button"] {
+            background-color: #1a1a1a;
+            border: 1px solid #1a1a1a;
+            border-radius: 0;
+            font-family: 'Lato', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            padding: 12px 20px;
+        }
+        a[role="button"]:hover {
+            background-color: var(--gold-accent);
+            border-color: var(--gold-accent);
+            color: white;
+        }
+        
+        /* GRID FIX FOR MOBILE */
+        .grid {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Bigger images */
+            gap: 2rem;
+        }
     </style>
 </head>
-<<body>
-    <!-- Main Container keeps content away from edges -->
-    <main class="container">
-        
-        <h1>Selene Luxe Favorites</h1>
+<body>
 
-        <!-- The GRID: This makes it responsive automatically -->
+    <!-- NAVBAR -->
+    <nav class="container-fluid">
+        <ul>
+            <li><strong class="brand-logo">Selene Luxe</strong></li>
+        </ul>
+        <ul>
+            <li><a href="#" class="secondary">Fashion</a></li>
+            <li><a href="#" class="secondary">Beauty</a></li>
+            <li><a href="#" class="secondary">Decor</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO BANNER (This fixes the "Empty" look) -->
+    <div class="hero">
+        <div class="hero-content">
+            <h2>The Winter Collection</h2>
+            <p>Curated elegance for the modern muse.</p>
+        </div>
+    </div>
+
+    <!-- MAIN PRODUCTS -->
+    <main class="container">
+        <h3 style="text-align: center; margin-bottom: 2rem;">Trending Now</h3>
+        
         <div class="grid">
 
-            <!-- ITEM 1 -->
-            <article>
-                <img src="your-image.jpg">
-                <h3>Product Name</h3>
-                <p>⭐⭐⭐⭐⭐</p>
-                <a href="YOUR_AFFILIATE_LINK" role="button">Buy Now</a>
+            <!-- PRODUCT 1 (Fashion) -->
+            <article class="product-card">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000&auto=format&fit=crop" class="product-img" alt="Fashion Model">
+                <div class="card-details">
+                    <h4>Silk Satin Midi Dress</h4>
+                    <span class="price">$45.00</span>
+                    <p>⭐⭐⭐⭐⭐</p>
+                    <a href="#" role="button">Shop This Look</a>
+                </div>
             </article>
 
-            <!-- ITEM 2 -->
-            <article>
-                <img src="your-image-2.jpg">
-                <h3>Product Name 2</h3>
-                <p>⭐⭐⭐⭐⭐</p>
-                <a href="YOUR_AFFILIATE_LINK_2" role="button">Buy Now</a>
+            <!-- PRODUCT 2 (Jewelry) -->
+            <article class="product-card">
+                <img src="https://images.unsplash.com/photo-1599643478518-17488fbbcd75?q=80&w=1000&auto=format&fit=crop" class="product-img" alt="Gold Jewelry">
+                <div class="card-details">
+                    <h4>Vintage Gold Layered Necklace</h4>
+                    <span class="price">$22.99</span>
+                    <p>⭐⭐⭐⭐⭐</p>
+                    <a href="#" role="button">Shop Accessories</a>
+                </div>
+            </article>
+
+            <!-- PRODUCT 3 (Decor) -->
+            <article class="product-card">
+                <img src="https://images.unsplash.com/photo-1616046229478-9901c5536a45?q=80&w=1000&auto=format&fit=crop" class="product-img" alt="Home Decor">
+                <div class="card-details">
+                    <h4>Minimalist Ceramic Vase</h4>
+                    <span class="price">$34.50</span>
+                    <p>⭐⭐⭐⭐⭐</p>
+                    <a href="#" role="button">Shop Decor</a>
+                </div>
             </article>
 
         </div>
     </main>
+
+    <!-- FOOTER -->
+    <footer class="container" style="text-align: center; margin-top: 4rem; padding-bottom: 2rem; color: #888;">
+        <small>&copy; 2026 Selene Luxe. All rights reserved.<br>
+        As an Amazon Associate I earn from qualifying purchases.</small>
+    </footer>
+
 </body>
 </html>
