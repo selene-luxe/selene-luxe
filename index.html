@@ -18,6 +18,9 @@
 
     <!-- 3. CUSTOM LUXURY STYLES -->
     <style>
+        html {
+    scroll-behavior: smooth;
+}
         :root {
             /* LUXURY COLOR PALETTE */
             --background: #FAFAF9; /* Warm Stone/Cream (Not pure white) */
@@ -138,9 +141,9 @@
             <li><strong class="brand-logo">Selene Luxe</strong></li>
         </ul>
         <ul>
-            <li><a href="#" class="secondary">Fashion</a></li>
-            <li><a href="#" class="secondary">Beauty</a></li>
-            <li><a href="#" class="secondary">Decor</a></li>
+            <li><a href="#fashion" class="secondary">Fashion</a></li>
+            <li><a href="#beauty" class="secondary">Beauty</a></li>
+            <li><a href="#decor" class="secondary">Decor</a></li>
         </ul>
     </nav>
 
@@ -154,45 +157,69 @@
 
     <!-- MAIN PRODUCTS -->
     <main class="container">
-        <h3 style="text-align: center; margin-bottom: 2rem;">Trending Now</h3>
-        
+    
+    <!-- 1. FASHION SECTION -->
+    <!-- id="fashion" matches the link href="#fashion" -->
+    <section id="fashion" style="padding-top: 60px;">
+        <h3>Fashion Edits</h3>
         <div class="grid">
-
-            <!-- PRODUCT 1 (Fashion) -->
+            
+            <!-- Fashion Item 1 -->
             <article class="product-card">
-                <img src="images/womens.jpg" class="product-img" alt="Fashion Model">
+                <img src="images/dress.jpg" class="product-img" alt="Dress">
                 <div class="card-details">
-                    <h4>Jeans Skirt/ Skirt/ Outfit</h4>
+                    <h4>Silk Dress</h4>
                     <span class="price">$45.00</span>
-                    <p>⭐⭐⭐⭐⭐</p>
-                    <a href="#" role="button">Shop This Look</a>
+                    <a href="/shop/dress" role="button">Shop Now</a>
                 </div>
             </article>
 
-            <!-- PRODUCT 2 (Jewelry) -->
-            <article class="product-card">
-                <img src="images/neck.jpg" class="product-img" alt="Gold Jewelry">
-                <div class="card-details">
-                    <h4>Ancient Egyptian Jewelry/ Jewelry</h4>
-                    <span class="price">$22.99</span>
-                    <p>⭐⭐⭐⭐⭐</p>
-                    <a href="#" role="button">Shop Accessories</a>
-                </div>
-            </article>
+            <!-- Add more fashion items here -->
 
-            <!-- PRODUCT 3 (Decor) -->
+        </div>
+    </section>
+
+    <hr> <!-- A nice divider line -->
+
+    <!-- 2. BEAUTY SECTION -->
+    <section id="beauty" style="padding-top: 60px;">
+        <h3>Beauty Favorites</h3>
+        <div class="grid">
+            
+            <!-- Beauty Item 1 -->
             <article class="product-card">
-                <img src="images/mens.jpg" alt="Home Decor">
+                <img src="images/lipstick.jpg" class="product-img" alt="Lipstick">
                 <div class="card-details">
-                    <h4>Men's Outfit/ Dress/ Coat</h4>
-                    <span class="price">$34.50</span>
-                    <p>⭐⭐⭐⭐⭐</p>
-                    <a href="#" role="button">Shop Decor</a>
+                    <h4>Matte Red Lip</h4>
+                    <span class="price">$22.00</span>
+                    <a href="/shop/lipstick" role="button">Shop Now</a>
                 </div>
             </article>
 
         </div>
-    </main>
+    </section>
+
+    <hr>
+
+    <!-- 3. DECOR SECTION -->
+    <section id="decor" style="padding-top: 60px;">
+        <h3>Home Decor</h3>
+        <div class="grid">
+            
+            <!-- Decor Item 1 -->
+            <article class="product-card">
+                <img src="images/vase.jpg" class="product-img" alt="Vase">
+                <div class="card-details">
+                    <h4>Ceramic Vase</h4>
+                    <span class="price">$35.00</span>
+                    <a href="/shop/vase" role="button">Shop Now</a>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+</main> 
 
     <!-- FOOTER -->
     <footer class="container" style="text-align: center; margin-top: 4rem; padding-bottom: 2rem; color: #888;">
