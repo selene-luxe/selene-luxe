@@ -1,0 +1,143 @@
+/* style.css */
+
+/* 1. GLOBAL SETTINGS */
+:root {
+    --primary: #1a1a1a;
+    --background: #FAFAF9;
+    --gold: #C5A059;
+}
+
+body {
+    background-color: var(--background);
+    font-family: 'Lato', sans-serif;
+    margin: 0; /* Removes default browser gaps */
+}
+
+/* 2. NAVIGATION (The "Gap" Fix is here) */
+nav {
+    background: #fff;
+    padding: 0.5rem 1rem; /* Tighter padding */
+    border-bottom: 1px solid #e5e5e5;
+}
+
+/* Logo Image Styling */
+.logo-img {
+    height: 50px; /* Adjust based on your logo shape */
+    width: auto;
+    display: block;
+}
+
+/* Darker Tabs Text */
+nav a {
+    color: #000000 !important; /* Force Black */
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+nav a:hover {
+    color: var(--gold) !important;
+}
+
+/* 3. HERO BANNER */
+.hero {
+    width: 100%;
+    height: 50vh; /* Half screen height */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* Dark Overlay for text readability */
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4);
+}
+.hero-text {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+}
+
+/* 4. SECTIONS (Men/Women) */
+.section-header {
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #ddd;
+    line-height: 0.1em;
+}
+.section-header span {
+    background: var(--background);
+    padding: 0 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: #111;
+}
+
+/* 5. SUB-CATEGORY TAGS */
+.category-tags {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+.tag {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: #555;
+    cursor: pointer;
+}
+.tag:hover {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}
+
+/* 6. PRODUCT CARD */
+.product-card {
+    background: #fff;
+    border: none;
+    transition: transform 0.2s;
+}
+.product-card:hover {
+    transform: translateY(-5px);
+}
+.product-img {
+    width: 100%;
+    aspect-ratio: 3/4; /* Ensures all images are same shape */
+    object-fit: cover;
+}
+.btn-shop {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    margin-top: 10px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
+.btn-shop:hover {
+    background-color: var(--gold);
+}
+
+/* MOBILE FIXES */
+@media (max-width: 768px) {
+    .logo-img { height: 40px; }
+    nav ul { padding: 0; margin: 0; }
+    .hero { height: 30vh; }
+}

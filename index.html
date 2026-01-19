@@ -1,230 +1,155 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selene Luxe | Fashion & Lifestyle</title>
     
-    <!-- SEO & Pinterest Data -->
-    <title>Selene Luxe | Curated Aesthetic Fashion</title>
-    <meta name="description" content="Discover luxury fashion finds, aesthetic home decor, and beauty essentials curated by Selene Luxe.">
-
-    <!-- 1. PICO CSS (Structure) -->
+    <!-- 1. Pico CSS (Framework) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     
-    <!-- 2. GOOGLE FONTS (The "Trust" Factor) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-
-    <!-- 3. CUSTOM LUXURY STYLES -->
-    <style>
-        html {
-    scroll-behavior: smooth;
-}
-        :root {
-            /* LUXURY COLOR PALETTE */
-            --background: #FAFAF9; /* Warm Stone/Cream (Not pure white) */
-            --text-main: #2C2C2C;    /* Soft Black (Charcoal) */
-            --gold-accent: #C5A059;  /* Muted Gold */
-            --card-bg: #FFFFFF;
-        }
-
-        body {
-            background-color: var(--background);
-            color: var(--text-main);
-            font-family: 'Lato', sans-serif; /* Clean body text */
-        }
-
-        /* HEADINGS - Magazine Style */
-        h1, h2, h3, .brand-logo {
-            font-family: 'Playfair Display', serif;
-            color: #1a1a1a;
-            letter-spacing: -0.5px;
-        }
-
-        /* NAVIGATION */
-        nav {
-            background: #fff;
-            padding: 1rem 0;
-            border-bottom: 1px solid #e5e5e5;
-            margin-bottom: 0;
-        }
-        .brand-logo {
-            font-size: 1.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* HERO SECTION (The Big Banner) */
-        .hero {
-            position: relative;
-            background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop'); 
-            background-size: cover;
-            background-position: center 30%;
-            height: 60vh; /* Takes up 60% of the screen height */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            margin-bottom: 3rem;
-        }
-        /* Dark overlay so text is readable */
-        .hero::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.3);
-        }
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            background: rgba(255,255,255,0.9);
-            padding: 2rem 3rem;
-            max-width: 600px;
-            border-radius: 4px;
-        }
-        .hero h2 { color: #222; margin-bottom: 0.5rem; }
-
-        /* PRODUCT CARDS */
-        .product-card {
-            background: var(--card-bg);
-            border: none;
-            border-radius: 0; /* Sharp corners look more expensive */
-            padding: 0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-            transition: transform 0.3s ease;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        }
-        .product-img {
-            width: 100%;
-            height: 400px; /* Taller images are better for fashion */
-            object-fit: cover;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        .card-details { padding: 1.5rem; text-align: center; }
-        .price { color: var(--gold-accent); font-weight: bold; margin-bottom: 1rem; display: block; }
-        
-        /* GOLD BUTTONS */
-        a[role="button"] {
-            background-color: #1a1a1a;
-            border: 1px solid #1a1a1a;
-            border-radius: 0;
-            font-family: 'Lato', sans-serif;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            padding: 12px 20px;
-        }
-        a[role="button"]:hover {
-            background-color: var(--gold-accent);
-            border-color: var(--gold-accent);
-            color: white;
-        }
-        
-        /* GRID FIX FOR MOBILE */
-        .grid {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Bigger images */
-            gap: 2rem;
-        }
-    </style>
+    <!-- 2. Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+    
+    <!-- 3. YOUR CUSTOM CSS (The file we just made) -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- NAVBAR -->
+    <!-- NAVIGATION -->
     <nav class="container-fluid">
         <ul>
-            <li><strong class="brand-logo">Selene Luxe</strong></li>
+            <!-- LOGO IMAGE HERE -->
+            <li>
+                <a href="#">
+                    <img src="images/logo.jpg" alt="Selene Luxe" class="logo-img">
+                </a>
+            </li>
         </ul>
         <ul>
-            <li><a href="#fashion" class="secondary">Fashion</a></li>
-            <li><a href="#beauty" class="secondary">Beauty</a></li>
-            <li><a href="#decor" class="secondary">Decor</a></li>
+            <!-- Darker Links -->
+            <li><a href="#women">Women</a></li>
+            <li><a href="#men">Men</a></li>
+            <li><a href="#sale" style="color: #c00 !important;">Sale</a></li>
         </ul>
     </nav>
 
-    <!-- HERO BANNER (This fixes the "Empty" look) -->
-    <div class="hero">
-        <div class="hero-content">
-            <h2>The Winter Collection</h2>
-            <p>Curated elegance for the modern muse.</p>
-        </div>
+    <!-- SOCIAL PROOF BAR -->
+    <div style="background-color: #f4f4f4; text-align: center; padding: 5px; font-size: 0.8rem;">
+        As seen on Pinterest • 5M+ Monthly Views
     </div>
 
-    <!-- MAIN PRODUCTS -->
+    <!-- HERO BANNER (Your Pinterest Banner) -->
+    <header class="hero" style="background-image: url('images/banner.jpg');">
+        <div class="hero-text">
+            <h1>The New Collection</h1>
+            <a href="#women" role="button" style="background: white; color: black; border: none; margin-top: 10px;">Explore</a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
     <main class="container">
-    
-    <!-- 1. FASHION SECTION -->
-    <!-- id="fashion" matches the link href="#fashion" -->
-    <section id="fashion" style="padding-top: 60px;">
-        <h3>Fashion Edits</h3>
+
+        <!-- ================= WOMEN SECTION ================= -->
+        <h2 class="section-header" id="women"><span>WOMEN</span></h2>
+        
+        <!-- Women Sub-Categories -->
+        <div class="category-tags">
+            <span class="tag">Shoes</span>
+            <span class="tag">Dresses</span>
+            <span class="tag">Accessories</span>
+            <span class="tag">Jewelry</span>
+        </div>
+
         <div class="grid">
-            
-            <!-- Fashion Item 1 -->
+            <!-- Product 1 -->
             <article class="product-card">
-                <img src="images/womens.jpg" class="product-img" alt="Dress">
-                <div class="card-details">
-                    <h4>skirt</h4>
-                    <span class="price">$45.00</span>
-                    <a href="/shop/dress" role="button">Shop Now</a>
+                <img src="images/dress.jpg" class="product-img" alt="Dress">
+                <div style="padding: 15px;">
+                    <h5>Silk Evening Dress</h5>
+                    <small>Dresses</small>
+                    <br><strong>$45.00</strong>
+                    <a href="/shop/silk-dress" class="btn-shop">Shop Now</a>
                 </div>
             </article>
 
-            <!-- Add more fashion items here -->
-
-        </div>
-    </section>
-
-    <hr> <!-- A nice divider line -->
-
-    <!-- 2. BEAUTY SECTION -->
-    <section id="beauty" style="padding-top: 60px;">
-        <h3>Beauty Favorites</h3>
-        <div class="grid">
-            
-            <!-- Beauty Item 1 -->
+            <!-- Product 2 -->
             <article class="product-card">
-                <img src="images/cosmetics.jpg" class="product-img" alt="Lipstick">
-                <div class="card-details">
-                    <h4>pink makeup</h4>
-                    <span class="price">$22.00</span>
-                    <a href="/shop/lipstick" role="button">Shop Now</a>
+                <img src="images/heels.jpg" class="product-img" alt="Heels">
+                <div style="padding: 15px;">
+                    <h5>Gold Stilettos</h5>
+                    <small>Shoes</small>
+                    <br><strong>$89.00</strong>
+                    <a href="/shop/heels" class="btn-shop">Shop Now</a>
+                </div>
+            </article>
+            
+            <!-- Product 3 -->
+            <article class="product-card">
+                <img src="images/bag.jpg" class="product-img" alt="Bag">
+                <div style="padding: 15px;">
+                    <h5>Leather Tote</h5>
+                    <small>Accessories</small>
+                    <br><strong>$120.00</strong>
+                    <a href="/shop/bag" class="btn-shop">Shop Now</a>
+                </div>
+            </article>
+        </div>
+
+
+        <!-- ================= MEN SECTION ================= -->
+        <h2 class="section-header" id="men"><span>MEN</span></h2>
+
+        <!-- Men Sub-Categories -->
+        <div class="category-tags">
+            <span class="tag">Shirts</span>
+            <span class="tag">Sneakers</span>
+            <span class="tag">Watches</span>
+        </div>
+
+        <div class="grid">
+            <!-- Product 1 -->
+            <article class="product-card">
+                <img src="images/shirt.jpg" class="product-img" alt="Shirt">
+                <div style="padding: 15px;">
+                    <h5>Linen Summer Shirt</h5>
+                    <small>Shirts</small>
+                    <br><strong>$35.00</strong>
+                    <a href="/shop/mens-shirt" class="btn-shop">Shop Now</a>
                 </div>
             </article>
 
-        </div>
-    </section>
-
-    <hr>
-
-    <!-- 3. DECOR SECTION -->
-    <section id="decor" style="padding-top: 60px;">
-        <h3>Home Decor</h3>
-        <div class="grid">
-            
-            <!-- Decor Item 1 -->
+            <!-- Product 2 -->
             <article class="product-card">
-                <img src="images/decor.jpg" class="product-img" alt="Vase">
-                <div class="card-details">
-                    <h4>christmas decor</h4>
-                    <span class="price">$35.00</span>
-                    <a href="/shop/vase" role="button">Shop Now</a>
+                <img src="images/watch.jpg" class="product-img" alt="Watch">
+                <div style="padding: 15px;">
+                    <h5>Classic Chronograph</h5>
+                    <small>Accessories</small>
+                    <br><strong>$150.00</strong>
+                    <a href="/shop/watch" class="btn-shop">Shop Now</a>
                 </div>
             </article>
-
+            
+             <!-- Product 3 -->
+             <article class="product-card">
+                <img src="images/sneaker.jpg" class="product-img" alt="Sneaker">
+                <div style="padding: 15px;">
+                    <h5>White Leather Kicks</h5>
+                    <small>Shoes</small>
+                    <br><strong>$60.00</strong>
+                    <a href="/shop/sneakers" class="btn-shop">Shop Now</a>
+                </div>
+            </article>
         </div>
-    </section>
 
-</main> 
+    </main>
 
     <!-- FOOTER -->
-    <footer class="container" style="text-align: center; margin-top: 4rem; padding-bottom: 2rem; color: #888;">
-        <small>&copy; 2026 Selene Luxe. All rights reserved.<br>
-        As an Amazon Associate I earn from qualifying purchases.</small>
+    <footer class="container" style="text-align: center; margin-top: 50px; color: #777; font-size: 0.8rem;">
+        <hr>
+        <p>&copy; 2026 Selene Luxe. All rights reserved.</p>
+        <p><a href="legal.html">Privacy Policy</a> | <a href="legal.html">Terms</a></p>
+        <p>As an Amazon Associate I earn from qualifying purchases.</p>
     </footer>
 
 </body>
