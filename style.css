@@ -1,143 +1,127 @@
-/* style.css */
+/* style.css - The Pinterest Clone Layout */
 
-/* 1. GLOBAL SETTINGS */
 :root {
-    --primary: #1a1a1a;
-    --background: #FAFAF9;
-    --gold: #C5A059;
+    --background: #fff;
+    --text-main: #111;
+    --gray-light: #efefef;
+    --pinterest-red: #e60023; /* Optional accent */
 }
 
 body {
     background-color: var(--background);
-    font-family: 'Lato', sans-serif;
-    margin: 0; /* Removes default browser gaps */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, "ＭＳ Ｐゴシック", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    margin: 0;
+    color: var(--text-main);
 }
 
-/* 2. NAVIGATION (The "Gap" Fix is here) */
-nav {
-    background: #fff;
-    padding: 0.5rem 1rem; /* Tighter padding */
-    border-bottom: 1px solid #e5e5e5;
-}
-
-/* Logo Image Styling */
-.logo-img {
-    height: 50px; /* Adjust based on your logo shape */
-    width: auto;
-    display: block;
-}
-
-/* Darker Tabs Text */
-nav a {
-    color: #000000 !important; /* Force Black */
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-}
-nav a:hover {
-    color: var(--gold) !important;
-}
-
-/* 3. HERO BANNER */
+/* 1. THE BANNER (Clean, No Overlay) */
 .hero {
     width: 100%;
-    height: 50vh; /* Half screen height */
+    height: 350px; /* Pinterest banners are usually this ratio */
     background-size: cover;
     background-position: center;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-/* Dark Overlay for text readability */
-.hero::after {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.4);
-}
-.hero-text {
-    position: relative;
-    z-index: 2;
-    color: white;
-    text-align: center;
-    font-family: 'Playfair Display', serif;
+    background-repeat: no-repeat;
+    /* No dark overlay anymore */
 }
 
-/* 4. SECTIONS (Men/Women) */
-.section-header {
+/* 2. THE PROFILE HEADER (Logo + Bio) */
+.profile-section {
     text-align: center;
-    margin-top: 3rem;
+    position: relative;
     margin-bottom: 2rem;
-    border-bottom: 2px solid #ddd;
-    line-height: 0.1em;
-}
-.section-header span {
-    background: var(--background);
-    padding: 0 20px;
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    color: #111;
 }
 
-/* 5. SUB-CATEGORY TAGS */
-.category-tags {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-}
-.tag {
+/* The Circular Logo */
+.profile-logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* Makes it a perfect circle */
+    border: 4px solid #fff; /* White ring around it */
+    object-fit: cover;
+    margin-top: -60px; /* Pulls it UP to overlap the banner */
     background: #fff;
-    border: 1px solid #ccc;
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-size: 0.8rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* The Brand Name & Bio */
+.brand-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 10px 0 5px 0;
+}
+.brand-bio {
     color: #555;
-    cursor: pointer;
-}
-.tag:hover {
-    background: #000;
-    color: #fff;
-    border-color: #000;
+    font-size: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
 }
 
-/* 6. PRODUCT CARD */
+/* 3. THE TABS (Women | Men | Sale) */
+.nav-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-link {
+    text-decoration: none;
+    color: #111;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 24px; /* Rounded pill shape like Pinterest */
+    transition: background 0.2s;
+}
+
+.tab-link:hover, .tab-link.active {
+    background-color: #111;
+    color: #fff;
+}
+
+/* Sale Tab - Make it Red */
+.tab-link.sale {
+    color: #d50000;
+}
+.tab-link.sale:hover {
+    background-color: #d50000;
+    color: white;
+}
+
+/* 4. PRODUCT GRID */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Masonry-ish feel */
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 .product-card {
-    background: #fff;
-    border: none;
+    border-radius: 16px; /* Pinterest cards have round corners */
+    overflow: hidden;
+    position: relative;
     transition: transform 0.2s;
 }
 .product-card:hover {
-    transform: translateY(-5px);
-}
-.product-img {
-    width: 100%;
-    aspect-ratio: 3/4; /* Ensures all images are same shape */
-    object-fit: cover;
-}
-.btn-shop {
-    background-color: #000;
-    color: #fff;
-    border: none;
-    width: 100%;
-    padding: 10px;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    margin-top: 10px;
-    display: block;
-    text-align: center;
-    text-decoration: none;
-}
-.btn-shop:hover {
-    background-color: var(--gold);
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-/* MOBILE FIXES */
+.product-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 16px; /* Important for the look */
+}
+
+/* 5. MOBILE FIXES */
 @media (max-width: 768px) {
-    .logo-img { height: 40px; }
-    nav ul { padding: 0; margin: 0; }
-    .hero { height: 30vh; }
+    .hero { height: 180px; } /* Smaller banner on phone */
+    .profile-logo { width: 90px; height: 90px; margin-top: -45px; }
+    .brand-title { font-size: 24px; }
+    .brand-bio { font-size: 14px; padding: 0 15px; }
+    .grid-container { grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; } /* 2 columns on phone */
 }
