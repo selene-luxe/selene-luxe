@@ -120,13 +120,21 @@ body {
     background: #111;
     color: #fff;
 }
-.pill-btn.sale {
-    background: #fff0f0;
-    color: #d50000;
+/* New "Selene's Edit" Pill Style */
+.pill-btn.edit {
+    background: #111; /* Black background */
+    color: #fff;      /* White text */
+    border: 1px solid #111;
 }
-.pill-btn.sale:hover {
-    background: #d50000;
-    color: #fff;
+.pill-btn.edit:hover {
+    background: #fff;
+    color: #111;
+}
+
+/* Optional: Make the "Edits" section stand out */
+.edit-card {
+    border: 1px solid #eee;
+    padding: 10px;
 }
 
 /* 4. PRODUCT GRID */
