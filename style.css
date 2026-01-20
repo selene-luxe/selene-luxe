@@ -71,8 +71,21 @@ body {
 .nav-right {
     display: flex;
     gap: 20px;
-    font-size: 18px; /* Icon size */
+    align-items: center;
 }
+
+/* New Social Buttons styling */
+.nav-social {
+    color: #000;
+    font-size: 20px; /* Slightly bigger for visibility */
+    transition: color 0.3s;
+}
+
+.nav-social:hover {
+    color: #E60023; /* Pinterest Red on Hover */
+}
+
+
 .nav-icon {
     color: #000;
     text-decoration: none;
@@ -140,4 +153,112 @@ body {
         gap: 50px;
     }
     .cat-img-wrapper { height: 500px; }
+}
+
+
+
+/* ================= FOOTER STYLES ================= */
+
+.site-footer {
+    background-color: #f9f9f9; /* Very light gray to separate from content */
+    padding: 80px 40px 30px 40px;
+    margin-top: 80px;
+    border-top: 1px solid #eee;
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr; /* Story column is wider (2fr) */
+    gap: 60px;
+}
+
+/* Titles */
+.footer-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    color: #000;
+}
+
+/* Text */
+.footer-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #555;
+    max-width: 350px;
+}
+
+/* Links */
+.footer-col a {
+    display: block;
+    text-decoration: none;
+    color: #555;
+    font-size: 13px;
+    margin-bottom: 12px;
+    transition: color 0.2s;
+}
+.footer-col a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+/* Social Icons */
+.social-icons {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    font-size: 20px;
+    color: #000;
+    cursor: pointer;
+}
+
+/* Newsletter Form */
+.footer-form {
+    display: flex;
+    flex-direction: column; /* Stack input and button */
+    gap: 10px;
+    margin-top: 15px;
+}
+.footer-form input {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 12px;
+}
+.footer-form button {
+    background: #000;
+    color: white;
+    width: 100%; /* Full width button */
+    padding: 12px;
+    font-weight: bold;
+}
+.footer-form button:hover {
+    background: #333;
+}
+
+/* Bottom Bar */
+.footer-bottom {
+    border-top: 1px solid #e5e5e5;
+    margin-top: 60px;
+    padding-top: 30px;
+    text-align: center;
+    color: #999;
+    font-size: 11px;
+}
+
+/* RESPONSIVE FOOTER (Mobile) */
+@media (max-width: 1024px) {
+    .footer-container {
+        grid-template-columns: 1fr; /* Stack everything vertically */
+        gap: 40px;
+    }
+    .site-footer {
+        padding: 50px 20px;
+    }
+    .footer-text {
+        max-width: 100%;
+    }
 }

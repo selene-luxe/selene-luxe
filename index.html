@@ -10,67 +10,127 @@
 </head>
 <body>
 
-    <!-- 1. NAVBAR -->
+    <!-- 1. NAVBAR (The Curator Edition) -->
     <nav class="navbar">
         
-        <!-- LEFT LINKS -->
+        <!-- LEFT: Categories (Renamed Sale to Trending) -->
         <div class="nav-left">
-            <a href="#sale" class="nav-link sale">Sale</a>
+            <a href="#edits" class="nav-link sale">Trending</a> <!-- Red text for urgency -->
             <a href="#men" class="nav-link">Men</a>
             <a href="#women" class="nav-link">Women</a>
             <a href="#kids" class="nav-link">Kids</a>
-            <a href="#accessories" class="nav-link">Accessories</a>
+            <!-- Removed Accessories to keep it clean -->
         </div>
 
-        <!-- CENTER LOGO -->
+        <!-- CENTER: Logo -->
         <div class="nav-center">
             <a href="#" class="brand-logo-text">SELENE LUXE</a>
         </div>
 
-        <!-- RIGHT ICONS -->
+        <!-- RIGHT: Social Proof (Instead of Cart) -->
         <div class="nav-right">
-            <a href="#" class="nav-icon"><i class="fa-solid fa-magnifying-glass"></i></a>
-            <a href="#" class="nav-icon"><i class="fa-regular fa-heart"></i></a>
-            <a href="#" class="nav-icon"><i class="fa-solid fa-bag-shopping"></i></a>
+            <!-- Link to your actual Pinterest Account -->
+            <a href="https://pinterest.com/YOUR_USERNAME" target="_blank" class="nav-social" title="Follow on Pinterest">
+                <i class="fa-brands fa-pinterest"></i>
+            </a>
+            <!-- Link to Instagram or TikTok if you have it -->
+            <a href="#" class="nav-social" title="Follow on Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
         </div>
     </nav>
 
 
-    <!-- 2. MAIN CATEGORIES (The 3 Big Cards) -->
+    <!-- 2. MAIN CATEGORIES (Keep this the same as before) -->
     <main class="main-container">
-        
         <div class="category-grid">
             
-            <!-- MEN CARD -->
+            <!-- MEN -->
             <a href="#men" class="cat-card">
                 <span class="cat-title">Men</span>
                 <div class="cat-img-wrapper">
-                    <!-- Rename your vertical man photo to cat-men.jpg -->
                     <img src="images/man-coat.jpg" alt="Men's Collection" class="cat-img">
                 </div>
             </a>
 
-            <!-- WOMEN CARD -->
+            <!-- WOMEN -->
             <a href="#women" class="cat-card">
                 <span class="cat-title">Women</span>
                 <div class="cat-img-wrapper">
-                    <!-- Rename your vertical woman photo to cat-women.jpg -->
-                    <img src="images/edit-cottage.jpg" alt="Women's Collection" class="cat-img">
+                    <img src="images/edit-academia.jpg" alt="Women's Collection" class="cat-img">
                 </div>
             </a>
 
-            <!-- KIDS CARD -->
+            <!-- KIDS -->
             <a href="#kids" class="cat-card">
                 <span class="cat-title">Kids</span>
                 <div class="cat-img-wrapper">
-                    <!-- Rename your kid photo to cat-kids.jpg -->
                     <img src="images/kids-laughing-2-scaled (1).webp" alt="Kids Collection" class="cat-img">
                 </div>
             </a>
+        </div>
+    </main>
+
+
+    <!-- 3. FOOTER (The Pinterest-Focused Version) -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            
+            <!-- COL 1: The Newsletter (Your Backup Asset) -->
+            <!-- Moved to first position for maximum attention -->
+            <div class="footer-col story-col">
+                <h4 class="footer-title">Join the Inner Circle</h4>
+                <p class="footer-text">
+                    Don't miss a trend. Get our curated "Weekly Edit" delivered to your inbox. 
+                    No spam, just aesthetics.
+                </p>
+                
+                <!-- This form is currently visual. Later we connect it to ConvertKit -->
+                <form class="footer-form">
+                    <input type="email" placeholder="Your Email Address" required>
+                    <button type="button">SUBSCRIBE</button>
+                </form>
+                <p style="font-size: 10px; color: #999; margin-top: 5px;">We respect your privacy.</p>
+            </div>
+
+            <!-- COL 2: Shop by Aesthetic (Pinterest Users LOVE this) -->
+            <div class="footer-col">
+                <h4 class="footer-title">Shop by Aesthetic</h4>
+                <a href="#edits">Old Money</a>
+                <a href="#edits">Dark Academia</a>
+                <a href="#edits">Coquette Core</a>
+                <a href="#edits">Minimalist</a>
+                <a href="#edits">Y2K Fashion</a>
+            </div>
+
+            <!-- COL 3: The Curator (Instead of "The Brand") -->
+            <div class="footer-col">
+                <h4 class="footer-title">Selene Luxe</h4>
+                <a href="#about">Our Story</a>
+                <a href="https://www.pinterest.com/SelenaLuxe/" target="_blank">Pinterest Profile</a>
+                <a href="legal.html">Privacy Policy</a>
+                <a href="legal.html">Terms of Service</a>
+            </div>
+
+            <!-- COL 4: Socials -->
+            <div class="footer-col">
+                <h4 class="footer-title">Follow Us</h4>
+                <p class="footer-text">Join 6 Million viewers on Pinterest for daily inspiration.</p>
+                <div class="social-icons">
+                    <a href="#" style="color:#000;"><i class="fa-brands fa-pinterest" style="font-size: 24px;"></i></a>
+                    <a href="#" style="color:#000;"><i class="fa-brands fa-tiktok" style="font-size: 24px;"></i></a>
+                    <a href="#" style="color:#000;"><i class="fa-brands fa-instagram" style="font-size: 24px;"></i></a>
+                </div>
+            </div>
 
         </div>
 
-    </main>
+        <!-- COPYRIGHT -->
+        <div class="footer-bottom">
+            <p>&copy; 2026 Selene Luxe. Curated with love.</p>
+            <p>As an Amazon Associate I earn from qualifying purchases.</p>
+        </div>
+    </footer>
 
 </body>
 </html>
