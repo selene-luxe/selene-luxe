@@ -174,3 +174,24 @@ body {
     .profile-bio h1 { font-size: 1.5rem; }
     .nav-links { display: none; } /* Hide text links on mobile, keep logo */
 }
+
+
+/* Fix scrolling so title doesn't hide behind navbar */
+section, div[id] {
+    scroll-margin-top: 100px; /* Pushes the content down when you click a link */
+}
+
+/* About Section Styling */
+.about-box {
+    background: #f9f9f9;
+    padding: 40px;
+    margin: 50px auto;
+    max-width: 800px;
+    text-align: center;
+    border-radius: 12px;
+}
+.about-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
