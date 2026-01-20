@@ -1,127 +1,176 @@
-/* style.css - The Pinterest Clone Layout */
+/* style.css - The Hybrid Layout (Website + Profile) */
 
 :root {
     --background: #fff;
     --text-main: #111;
-    --gray-light: #efefef;
-    --pinterest-red: #e60023; /* Optional accent */
+    --gold: #C5A059;
 }
 
 body {
     background-color: var(--background);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, "ＭＳ Ｐゴシック", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
     color: var(--text-main);
+    padding-top: 70px; /* Space for the fixed navbar */
 }
 
-/* 1. THE BANNER (Clean, No Overlay) */
-.hero {
+/* 1. THE FIXED NAVBAR (This is what was missing) */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 350px; /* Pinterest banners are usually this ratio */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    /* No dark overlay anymore */
+    height: 70px;
+    background: #fff;
+    border-bottom: 1px solid #efefef;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    box-sizing: border-box;
+    z-index: 1000; /* Ensures it sits ON TOP of the banner */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
 }
 
-/* 2. THE PROFILE HEADER (Logo + Bio) */
+.nav-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: #000;
+    font-family: 'Playfair Display', serif;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+.nav-links a:hover {
+    color: #000;
+}
+
+/* 2. THE PROFILE HEADER (The Pinterest Branding) */
 .profile-section {
     text-align: center;
     position: relative;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
 }
 
-/* The Circular Logo */
-.profile-logo {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%; /* Makes it a perfect circle */
-    border: 4px solid #fff; /* White ring around it */
+.hero-banner {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    background-color: #f0f0f0;
+}
+
+.profile-avatar {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 5px solid #fff;
     object-fit: cover;
-    margin-top: -60px; /* Pulls it UP to overlap the banner */
+    margin-top: -65px; /* Pulls it up to overlap banner */
     background: #fff;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 10;
 }
 
-/* The Brand Name & Bio */
-.brand-title {
-    font-size: 36px;
-    font-weight: 700;
-    margin: 10px 0 5px 0;
-}
-.brand-bio {
-    color: #555;
-    font-size: 16px;
+.profile-bio {
     max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.5;
+    margin: 15px auto;
+    padding: 0 20px;
+}
+.profile-bio h1 {
+    font-size: 2rem;
+    margin: 0 0 10px 0;
+    font-family: 'Playfair Display', serif;
+}
+.profile-bio p {
+    color: #555;
+    line-height: 1.6;
+    font-size: 0.95rem;
 }
 
-/* 3. THE TABS (Women | Men | Sale) */
-.nav-tabs {
+/* 3. THE TABS (Category Filters) */
+.filter-tabs {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 15px;
     margin-top: 20px;
-    border-bottom: 2px solid transparent;
 }
 
-.tab-link {
+.pill-btn {
+    padding: 10px 25px;
+    border-radius: 30px;
+    background: #f0f0f0;
     text-decoration: none;
     color: #111;
     font-weight: 600;
-    padding: 10px 20px;
-    border-radius: 24px; /* Rounded pill shape like Pinterest */
-    transition: background 0.2s;
+    transition: all 0.2s;
 }
-
-.tab-link:hover, .tab-link.active {
-    background-color: #111;
+.pill-btn:hover, .pill-btn.active {
+    background: #111;
     color: #fff;
 }
-
-/* Sale Tab - Make it Red */
-.tab-link.sale {
+.pill-btn.sale {
+    background: #fff0f0;
     color: #d50000;
 }
-.tab-link.sale:hover {
-    background-color: #d50000;
-    color: white;
+.pill-btn.sale:hover {
+    background: #d50000;
+    color: #fff;
 }
 
 /* 4. PRODUCT GRID */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Masonry-ish feel */
-    gap: 20px;
-    padding: 20px;
-    max-width: 1200px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px 5%;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
 .product-card {
-    border-radius: 16px; /* Pinterest cards have round corners */
-    overflow: hidden;
-    position: relative;
     transition: transform 0.2s;
 }
 .product-card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
 }
-
 .product-img {
     width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 16px; /* Important for the look */
+    border-radius: 12px;
+    object-fit: cover;
+    aspect-ratio: 3/4; /* Forces fashion-style vertical images */
+    background-color: #eee;
+}
+.product-info {
+    padding: 10px 0;
+}
+.product-title {
+    font-weight: 700;
+    margin: 0;
+    font-size: 1rem;
+}
+.product-price {
+    color: #555;
+    font-size: 0.9rem;
 }
 
-/* 5. MOBILE FIXES */
+/* MOBILE RESPONSIVE */
 @media (max-width: 768px) {
-    .hero { height: 180px; } /* Smaller banner on phone */
-    .profile-logo { width: 90px; height: 90px; margin-top: -45px; }
-    .brand-title { font-size: 24px; }
-    .brand-bio { font-size: 14px; padding: 0 15px; }
-    .grid-container { grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; } /* 2 columns on phone */
+    .navbar { padding: 0 20px; height: 60px; }
+    body { padding-top: 60px; }
+    .hero-banner { height: 180px; }
+    .profile-avatar { width: 100px; height: 100px; margin-top: -50px; }
+    .profile-bio h1 { font-size: 1.5rem; }
+    .nav-links { display: none; } /* Hide text links on mobile, keep logo */
 }

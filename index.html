@@ -3,100 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selene Luxe | Fashion & Beauty</title>
-    <!-- Use the new CSS file -->
+    <title>Selene Luxe | Fashion & Lifestyle</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Font Awesome for the Search/Cart icons (Optional but looks nice) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts for that Luxury Look -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- 1. HEADER BANNER (Clean, No Text) -->
-    <header class="hero" style="background-image: url('images/banner.jpg');">
-        <!-- We removed the text/buttons here. It is just the image now. -->
-    </header>
+    <!-- 1. THE NAVBAR (Restored!) -->
+    <nav class="navbar">
+        <a href="#" class="nav-brand">Selene Luxe</a>
+        <div class="nav-links">
+            <a href="#women">Women</a>
+            <a href="#men">Men</a>
+            <a href="#about">About</a>
+        </div>
+    </nav>
 
-    <!-- 2. PROFILE SECTION (The Pinterest Look) -->
+    <!-- 2. THE PROFILE HEADER (The Pinterest Look) -->
     <section class="profile-section">
+        <!-- Banner Image -->
+        <div class="hero-banner" style="background-image: url('images/banner.jpg');"></div>
+        
         <!-- Circular Logo -->
-        <img src="images/logo.jpg" alt="Selene Luxe Logo" class="profile-logo">
+        <img src="images/logo.jpg" alt="Selene Luxe" class="profile-avatar">
         
-        <!-- Brand Name -->
-        <h1 class="brand-title">Selene Luxe</h1>
-        
-        <!-- Bio Text (Copied from your Screenshot) -->
-        <p class="brand-bio">
-            Living in style ✨ Fashion | Beauty | Lifestyle <br>
-            Curating dreams, one pin at a time 🌸 <br>
-            Inspiring everyday elegance & timeless vibes
-        </p>
-
-        <!-- TABS (Navigation) -->
-        <div class="nav-tabs">
-            <a href="#women" class="tab-link active">Women</a>
-            <a href="#men" class="tab-link">Men</a>
-            <a href="#sale" class="tab-link sale">Sale</a>
+        <!-- Bio -->
+        <div class="profile-bio">
+            <h1>Selene Luxe</h1>
+            <p>Living in style ✨ Fashion | Beauty | Lifestyle<br>
+            Curating dreams, one pin at a time 🌸</p>
+            
+            <!-- Category Pills -->
+            <div class="filter-tabs">
+                <a href="#women" class="pill-btn active">Women</a>
+                <a href="#men" class="pill-btn">Men</a>
+                <a href="#sale" class="pill-btn sale">Sale</a>
+            </div>
         </div>
     </section>
 
-    <!-- 3. MAIN CONTENT GRID -->
+    <!-- 3. MAIN CONTENT (Products) -->
     
-    <!-- WOMEN SECTION -->
-    <div id="women" class="grid-container">
-        <!-- You can copy-paste these blocks for more items -->
-        <div class="product-card">
-            <a href="/shop/silk-dress">
-                <img src="images/dress.jpg" class="product-img" alt="Product">
-            </a>
-            <!-- Minimal Pinterest style: No heavy text below, just the image click -->
-        </div>
-        
-        <div class="product-card">
-            <a href="/shop/heels">
-                <img src="images/heels.jpg" class="product-img" alt="Product">
-            </a>
-        </div>
-
-        <div class="product-card">
-            <a href="/shop/bag">
-                <img src="images/bag.jpg" class="product-img" alt="Product">
-            </a>
-        </div>
+    <!-- WOMEN -->
+    <div id="women" style="text-align: center; margin-top: 40px;">
+        <h2 style="font-family: 'Playfair Display', serif;">Latest Finds</h2>
     </div>
 
-    <!-- MEN SECTION -->
-    <div id="men" class="grid-container" style="margin-top: 50px;">
-        <h3 style="text-align: center; width: 100%;">Men's Collection</h3>
+    <div class="grid-container">
+        
+        <!-- Product 1 -->
+        <div class="product-card">
+            <a href="/shop/dress">
+                <!-- IMPORTANT: Make sure this image exists in your folder! -->
+                <img src="images/womens.jpg" class="product-img" alt="Silk Dress">
+            </a>
+            <div class="product-info">
+                <p class="product-title">Silk Evening Dress</p>
+                <span class="product-price">See Details</span>
+            </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card">
+            <a href="/shop/heels">
+                <img src="images/neck.jpg" class="product-img" alt="Gold Heels">
+            </a>
+            <div class="product-info">
+                <p class="product-title">Gold Stiletto Heels</p>
+                <span class="product-price">See Details</span>
+            </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card">
+            <a href="/shop/bag">
+                <img src="images/decor.jpg" class="product-img" alt="Luxury Bag">
+            </a>
+            <div class="product-info">
+                <p class="product-title">Leather Tote Bag</p>
+                <span class="product-price">See Details</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- MEN -->
+    <div id="men" style="text-align: center; margin-top: 60px;">
+        <h2 style="font-family: 'Playfair Display', serif;">Men's Collection</h2>
+    </div>
+
+    <div class="grid-container">
         
         <div class="product-card">
             <a href="/shop/shirt">
-                <img src="images/shirt.jpg" class="product-img" alt="Product">
+                <img src="images/mens.jpg" class="product-img" alt="Men's Shirt">
             </a>
+            <div class="product-info">
+                <p class="product-title">Summer Linen Shirt</p>
+                <span class="product-price">See Details</span>
+            </div>
         </div>
 
-        <div class="product-card">
-            <a href="/shop/watch">
-                <img src="images/watch.jpg" class="product-img" alt="Product">
-            </a>
-        </div>
-    </div>
-
-    <!-- SALE SECTION (Now it works!) -->
-    <div id="sale" class="grid-container" style="margin-top: 50px;">
-        <h3 style="text-align: center; width: 100%; color: #d50000;">Clearance & Deals</h3>
-        
-        <!-- Add your sale items here -->
-        <div class="product-card">
-            <a href="/shop/sale-item-1">
-                <img src="images/sneaker.jpg" class="product-img" alt="Sale Product">
-            </a>
-        </div>
     </div>
 
     <!-- FOOTER -->
-    <footer style="text-align: center; padding: 40px; color: #888; font-size: 12px;">
-        <p>&copy; 2026 Selene Luxe. As an Amazon Associate I earn from qualifying purchases.</p>
-        <p><a href="legal.html" style="color:#888;">Privacy Policy</a></p>
+    <footer style="text-align: center; padding: 50px 20px; color: #777; font-size: 0.8rem; background: #fafafa; margin-top: 50px;">
+        <p>&copy; 2026 Selene Luxe. All rights reserved.</p>
+        <p>As an Amazon Associate I earn from qualifying purchases.</p>
     </footer>
 
 </body>
