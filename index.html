@@ -3,231 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selene Luxe | Fashion & Lifestyle</title>
+    <title>Selene Luxe</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts for that Luxury Look -->
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for the Icons (Search/Heart) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- 1. THE NAVBAR (Restored!) -->
+    <!-- 1. NAVBAR -->
     <nav class="navbar">
-        <a href="#" class="nav-brand">Selene Luxe</a>
-        <div class="nav-links">
-            <a href="#women">Women</a>
-            <a href="#men">Men</a>
-            <!-- Changed from About to Edits -->
-            <a href="#edits">Selene's picks</a> 
+        
+        <!-- LEFT LINKS -->
+        <div class="nav-left">
+            <a href="#sale" class="nav-link sale">Sale</a>
+            <a href="#men" class="nav-link">Men</a>
+            <a href="#women" class="nav-link">Women</a>
+            <a href="#kids" class="nav-link">Kids</a>
+            <a href="#accessories" class="nav-link">Accessories</a>
+        </div>
+
+        <!-- CENTER LOGO -->
+        <div class="nav-center">
+            <a href="#" class="brand-logo-text">SELENE LUXE</a>
+        </div>
+
+        <!-- RIGHT ICONS -->
+        <div class="nav-right">
+            <a href="#" class="nav-icon"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a href="#" class="nav-icon"><i class="fa-regular fa-heart"></i></a>
+            <a href="#" class="nav-icon"><i class="fa-solid fa-bag-shopping"></i></a>
         </div>
     </nav>
 
-    <!-- 2. THE PROFILE HEADER (The Pinterest Look) -->
-    <section class="profile-section">
-        <!-- Banner Image -->
-        <div class="hero-banner" style="background-image: url('images/banner.jpg');"></div>
+
+    <!-- 2. MAIN CATEGORIES (The 3 Big Cards) -->
+    <main class="main-container">
         
-        <!-- Circular Logo -->
-        <img src="images/logo.jpg" alt="Selene Luxe" class="profile-avatar">
-        
-        <!-- Bio -->
-        <div class="profile-bio">
-            <h1>Selene Luxe</h1>
-            <p>Living in style ✨ Fashion | Beauty | Lifestyle<br>
-            Curating dreams, one pin at a time 🌸</p>
+        <div class="category-grid">
             
-            
-            <!-- Category Pills -->
-            <div class="filter-tabs">
-                <a href="#women" class="pill-btn active">Women</a>
-                <a href="#men" class="pill-btn">Men</a>
-                <!-- Changed from Sale to Selene's Edit -->
-                <a href="#edits" class="pill-btn edit">Selene's Edit</a>
-            </div>
-
-
-        </div>
-    </section>
-
-    <!-- 3. MAIN CONTENT (Products) -->
-
-    <!-- WOMEN SECTION -->
-    <div id="women" style="text-align: center; margin-top: 40px;">
-        <h2 style="font-family: 'Playfair Display', serif;">Women's Collection</h2>
-    </div>
-
-    <div class="grid-container">
-        
-        <!-- Item 1: Velvet Heels -->
-        <div class="product-card">
-            <a href="/shop/velvet-heels">
-                <img src="images/heels-velvet.jpg" class="product-img" alt="Velvet Pearl Heels">
+            <!-- MEN CARD -->
+            <a href="#men" class="cat-card">
+                <span class="cat-title">Men</span>
+                <div class="cat-img-wrapper">
+                    <!-- Rename your vertical man photo to cat-men.jpg -->
+                    <img src="images/man-coat.jpg" alt="Men's Collection" class="cat-img">
+                </div>
             </a>
-            <div class="product-info">
-                <p class="product-title">Royal Velvet Pumps</p>
-                <p style="font-size: 0.8rem; color: #888;">Gold embroidery & Pearl detail</p>
-                <span class="product-price">See Details</span>
-            </div>
-        </div>
 
-        <!-- Item 9: Ribbon Bag -->
-        <div class="product-card">
-            <a href="/shop/ribbon-bag">
-                <img src="images/bag-ribbon.jpg" class="product-img" alt="Burgundy Bag">
+            <!-- WOMEN CARD -->
+            <a href="#women" class="cat-card">
+                <span class="cat-title">Women</span>
+                <div class="cat-img-wrapper">
+                    <!-- Rename your vertical woman photo to cat-women.jpg -->
+                    <img src="images/edit-cottage.jpg" alt="Women's Collection" class="cat-img">
+                </div>
             </a>
-            <div class="product-info">
-                <p class="product-title">The Coquette Shoulder Bag</p>
-                <p style="font-size: 0.8rem; color: #888;">Deep Burgundy with Ribbon</p>
-                <span class="product-price">See Details</span>
-            </div>
-        </div>
 
-        <!-- Item 10: Vintage Shoes -->
-        <div class="product-card">
-            <a href="/shop/mary-janes">
-                <img src="images/shoes-vintage.jpg" class="product-img" alt="Mary Jane Shoes">
+            <!-- KIDS CARD -->
+            <a href="#kids" class="cat-card">
+                <span class="cat-title">Kids</span>
+                <div class="cat-img-wrapper">
+                    <!-- Rename your kid photo to cat-kids.jpg -->
+                    <img src="images/kids-laughing-2-scaled (1).webp" alt="Kids Collection" class="cat-img">
+                </div>
             </a>
-            <div class="product-info">
-                <p class="product-title">Vintage Leather Mary Janes</p>
-                <p style="font-size: 0.8rem; color: #888;">Oxblood leather & double strap</p>
-                <span class="product-price">See Details</span>
-            </div>
+
         </div>
 
-        <!-- Item 5: Lifestyle/Decor -->
-        <div class="product-card">
-            <a href="/shop/evil-eye-cup">
-                <img src="images/decor-glass.jpg" class="product-img" alt="Aesthetic Glass">
-            </a>
-            <div class="product-info">
-                <p class="product-title">Mystic Iced Coffee Glass</p>
-                <p style="font-size: 0.8rem; color: #888;">Bamboo lid & glass straw</p>
-                <span class="product-price">See Details</span>
-            </div>
-        </div>
-
-    </div>
-    
-
-    <!-- MEN SECTION -->
-    <div id="men" style="text-align: center; margin-top: 60px;">
-        <h2 style="font-family: 'Playfair Display', serif;">Men's Collection</h2>
-    </div>
-
-    <div class="grid-container">
-        
-        <!-- Item 3: The Coat -->
-        <div class="product-card">
-            <a href="/shop/mens-coat">
-                <img src="images/man-coat.jpg" class="product-img" alt="Shearling Coat">
-            </a>
-            <div class="product-info">
-                <p class="product-title">The Professor Coat</p>
-                <p style="font-size: 0.8rem; color: #888;">Shearling lined brown wool</p>
-                <span class="product-price">See Details</span>
-            </div>
-        </div>
-
-        <!-- Item 4: The Sweater -->
-        <div class="product-card">
-            <a href="/shop/mens-sweater">
-                <img src="images/man-sweater.jpg" class="product-img" alt="Cable Knit Sweater">
-            </a>
-            <div class="product-info">
-                <p class="product-title">Classic Cable Knit</p>
-                <p style="font-size: 0.8rem; color: #888;">Essential Grey Wool Blend</p>
-                <span class="product-price">See Details</span>
-            </div>
-        </div>
-
-        <!-- Item 2: The Vest Look -->
-        <div class="product-card">
-            <a href="/shop/mens-vest">
-                <img src="images/man-vest.jpg" class="product-img" alt="Puffer Vest">
-            </a>
-            <div class="product-info">
-                <p class="product-title">Weekend Layering Vest</p>
-                <p style="font-size: 0.8rem; color: #888;">Forest Green Puffer</p>
-                <span class="product-price">See Details</span>
-            </div>
-        </div>
-
-    </div>
-
-
-    <!-- SELENE'S EDIT (Outfits) -->
-    <div id="edits" style="text-align: center; margin-top: 80px; margin-bottom: 40px;">
-        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.2rem;">
-            Selene's Edit
-        </h2>
-        <p style="color: #666; max-width: 500px; margin: 10px auto;">
-            Curated aesthetics: From Dark Academia to Corporate Chic.
-        </p>
-    </div>
-
-    <div class="grid-container">
-        
-        <!-- Item 7: Brown Skirt Outfit -->
-        <div class="product-card edit-card">
-            <a href="/shop/academia-look">
-                <img src="images/edit-academia.jpg" class="product-img" alt="Dark Academia Outfit">
-            </a>
-            <div class="product-info">
-                <p class="product-title" style="font-size: 1.1rem;">The "Dark Academia" Edit</p>
-                <p style="font-size: 0.85rem; color: #888;">Pleated Skirt • Chunky Knit • Boots</p>
-                <a href="/shop/academia-look" style="text-decoration: underline; color: #C5A059; font-size: 0.9rem;">Shop This Look</a>
-            </div>
-        </div>
-
-        <!-- Item 6: Maroon Coat Outfit -->
-        <div class="product-card edit-card">
-            <a href="/shop/corporate-look">
-                <img src="images/edit-maroon.jpg" class="product-img" alt="Corporate Chic Outfit">
-            </a>
-            <div class="product-info">
-                <p class="product-title" style="font-size: 1.1rem;">The "Power Suit" Edit</p>
-                <p style="font-size: 0.85rem; color: #888;">Burgundy Coat • Grey Tailoring</p>
-                <a href="/shop/corporate-look" style="text-decoration: underline; color: #C5A059; font-size: 0.9rem;">Shop This Look</a>
-            </div>
-        </div>
-
-        <!-- Item 8: Denim Skirt Outfit -->
-        <div class="product-card edit-card">
-            <a href="/shop/cottage-look">
-                <img src="images/edit-cottage.jpg" class="product-img" alt="Cottagecore Outfit">
-            </a>
-            <div class="product-info">
-                <p class="product-title" style="font-size: 1.1rem;">The "Spring Cottage" Edit</p>
-                <p style="font-size: 0.85rem; color: #888;">Embroidered Blouse • Denim Maxi</p>
-                <a href="/shop/cottage-look" style="text-decoration: underline; color: #C5A059; font-size: 0.9rem;">Shop This Look</a>
-            </div>
-        </div>
-
-    </div>
-
-
-
-
-
-
-
-
-
-    <!-- ================= ABOUT SECTION ================= -->
-    <div id="about" class="about-box">
-        <h3>The Selene Luxe Story</h3>
-        <p style="line-height: 1.8; color: #555;">
-            Founded with a passion for timeless elegance, <strong>Selene Luxe</strong> curates the finest fashion, beauty, and lifestyle essentials for the modern muse. 
-            <br><br>
-            Our mission is simple: to bring you luxury aesthetics without the hassle. Every item is hand-picked to ensure it meets our high standards of quality and style.
-            Thank you for being part of our journey (and our 6 million monthly viewers on Pinterest!).
-        </p>
-    </div>
-
-    <!-- FOOTER -->
-    <footer style="text-align: center; padding: 50px 20px; color: #777; font-size: 0.8rem; background: #fafafa; margin-top: 50px;">
-        <p>&copy; 2026 Selene Luxe. All rights reserved.</p>
-        <p>As an Amazon Associate I earn from qualifying purchases.</p>
-    </footer>
+    </main>
 
 </body>
 </html>

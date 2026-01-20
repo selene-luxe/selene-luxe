@@ -1,205 +1,143 @@
-/* style.css - The Hybrid Layout (Website + Profile) */
+/* style.css - The High-End Retail Layout */
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Oswald:wght@500;700&display=swap');
 
 :root {
-    --background: #fff;
-    --text-main: #111;
-    --gold: #C5A059;
+    --bg-color: #ffffff;
+    --text-black: #000000;
+    --sale-red: #d50000;
 }
 
 body {
-    background-color: var(--background);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    font-family: 'Lato', sans-serif;
     margin: 0;
-    color: var(--text-main);
-    padding-top: 70px; /* Space for the fixed navbar */
+    padding-top: 80px; /* Space for the bigger navbar */
+    color: var(--text-black);
 }
 
-/* 1. THE FIXED NAVBAR (This is what was missing) */
+/* 1. THE RETAIL NAVBAR */
 .navbar {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
+    top: 0; left: 0; width: 100%; height: 80px;
     background: #fff;
-    border-bottom: 1px solid #efefef;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 5%;
+    justify-content: space-between; /* Spreads Left, Center, Right apart */
+    padding: 0 40px;
     box-sizing: border-box;
-    z-index: 1000; /* Ensures it sits ON TOP of the banner */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    z-index: 1000;
+    /* No shadow/border for that ultra-clean look, or optional border */
+    /* border-bottom: 1px solid #f0f0f0; */ 
 }
 
-.nav-brand {
-    font-size: 1.5rem;
-    font-weight: 700;
+/* Left: The Links */
+.nav-left {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+.nav-link {
     text-decoration: none;
     color: #000;
-    font-family: 'Playfair Display', serif;
-}
-
-.nav-links {
-    display: flex;
-    gap: 30px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: #555;
-    font-weight: 600;
-    font-size: 0.95rem;
-}
-.nav-links a:hover {
-    color: #000;
-}
-
-/* 2. THE PROFILE HEADER (The Pinterest Branding) */
-.profile-section {
-    text-align: center;
-    position: relative;
-    margin-bottom: 3rem;
-}
-
-.hero-banner {
-    width: 100%;
-    height: 300px;
-    background-size: cover;
-    background-position: center;
-    background-color: #f0f0f0;
-}
-
-.profile-avatar {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    border: 5px solid #fff;
-    object-fit: cover;
-    margin-top: -65px; /* Pulls it up to overlap banner */
-    background: #fff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    position: relative;
-    z-index: 10;
-}
-
-.profile-bio {
-    max-width: 600px;
-    margin: 15px auto;
-    padding: 0 20px;
-}
-.profile-bio h1 {
-    font-size: 2rem;
-    margin: 0 0 10px 0;
-    font-family: 'Playfair Display', serif;
-}
-.profile-bio p {
-    color: #555;
-    line-height: 1.6;
-    font-size: 0.95rem;
-}
-
-/* 3. THE TABS (Category Filters) */
-.filter-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.pill-btn {
-    padding: 10px 25px;
-    border-radius: 30px;
-    background: #f0f0f0;
-    text-decoration: none;
-    color: #111;
-    font-weight: 600;
-    transition: all 0.2s;
-}
-.pill-btn:hover, .pill-btn.active {
-    background: #111;
-    color: #fff;
-}
-/* New "Selene's Edit" Pill Style */
-.pill-btn.edit {
-    background: #111; /* Black background */
-    color: #fff;      /* White text */
-    border: 1px solid #111;
-}
-.pill-btn.edit:hover {
-    background: #fff;
-    color: #111;
-}
-
-/* Optional: Make the "Edits" section stand out */
-.edit-card {
-    border: 1px solid #eee;
-    padding: 10px;
-}
-
-/* 4. PRODUCT GRID */
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 30px;
-    padding: 20px 5%;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.product-card {
-    transition: transform 0.2s;
-}
-.product-card:hover {
-    transform: translateY(-5px);
-}
-.product-img {
-    width: 100%;
-    border-radius: 12px;
-    object-fit: cover;
-    aspect-ratio: 3/4; /* Forces fashion-style vertical images */
-    background-color: #eee;
-}
-.product-info {
-    padding: 10px 0;
-}
-.product-title {
     font-weight: 700;
+    font-size: 13px; /* Retail sites use small, bold text */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.nav-link:hover { text-decoration: underline; }
+
+/* The SALE link is Red */
+.nav-link.sale { color: var(--sale-red); }
+
+/* Center: The Logo */
+.nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.brand-logo-text {
+    font-family: 'Oswald', sans-serif; /* Tall, condensed font like "Cougar" */
+    font-size: 38px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    color: #000;
+    text-decoration: none;
     margin: 0;
-    font-size: 1rem;
 }
-.product-price {
-    color: #555;
-    font-size: 0.9rem;
+
+/* Right: The Icons */
+.nav-right {
+    display: flex;
+    gap: 20px;
+    font-size: 18px; /* Icon size */
+}
+.nav-icon {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 2. THE 3-COLUMN CATEGORY LAYOUT */
+.main-container {
+    max-width: 1600px; /* Very wide layout */
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* 3 Equal Columns */
+    gap: 30px; /* Space between the big cards */
+}
+
+/* The Category Card */
+.cat-card {
+    text-align: center;
+    text-decoration: none; /* Removes link underline */
+    display: block;
+}
+
+.cat-title {
+    font-family: 'Lato', sans-serif;
+    font-weight: 800; /* Extra Bold */
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #000;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.cat-img-wrapper {
+    width: 100%;
+    height: 650px; /* Very Tall Vertical Images */
+    overflow: hidden;
+    background-color: #f4f4f4;
+}
+
+.cat-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image fills the tall box */
+    transition: transform 0.5s ease;
+}
+
+/* Zoom Effect on Hover */
+.cat-card:hover .cat-img {
+    transform: scale(1.03);
 }
 
 /* MOBILE RESPONSIVE */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .navbar { padding: 0 20px; height: 60px; }
-    body { padding-top: 60px; }
-    .hero-banner { height: 180px; }
-    .profile-avatar { width: 100px; height: 100px; margin-top: -50px; }
-    .profile-bio h1 { font-size: 1.5rem; }
-    .nav-links { display: none; } /* Hide text links on mobile, keep logo */
-}
-
-
-/* Fix scrolling so title doesn't hide behind navbar */
-section, div[id] {
-    scroll-margin-top: 100px; /* Pushes the content down when you click a link */
-}
-
-/* About Section Styling */
-.about-box {
-    background: #f9f9f9;
-    padding: 40px;
-    margin: 50px auto;
-    max-width: 800px;
-    text-align: center;
-    border-radius: 12px;
-}
-.about-box h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    margin-bottom: 10px;
+    .brand-logo-text { font-size: 28px; }
+    /* Hide the text links on small tablets/phones */
+    .nav-left { display: none; } 
+    
+    .category-grid {
+        grid-template-columns: 1fr; /* Stack them 1 on top of another */
+        gap: 50px;
+    }
+    .cat-img-wrapper { height: 500px; }
 }
