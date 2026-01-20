@@ -3,131 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selene Luxe</title>
+    <title>Selene Luxe | Fashion & Lifestyle</title>
     <link rel="stylesheet" href="style.css">
-    <!-- FontAwesome for the Icons (Search/Heart) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- 1. NAVBAR (The Curator Edition) -->
+    <!-- NAVBAR -->
     <nav class="navbar">
-        
-        <!-- LEFT: Categories (Renamed Sale to Trending) -->
         <div class="nav-left">
-            <a href="#edits" class="nav-link sale">Trending</a> <!-- Red text for urgency -->
+            <a href="trends.html" class="nav-link sale">Trending</a>
             <a href="#men" class="nav-link">Men</a>
             <a href="#women" class="nav-link">Women</a>
             <a href="#kids" class="nav-link">Kids</a>
-            <!-- Removed Accessories to keep it clean -->
         </div>
-
-        <!-- CENTER: Logo -->
         <div class="nav-center">
-            <a href="#" class="brand-logo-text">SELENE LUXE</a>
+            <a href="index.html" class="brand-logo-text">SELENE LUXE</a>
         </div>
-
-        <!-- RIGHT: Social Proof (Instead of Cart) -->
         <div class="nav-right">
-            <!-- Link to your actual Pinterest Account -->
-            <a href="https://pinterest.com/YOUR_USERNAME" target="_blank" class="nav-social" title="Follow on Pinterest">
-                <i class="fa-brands fa-pinterest"></i>
-            </a>
-            <!-- Link to Instagram or TikTok if you have it -->
-            <a href="#" class="nav-social" title="Follow on Instagram">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
+            <a href="https://pinterest.com/YOUR_USERNAME" class="nav-social"><i class="fa-brands fa-pinterest"></i></a>
+            <a href="#" class="nav-social"><i class="fa-brands fa-instagram"></i></a>
         </div>
     </nav>
 
-
-    <!-- 2. MAIN CATEGORIES (Keep this the same as before) -->
+    <!-- MAIN CATEGORIES -->
     <main class="main-container">
         <div class="category-grid">
-            
-            <!-- MEN -->
             <a href="#men" class="cat-card">
                 <span class="cat-title">Men</span>
-                <div class="cat-img-wrapper">
-                    <img src="images/man-coat.jpg" alt="Men's Collection" class="cat-img">
-                </div>
+                <div class="cat-img-wrapper"><img src="images/man-coat.jpg" class="cat-img"></div>
             </a>
-
-            <!-- WOMEN -->
             <a href="#women" class="cat-card">
                 <span class="cat-title">Women</span>
-                <div class="cat-img-wrapper">
-                    <img src="images/edit-academia.jpg" alt="Women's Collection" class="cat-img">
-                </div>
+                <div class="cat-img-wrapper"><img src="images/edit-academia.jpg" class="cat-img"></div>
             </a>
-
-            <!-- KIDS -->
             <a href="#kids" class="cat-card">
                 <span class="cat-title">Kids</span>
-                <div class="cat-img-wrapper">
-                    <img src="images/kids-laughing-2-scaled (1).webp" alt="Kids Collection" class="cat-img">
-                </div>
+                <div class="cat-img-wrapper"><img src="images/kids-laughing-2-scaled (1).webp" class="cat-img"></div>
             </a>
         </div>
     </main>
 
+    <!-- NEW SECTION: THIS WEEK'S FAVORITES -->
+    <section>
+        <div class="section-header">
+            <h2 class="section-title">This Week's Favorites</h2>
+            <p>Hand-picked luxury finds for the season.</p>
+        </div>
+        
+        <div class="product-grid">
+            <!-- Reuse your existing images here -->
+            <a href="#" class="product-item">
+                <img src="images/bag-ribbon.jpg" class="p-img">
+                <p class="p-title">Burgundy Ribbon Bag</p>
+                <p class="p-price">View Details</p>
+            </a>
+            <a href="#" class="product-item">
+                <img src="images/heels-velvet.jpg" class="p-img">
+                <p class="p-title">Velvet Pearl Heels</p>
+                <p class="p-price">View Details</p>
+            </a>
+            <a href="#" class="product-item">
+                <img src="images/man-coat.jpg" class="p-img">
+                <p class="p-title">The Shearling Coat</p>
+                <p class="p-price">View Details</p>
+            </a>
+            <a href="#" class="product-item">
+                <img src="images/decor-glass.jpg" class="p-img">
+                <p class="p-title">Aesthetic Glassware</p>
+                <p class="p-price">View Details</p>
+            </a>
+        </div>
+    </section>
 
-    <!-- 3. FOOTER (The Pinterest-Focused Version) -->
+    <!-- FOOTER -->
     <footer class="site-footer">
         <div class="footer-container">
-            
-            <!-- COL 1: The Newsletter (Your Backup Asset) -->
-            <!-- Moved to first position for maximum attention -->
             <div class="footer-col story-col">
                 <h4 class="footer-title">Join the Inner Circle</h4>
-                <p class="footer-text">
-                    Don't miss a trend. Get our curated "Weekly Edit" delivered to your inbox. 
-                    No spam, just aesthetics.
-                </p>
-                
-                <!-- This form is currently visual. Later we connect it to ConvertKit -->
+                <p class="footer-text">Don't miss a trend. Get our curated "Weekly Edit" delivered to your inbox.</p>
                 <form class="footer-form">
-                    <input type="email" placeholder="Your Email Address" required>
+                    <input type="email" placeholder="Your Email Address">
                     <button type="button">SUBSCRIBE</button>
                 </form>
-                <p style="font-size: 10px; color: #999; margin-top: 5px;">We respect your privacy.</p>
             </div>
-
-            <!-- COL 2: Shop by Aesthetic (Pinterest Users LOVE this) -->
             <div class="footer-col">
                 <h4 class="footer-title">Shop by Aesthetic</h4>
-                <a href="#edits">Old Money</a>
-                <a href="#edits">Dark Academia</a>
-                <a href="#edits">Coquette Core</a>
-                <a href="#edits">Minimalist</a>
-                <a href="#edits">Y2K Fashion</a>
+                <a href="trends.html">Old Money</a>
+                <a href="trends.html">Dark Academia</a>
+                <a href="trends.html">Coquette Core</a>
             </div>
-
-            <!-- COL 3: The Curator (Instead of "The Brand") -->
             <div class="footer-col">
                 <h4 class="footer-title">Selene Luxe</h4>
-                <a href="#about">Our Story</a>
-                <a href="https://www.pinterest.com/SelenaLuxe/" target="_blank">Pinterest Profile</a>
+                <a href="about.html">Our Story</a>
                 <a href="legal.html">Privacy Policy</a>
-                <a href="legal.html">Terms of Service</a>
+                <a href="legal.html">Affiliate Disclosure</a>
             </div>
-
-            <!-- COL 4: Socials -->
             <div class="footer-col">
                 <h4 class="footer-title">Follow Us</h4>
-                <p class="footer-text">Join 6 Million viewers on Pinterest for daily inspiration.</p>
                 <div class="social-icons">
-                    <a href="#" style="color:#000;"><i class="fa-brands fa-pinterest" style="font-size: 24px;"></i></a>
-                    <a href="#" style="color:#000;"><i class="fa-brands fa-tiktok" style="font-size: 24px;"></i></a>
-                    <a href="#" style="color:#000;"><i class="fa-brands fa-instagram" style="font-size: 24px;"></i></a>
+                    <i class="fa-brands fa-pinterest"></i>
+                    <i class="fa-brands fa-instagram"></i>
                 </div>
             </div>
-
         </div>
-
-        <!-- COPYRIGHT -->
         <div class="footer-bottom">
-            <p>&copy; 2026 Selene Luxe. Curated with love.</p>
+            <p>&copy; 2026 Selene Luxe. All rights reserved.</p>
             <p>As an Amazon Associate I earn from qualifying purchases.</p>
         </div>
     </footer>
