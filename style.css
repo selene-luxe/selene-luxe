@@ -296,12 +296,15 @@ body {
 }
 .product-item:hover { transform: translateY(-5px); }
 
-.p-img {
+.p-img, .product-img {
     width: 100%;
-    aspect-ratio: 3/4;
-    object-fit: cover;
-    background: #f4f4f4;
-    margin-bottom: 10px;
+    aspect-ratio: 3/4;     /* Keeps the shape */
+    object-fit: contain;   /* Shows full product */
+    
+    /* THE FIX: */
+    background-color: #fff; /* Ensures the empty space inside the box is white */
+    border: 1px solid #e5e5e5; /* A thin gray border to define the edge */
+    border-radius: 8px;     /* Slight rounding so it doesn't look harsh */
 }
 .p-title { font-weight: bold; font-size: 14px; margin: 0; }
 .p-price { color: #555; font-size: 13px; }
@@ -349,4 +352,104 @@ body {
     max-width: 600px;
     margin: 0 auto;
     color: #555;
+}
+
+
+
+/* ================= NEW CATEGORY PAGE STYLES ================= */
+
+/* Sub-Category Navigation (The Pill Bar) */
+.sub-nav-container {
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+    position: sticky;
+    top: 70px; /* Sticks below the main navbar */
+    z-index: 900;
+    text-align: center;
+    overflow-x: auto; /* Allows scrolling on mobile */
+    white-space: nowrap;
+}
+
+.sub-link {
+    display: inline-block;
+    padding: 8px 20px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    text-decoration: none;
+    color: #555;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.sub-link:hover {
+    background: var(--text-dark); /* Purple */
+    color: #fff;
+    border-color: var(--text-dark);
+}
+
+/* Category Headers */
+.category-hero {
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+}
+.category-hero h1 {
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.3); /* Dark box for readability */
+    padding: 10px 30px;
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+/* Section Dividers */
+.sub-header {
+    margin: 60px 0 30px 0;
+    padding-left: 5%;
+    border-left: 4px solid var(--text-dark); /* Purple line */
+}
+.sub-header h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.8rem;
+    margin: 0;
+    text-transform: uppercase;
+    color: var(--text-dark);
+}
+.sub-header a {
+    font-size: 0.9rem;
+    color: #888;
+    text-decoration: none;
+}
+
+/* Update Card Overlay for Index Page */
+.cat-card { position: relative; }
+.cat-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    padding: 12px 25px;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    opacity: 0.9;
+    transition: all 0.3s;
+    width: 60%;
+    text-align: center;
+}
+.cat-card:hover .cat-overlay {
+    background: var(--text-dark); /* Purple on hover */
+    color: #fff;
+    width: 70%;
 }
