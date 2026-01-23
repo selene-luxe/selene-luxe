@@ -169,7 +169,8 @@ body {
 .footer-container {
     max-width: 1400px;
     margin: 0 auto;
-    display: grid;
+    display: flex;
+    justify-content:space-around;
     grid-template-columns: 2fr 1fr 1fr 1.5fr; /* Story column is wider (2fr) */
     gap: 60px;
 }
