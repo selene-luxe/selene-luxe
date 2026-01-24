@@ -12,23 +12,28 @@ body {
     background-color: var(--bg-color);
     font-family: 'Lato', sans-serif;
     margin: 0;
-    padding-top: 80px; /* Space for the bigger navbar */
+    padding-top: 80px;
+    /* Space for the bigger navbar */
     color: var(--text-black);
 }
 
 /* 1. THE RETAIL NAVBAR */
 .navbar {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 80px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
     background: #fff;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Spreads Left, Center, Right apart */
+    justify-content: space-between;
+    /* Spreads Left, Center, Right apart */
     padding: 0 40px;
     box-sizing: border-box;
     z-index: 1000;
     /* No shadow/border for that ultra-clean look, or optional border */
-    /* border-bottom: 1px solid #f0f0f0; */ 
+    /* border-bottom: 1px solid #f0f0f0; */
 }
 
 /* Left: The Links */
@@ -37,18 +42,25 @@ body {
     gap: 25px;
     align-items: center;
 }
+
 .nav-link {
     text-decoration: none;
     color: #000;
     font-weight: 700;
-    font-size: 13px; /* Retail sites use small, bold text */
+    font-size: 13px;
+    /* Retail sites use small, bold text */
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
-.nav-link:hover { text-decoration: underline; }
+
+.nav-link:hover {
+    text-decoration: underline;
+}
 
 /* The SALE link is Red */
-.nav-link.sale { color: var(--sale-red); }
+.nav-link.sale {
+    color: var(--sale-red);
+}
 
 /* Center: The Logo */
 .nav-center {
@@ -56,8 +68,10 @@ body {
     left: 50%;
     transform: translateX(-50%);
 }
+
 .brand-logo-text {
-    font-family: 'Oswald', sans-serif; /* Tall, condensed font like "Cougar" */
+    font-family: 'Oswald', sans-serif;
+    /* Tall, condensed font like "Cougar" */
     font-size: 38px;
     font-weight: 500;
     text-transform: uppercase;
@@ -77,12 +91,14 @@ body {
 /* New Social Buttons styling */
 .nav-social {
     color: #000;
-    font-size: 20px; /* Slightly bigger for visibility */
+    font-size: 20px;
+    /* Slightly bigger for visibility */
     transition: color 0.3s;
 }
 
 .nav-social:hover {
-    color: #E60023; /* Pinterest Red on Hover */
+    color: #E60023;
+    /* Pinterest Red on Hover */
 }
 
 
@@ -94,27 +110,32 @@ body {
 
 /* 2. THE 3-COLUMN CATEGORY LAYOUT */
 .main-container {
-    max-width: 1600px; /* Very wide layout */
+    max-width: 1600px;
+    /* Very wide layout */
     margin: 0 auto;
     padding: 40px;
 }
 
 .category-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* 3 Equal Columns */
-    gap: 30px; /* Space between the big cards */
+    grid-template-columns: 1fr 1fr 1fr;
+    /* 3 Equal Columns */
+    gap: 30px;
+    /* Space between the big cards */
 }
 
 /* The Category Card */
 .cat-card {
     text-align: center;
-    text-decoration: none; /* Removes link underline */
+    text-decoration: none;
+    /* Removes link underline */
     display: block;
 }
 
 .cat-title {
     font-family: 'Lato', sans-serif;
-    font-weight: 800; /* Extra Bold */
+    font-weight: 800;
+    /* Extra Bold */
     font-size: 24px;
     text-transform: uppercase;
     color: #000;
@@ -124,7 +145,8 @@ body {
 
 .cat-img-wrapper {
     width: 100%;
-    height: 650px; /* Very Tall Vertical Images */
+    height: 650px;
+    /* Very Tall Vertical Images */
     overflow: hidden;
     background-color: #f4f4f4;
 }
@@ -132,7 +154,8 @@ body {
 .cat-img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures image fills the tall box */
+    object-fit: cover;
+    /* Ensures image fills the tall box */
     transition: transform 0.5s ease;
 }
 
@@ -143,16 +166,29 @@ body {
 
 /* MOBILE RESPONSIVE */
 @media (max-width: 1024px) {
-    .navbar { padding: 0 20px; height: 60px; }
-    .brand-logo-text { font-size: 28px; }
+    .navbar {
+        padding: 0 20px;
+        height: 60px;
+    }
+
+    .brand-logo-text {
+        font-size: 28px;
+    }
+
     /* Hide the text links on small tablets/phones */
-    .nav-left { display: none; } 
-    
+    .nav-left {
+        display: none;
+    }
+
     .category-grid {
-        grid-template-columns: 1fr; /* Stack them 1 on top of another */
+        grid-template-columns: 1fr;
+        /* Stack them 1 on top of another */
         gap: 50px;
     }
-    .cat-img-wrapper { height: 500px; }
+
+    .cat-img-wrapper {
+        height: 500px;
+    }
 }
 
 
@@ -160,7 +196,8 @@ body {
 /* ================= FOOTER STYLES ================= */
 
 .site-footer {
-    background-color: #f9f9f9; /* Very light gray to separate from content */
+    background-color: #f9f9f9;
+    /* Very light gray to separate from content */
     padding: 80px 40px 30px 40px;
     margin-top: 80px;
     border-top: 1px solid #eee;
@@ -170,8 +207,9 @@ body {
     max-width: 1400px;
     margin: 0 auto;
     display: flex;
-    justify-content:space-around;
-    grid-template-columns: 2fr 1fr 1fr 1.5fr; /* Story column is wider (2fr) */
+    justify-content: space-around;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    /* Story column is wider (2fr) */
     gap: 60px;
 }
 
@@ -202,6 +240,7 @@ body {
     margin-bottom: 12px;
     transition: color 0.2s;
 }
+
 .footer-col a:hover {
     color: #000;
     text-decoration: underline;
@@ -220,22 +259,27 @@ body {
 /* Newsletter Form */
 .footer-form {
     display: flex;
-    flex-direction: column; /* Stack input and button */
+    flex-direction: column;
+    /* Stack input and button */
     gap: 10px;
     margin-top: 15px;
 }
+
 .footer-form input {
     background: #fff;
     border: 1px solid #ddd;
     padding: 12px;
 }
+
 .footer-form button {
     background: #000;
     color: white;
-    width: 100%; /* Full width button */
+    width: 100%;
+    /* Full width button */
     padding: 12px;
     font-weight: bold;
 }
+
 .footer-form button:hover {
     background: #333;
 }
@@ -253,12 +297,15 @@ body {
 /* RESPONSIVE FOOTER (Mobile) */
 @media (max-width: 1024px) {
     .footer-container {
-        grid-template-columns: 1fr; /* Stack everything vertically */
+        grid-template-columns: 1fr;
+        /* Stack everything vertically */
         gap: 40px;
     }
+
     .site-footer {
         padding: 50px 20px;
     }
+
     .footer-text {
         max-width: 100%;
     }
@@ -273,6 +320,7 @@ body {
     text-align: center;
     margin: 60px 0 30px 0;
 }
+
 .section-title {
     font-family: 'Oswald', sans-serif;
     font-size: 28px;
@@ -283,10 +331,14 @@ body {
 /* UPDATED PRODUCT GRID - Centers items if less than 5 */
 
 .product-grid {
-    display: flex;             /* Use Flexbox instead of Grid */
-    flex-wrap: wrap;           /* Allow items to wrap to next line */
-    justify-content: start;   /* THIS is the magic: Centers items horizontally */
-    gap: 30px;                 /* Space between items */
+    display: flex;
+    /* Use Flexbox instead of Grid */
+    flex-wrap: wrap;
+    /* Allow items to wrap to next line */
+    justify-content: start;
+    /* THIS is the magic: Centers items horizontally */
+    gap: 30px;
+    /* Space between items */
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 40px;
@@ -298,11 +350,14 @@ body {
     display: block;
     transition: transform 0.3s;
     background: #fff;
-    
+
     /* Flex Sizing Rules */
-    width: 260px;        /* Base width of the card */
-    flex-grow: 1;        /* Allows card to stretch slightly to fill gaps */
-    max-width: 350px;    /* Stops card from getting too huge if alone */
+    width: 260px;
+    /* Base width of the card */
+    flex-grow: 1;
+    /* Allows card to stretch slightly to fill gaps */
+    max-width: 350px;
+    /* Stops card from getting too huge if alone */
 }
 
 /* Ensure the image inside fits perfectly */
@@ -315,21 +370,41 @@ body {
     border-radius: 8px;
     margin-bottom: 10px;
 }
-.product-item:hover { transform: translateY(-5px); }
+
+.product-item:hover {
+    transform: translateY(-5px);
+}
 
 /* FIXED IMAGE STYLING - Shows full product without cropping */
-.p-img, .product-img, .cat-img {
+.p-img,
+.product-img,
+.cat-img {
     width: 100%;
-    aspect-ratio: 3/4;     /* Keeps the tall fashion shape */
-    object-fit: contain;   /* <--- THE MAGIC FIX: Shows the whole image */
-    
-    background-color: #fff; /* White background for the empty space */
-    border: 1px solid #e5e5e5; /* A thin gray border to frame it */
-    border-radius: 8px;     /* Rounded corners */
-    padding: 10px;          /* Adds breathing room around the item */
+    aspect-ratio: 3/4;
+    /* Keeps the tall fashion shape */
+    object-fit: contain;
+    /* <--- THE MAGIC FIX: Shows the whole image */
+
+    background-color: #fff;
+    /* White background for the empty space */
+    border: 1px solid #e5e5e5;
+    /* A thin gray border to frame it */
+    border-radius: 8px;
+    /* Rounded corners */
+    padding: 10px;
+    /* Adds breathing room around the item */
 }
-.p-title { font-weight: bold; font-size: 14px; margin: 0; }
-.p-price { color: #555; font-size: 13px; }
+
+.p-title {
+    font-weight: bold;
+    font-size: 14px;
+    margin: 0;
+}
+
+.p-price {
+    color: #555;
+    font-size: 13px;
+}
 
 /* ABOUT PAGE STYLES */
 .about-container {
@@ -338,16 +413,19 @@ body {
     padding: 60px 20px;
     text-align: center;
 }
+
 .stat-box {
     background: #f9f9f9;
     padding: 30px;
     margin: 30px 0;
     border: 1px solid #eee;
 }
+
 .big-stat {
     font-family: 'Oswald', sans-serif;
     font-size: 50px;
-    color: #d50000; /* Red for emphasis */
+    color: #d50000;
+    /* Red for emphasis */
     font-weight: 700;
     display: block;
 }
@@ -360,8 +438,16 @@ body {
     line-height: 1.6;
     color: #333;
 }
-.legal-container h1 { font-family: 'Oswald', sans-serif; margin-bottom: 20px; }
-.legal-container h2 { margin-top: 30px; font-size: 18px; }
+
+.legal-container h1 {
+    font-family: 'Oswald', sans-serif;
+    margin-bottom: 20px;
+}
+
+.legal-container h2 {
+    margin-top: 30px;
+    font-size: 18px;
+}
 
 /* TRENDS / BLOG PAGE */
 .trend-hero {
@@ -370,6 +456,7 @@ body {
     background: #f4f4f4;
     margin-bottom: 40px;
 }
+
 .trend-desc {
     max-width: 600px;
     margin: 0 auto;
@@ -386,10 +473,12 @@ body {
     border-bottom: 1px solid #eee;
     padding: 15px 0;
     position: sticky;
-    top: 70px; /* Sticks below the main navbar */
+    top: 70px;
+    /* Sticks below the main navbar */
     z-index: 900;
     text-align: center;
-    overflow-x: auto; /* Allows scrolling on mobile */
+    overflow-x: auto;
+    /* Allows scrolling on mobile */
     white-space: nowrap;
 }
 
@@ -407,7 +496,8 @@ body {
 }
 
 .sub-link:hover {
-    background: var(--text-dark); /* Purple */
+    background: var(--text-dark);
+    /* Purple */
     color: #fff;
     border-color: var(--text-dark);
 }
@@ -422,22 +512,26 @@ body {
     justify-content: center;
     margin-bottom: 0;
 }
+
 .category-hero h1 {
     color: #fff;
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    background: rgba(0,0,0,0.3); /* Dark box for readability */
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.3);
+    /* Dark box for readability */
     padding: 10px 30px;
-    border: 1px solid rgba(255,255,255,0.5);
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 /* Section Dividers */
 .sub-header {
     margin: 60px 0 30px 0;
     padding-left: 5%;
-    border-left: 4px solid var(--text-dark); /* Purple line */
+    border-left: 4px solid var(--text-dark);
+    /* Purple line */
 }
+
 .sub-header h3 {
     font-family: 'Oswald', sans-serif;
     font-size: 1.8rem;
@@ -445,6 +539,7 @@ body {
     text-transform: uppercase;
     color: var(--text-dark);
 }
+
 .sub-header a {
     font-size: 0.9rem;
     color: #888;
@@ -452,7 +547,10 @@ body {
 }
 
 /* Update Card Overlay for Index Page */
-.cat-card { position: relative; }
+.cat-card {
+    position: relative;
+}
+
 .cat-overlay {
     position: absolute;
     bottom: 20px;
@@ -464,14 +562,16 @@ body {
     text-transform: uppercase;
     font-weight: bold;
     color: #000;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     opacity: 0.9;
     transition: all 0.3s;
     width: 60%;
     text-align: center;
 }
+
 .cat-card:hover .cat-overlay {
-    background: var(--text-dark); /* Purple on hover */
+    background: var(--text-dark);
+    /* Purple on hover */
     color: #fff;
     width: 70%;
 }
