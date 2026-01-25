@@ -694,3 +694,13 @@ html, body {
         box-sizing: border-box !important;
     }
 }
+
+
+/* Fix Footer Icon Alignment on Mobile */
+@media (max-width: 768px) {
+    .social-icons {
+        display: flex;
+        justify-content: center !important; /* Forces the icon to the middle */
+        width: 100%;
+    }
+}
