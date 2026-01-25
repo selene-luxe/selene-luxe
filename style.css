@@ -575,3 +575,57 @@ body {
     color: #fff;
     width: 70%;
 }
+
+/* ================= MOBILE RESPONSIVE FIXES ================= */
+@media (max-width: 768px) {
+    
+    /* 1. Fix the Navbar squeezing */
+    .navbar {
+        padding: 0 15px; /* Reduce padding so logo fits */
+        height: 60px;
+    }
+    
+    .brand-logo-text {
+        font-size: 24px; /* Make logo smaller on phone */
+    }
+
+    /* Hide the text links on phone (They take too much space) */
+    .nav-left { display: none; }
+    
+    /* 2. Fix the Body Spacing */
+    body {
+        padding-top: 60px; /* Match new navbar height */
+    }
+    
+    .main-container, .product-grid, .grid-container {
+        padding: 20px 15px; /* Less padding on sides */
+    }
+
+    /* 3. Fix the Big Category Cards (Men/Women/Kids) */
+    .category-grid {
+        grid-template-columns: 1fr; /* Stack them vertically */
+        gap: 20px;
+    }
+    
+    .cat-img-wrapper {
+        height: 400px; /* Make them shorter on phone so you don't scroll forever */
+    }
+
+    /* 4. Fix Product Cards appearing cut off */
+    .product-grid {
+        justify-content: center; /* Center items */
+        gap: 15px;
+    }
+    
+    .product-item {
+        width: 45%; /* Show 2 items per row */
+        max-width: 200px;
+        flex-grow: 0;
+    }
+    
+    /* 5. Fix Hero Banners text */
+    .category-hero h1 {
+        font-size: 2rem;
+        padding: 5px 15px;
+    }
+}
