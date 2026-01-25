@@ -629,3 +629,68 @@ body {
         padding: 5px 15px;
     }
 }
+
+
+
+/* ================= FINAL MOBILE FIX (Paste at VERY BOTTOM) ================= */
+
+/* 1. Stop horizontal scrolling globally */
+html, body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    margin: 0px !important;
+    padding: 0px !important;
+    padding-top: 60px !important; /* Keep space for navbar */
+}
+
+/* 2. Force the Footer to Stack Vertically */
+@media (max-width: 768px) {
+    
+    .footer-container {
+        display: flex !important;       /* Switch to Flexbox */
+        flex-direction: column !important; /* Stack items top-to-bottom */
+        gap: 40px !important;
+        padding: 0 10px !important;
+    }
+
+    /* Fix the specific footer columns width */
+    .footer-col, .story-col {
+        width: 100% !important;
+        max-width: 100% !important;
+        text-align: center; /* Center text looks better on mobile stack */
+    }
+
+    .footer-text {
+        margin: 0 auto; /* Center the paragraph text */
+    }
+    
+    .footer-form {
+        width: 100% !important;
+    }
+
+    /* 3. Fix the "Shop Kids" / Category Card Overlays */
+    .cat-overlay {
+        width: 80% !important; /* Make overlay smaller so it doesn't touch edges */
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        padding: 10px !important;
+    }
+
+    /* 4. Navbar Safety Check */
+    .navbar {
+        width: 100% !important;
+        padding: 0 15px !important;
+        box-sizing: border-box !important;
+    }
+    
+    .brand-logo-text {
+        font-size: 24px !important; /* Prevent huge logo pushing width */
+    }
+    
+    /* 5. Main Container Padding */
+    .main-container, .category-grid {
+        padding: 20px 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+}
