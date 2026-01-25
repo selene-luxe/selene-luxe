@@ -117,9 +117,15 @@
             <div class="footer-col story-col">
                 <h4 class="footer-title">Join the Inner Circle</h4>
                 <p class="footer-text">Don't miss a trend. Get our curated "Weekly Edit" delivered to your inbox.</p>
-                <form class="footer-form">
-                    <input type="email" placeholder="Your Email Address">
-                    <button type="button">SUBSCRIBE</button>
+                <!-- Replace 'bassam251295@gmail.com' with your real email address -->
+                <form class="footer-form" action="https://formsubmit.co/bassam251295@gmail.com" method="POST">
+
+                    <!-- This makes the user stay on your site after submitting (Optional but recommended) -->
+                    <input type="hidden" name="_next" value="https://selene-luxe.pages.dev/">
+                    <input type="hidden" name="_captcha" value="false">
+
+                    <input type="email" name="email" placeholder="Your Email Address" required>
+                    <button type="submit">SUBSCRIBE</button>
                 </form>
             </div>
             <!-- <div class="footer-col">
@@ -131,8 +137,8 @@
             <div class="footer-col">
                 <h4 class="footer-title">Selene Luxe</h4>
                 <a href="about.html">Our Story</a>
-<a href="legal.html#privacy">Privacy Policy</a>
-<a href="legal.html#affiliate">Affiliate Disclosure</a>
+                <a href="legal.html#privacy">Privacy Policy</a>
+                <a href="legal.html#affiliate">Affiliate Disclosure</a>
             </div>
             <div class="footer-col">
                 <h4 class="footer-title">Follow Us</h4>
