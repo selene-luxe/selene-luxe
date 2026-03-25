@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SELENE LUXE | Product Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        ::-webkit-scrollbar { display: none; }
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #000000; scroll-behavior: smooth; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .zara-logo { 
+            letter-spacing: -0.05em; 
+            font-weight: 900; 
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            word-spacing: 0.2em;
+        }
+    </style>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body class="antialiased">
+
+    <!-- GLOBAL HEADER -->
+    <header class="fixed top-0 w-full flex justify-between items-center px-6 md:px-12 py-6 z-50 transition-all duration-500" id="main-header">
+        <div class="flex items-center w-1/4">
+            <button id="menu-btn" class="hover:opacity-50 transition flex items-center gap-2 p-2">
+                <i data-feather="menu" class="w-5 h-5"></i>
+                <span class="text-[10px] uppercase tracking-widest font-bold hidden md:block">Menu</span>
+            </button>
+        </div>
+        <div class="flex justify-center w-1/2 md:w-1/3">
+            <a href="index.html" class="text-4xl md:text-6xl zara-logo transition-all duration-500" id="header-logo">SELENE&nbsp;LUXE</a>
+        </div>
+        <div class="flex items-center justify-end gap-3 md:gap-6 w-1/4">
+            <button id="search-btn" class="hover:opacity-50 transition flex items-center gap-2 p-2">
+                <span class="text-[10px] uppercase tracking-widest font-bold hidden md:block">Search</span>
+                <i data-feather="search" class="w-4 h-4 md:w-5 md:h-5"></i>
+            </button>
+            <a href="wishlist.html" class="hover:opacity-50 transition p-2">
+                <i data-feather="heart" class="w-4 h-4 md:w-5 md:h-5"></i>
+            </a>
+        </div>
+    </header>
+
+    <main class="pt-24 md:pt-32 pb-20 px-4 md:px-12 max-w-[1800px] mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-12 gap-4 md:gap-12">
+            
+            <!-- LEFT SIDE: IMAGE -->
+            <div class="col-span-1 md:col-span-8 order-1">
+                <div class="aspect-[3/4] overflow-hidden bg-gray-50">
+                    <img id="img1" src="" class="w-full h-full object-cover transition duration-700 hover:scale-105">
+                </div>
+            </div>
+
+            <!-- RIGHT SIDE: DETAILS -->
+            <div class="col-span-1 md:col-span-4 order-2">
+                <div class="md:sticky md:top-32 space-y-4 md:space-y-8">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="w-2 h-2 bg-black rounded-full"></span>
+                        <p class="text-[10px] uppercase tracking-widest font-bold">Curated by SELENE LUXE</p>
+                    </div>
+                    <div>
+                        <p id="brand" class="text-[8px] md:text-[10px] text-gray-400 uppercase tracking-widest mb-1 md:mb-4"></p>
+                        <h1 id="name" class="text-lg md:text-4xl font-serif italic mb-1 md:mb-4 text-gray-900 leading-tight"></h1>
+                        <p id="price" class="text-[9px] md:text-sm font-bold uppercase tracking-widest text-neutral-500"></p>
+                    </div>
+
+                    <div class="border-t border-gray-100 pt-4 md:pt-8">
+                        <a id="btn" href="#" target="_blank" class="w-full block text-center bg-black text-white py-3 md:py-5 text-[8px] md:text-[10px] font-bold uppercase tracking-widest hover:bg-neutral-800 transition duration-300 mb-2">
+                            Check Availability
+                        </a>
+                        <p class="text-[7px] md:text-[9px] text-gray-400 text-center mb-2 md:mb-6 italic">
+                            *Prices and availability are accurate as of the date/time indicated and are subject to change.
+                        </p>
+                        
+                        <button id="save-wishlist-btn" class="w-full flex items-center justify-center gap-2 border border-neutral-200 text-black py-3 md:py-5 text-[8px] md:text-[10px] font-bold uppercase tracking-widest hover:bg-neutral-50 transition duration-300">
+                            <i data-feather="heart" class="w-3 h-3 md:w-4 md:h-4"></i> Add to Wishlist
+                        </button>
+                    </div>
+
+                    <div class="mt-4 md:mt-12 bg-gray-50 p-3 md:p-6 hidden md:block">
+                        <p class="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-widest mb-2">Notice</p>
+                        <p class="text-[8px] md:text-[9px] text-gray-500 italic leading-relaxed">
+                            Images on this site are for style inspiration and illustrative purposes only. The actual product on Amazon may vary in appearance. As an Amazon Associate I earn from qualifying purchases.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOUTIQUE ASSURANCE -->
+        <section class="mt-24 pt-16 border-t border-gray-100 max-w-2xl mx-auto text-center">
+            <h2 class="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-6">The SELENE LUXE Assurance</h2>
+            <div class="space-y-8">
+                <div>
+                    <h3 class="font-serif italic text-2xl mb-2">Curated with Purpose</h3>
+                    <p class="text-xs text-neutral-500 font-light leading-relaxed">
+                        Every item in our collection is hand-selected by our editors. We focus on high-reputation pieces that offer timeless style and quality, ensuring you only see the best of what's available.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="font-serif italic text-2xl mb-2">Verified Reputation</h3>
+                    <p class="text-xs text-neutral-500 font-light leading-relaxed">
+                        We prioritize products with proven track records and positive feedback, simplifying your search for the perfect addition to your wardrobe.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- OVERLAYS -->
+    <div id="side-menu" class="fixed top-0 left-0 w-full md:w-[400px] h-full bg-white z-[100] transform -translate-x-full transition-transform duration-500 p-10 shadow-2xl flex flex-col">
+        <button id="close-menu" class="self-end mb-10 hover:rotate-90 transition-transform duration-300">
+            <i data-feather="x" class="w-6 h-6"></i>
+        </button>
+        <nav class="flex flex-col gap-8 text-2xl font-serif italic">
+            <a href="shop.html?cat=women" class="hover:pl-4 transition-all">Women</a>
+            <a href="shop.html?cat=men" class="hover:pl-4 transition-all">Men</a>
+            <a href="shop.html?cat=kids" class="hover:pl-4 transition-all">Kids</a>
+            <a href="outfits.html" class="hover:pl-4 transition-all border-t border-gray-100 pt-8 mt-4">Outfits</a>
+        </nav>
+        <div class="mt-auto pt-10 border-t border-gray-100 text-[10px] uppercase tracking-widest font-bold text-gray-400 flex flex-col gap-4">
+            <a href="about.html">About Us</a>
+            <a href="disclosure.html">Affiliate Disclosure</a>
+            <a href="privacy.html">Privacy Policy</a>
+        </div>
+    </div>
+
+    <div id="search-overlay" class="fixed inset-0 bg-white z-[110] hidden flex flex-col items-center justify-center p-6 opacity-0 transition-opacity duration-500">
+        <button id="close-search" class="absolute top-10 right-10 hover:rotate-90 transition-transform duration-300">
+            <i data-feather="x" class="w-8 h-8"></i>
+        </button>
+        <div class="w-full max-w-2xl">
+            <input id="search-input" type="text" placeholder="SEARCH" class="w-full text-4xl md:text-6xl font-serif italic border-b border-black focus:outline-none pb-4 uppercase">
+        </div>
+    </div>
+
+    <footer class="py-20 bg-white border-t border-gray-50">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-[10px] text-gray-400 uppercase tracking-[0.2em] mb-10">
+                As an Amazon Associate I earn from qualifying purchases.
+            </p>
+            <div class="flex justify-center gap-10 text-[10px] uppercase tracking-widest font-bold text-neutral-400">
+                <a href="privacy.html" class="hover:text-black transition">Privacy</a>
+                <a href="disclosure.html" class="hover:text-black transition">Disclosure</a>
+                <a href="about.html" class="hover:text-black transition">About</a>
+            </div>
+            <p class="mt-16 text-[9px] text-gray-300 uppercase tracking-[0.5em]">
+                © 2024 SELENE LUXE CURATED
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const productID = parseInt(urlParams.get('id'));
+        const product = products.find(p => p.id === productID);
+
+        if (product) {
+            document.getElementById('name').innerText = product.name;
+            document.getElementById('brand').innerText = product.brand;
+            document.getElementById('price').innerText = product.price;
+            document.getElementById('img1').src = product.image1;
+            document.getElementById('btn').href = product.affiliateLink;
+            document.getElementById('btn').innerText = product.buttonText || "Shop on Amazon";
+            
+            document.title = `LUXE | ${product.name}`;
+        }
+
+        const saveBtn = document.getElementById('save-wishlist-btn');
+        saveBtn.addEventListener('click', () => {
+            let wishlist = JSON.parse(localStorage.getItem('myWishlist')) || [];
+            if (!wishlist.includes(productID)) {
+                wishlist.push(productID);
+                localStorage.setItem('myWishlist', JSON.stringify(wishlist));
+                saveBtn.innerText = "Added to Wishlist";
+                saveBtn.classList.add('bg-gray-100');
+            } else {
+                alert("Already in your wishlist!");
+            }
+        });
+
+        feather.replace();
+    </script>
+</body>
+</html>
