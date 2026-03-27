@@ -1,46 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SELENE LUXE | Outfit Details</title>
-    <!-- PINTEREST BOT META TAGS (HARDCODED FOR BIRMINGHAM EDIT) -->
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="The Birmingham Edit: Old Money Aesthetic Guide" />
-    <meta property="og:description"
-        content="Shop the exact Amazon matches for this viral dark academia look. Curated men's vintage style." />
-
-    <!-- THE URL PINTEREST WILL CHECK -->
-    <meta property="og:url" content="https://selene-luxe.pages.dev/outfit-details?id=birmingham-edit" />
-    <meta property="og:site_name" content="SELENE LUXE" />
-
-    <!-- CRITICAL: REPLACE THIS WITH THE ACTUAL DIRECT LINK TO YOUR AI IMAGE -->
-    <meta property="og:image" content="https://selene-luxe.pages.dev/images/outfit1.jpg" />
-
-    <!-- TODAY'S DATE TO SHOW IT IS FRESH CONTENT -->
-    <meta property="article:published_time" content="2026-03-27T12:00:00Z" />
-    <!-- END PINTEREST TAGS -->
-    <script src="https://unpkg.com/feather-icons"></script>
+=    <script src="https://unpkg.com/feather-icons"></script>
     <style>
-        ::-webkit-scrollbar {
-            display: none;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #ffffff;
-            color: #000000;
-            scroll-behavior: smooth;
-        }
-
-        .font-serif {
-            font-family: 'Playfair Display', serif;
-        }
-
-        .zara-logo {
-            letter-spacing: -0.05em;
-            font-weight: 900;
+        ::-webkit-scrollbar { display: none; }
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #000000; scroll-behavior: smooth; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .zara-logo { 
+            letter-spacing: -0.05em; 
+            font-weight: 900; 
             font-family: 'Playfair Display', serif;
             text-transform: uppercase;
             word-spacing: 0.2em;
@@ -48,16 +19,13 @@
     </style>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
-
 <body class="antialiased">
     <div style="display:none;">
-        <img src="https://selene-luxe.pages.dev/images/outfit1.jpg" alt="The Birmingham Edit Outfit">
-    </div>
+    <img src="https://selene-luxe.pages.dev/images/outfit1.jpg" alt="The Birmingham Edit Outfit">
+</div>
 
     <!-- GLOBAL HEADER -->
-    <header
-        class="fixed top-0 w-full flex justify-between items-center px-6 md:px-12 py-6 z-50 transition-all duration-500"
-        id="main-header">
+    <header class="fixed top-0 w-full flex justify-between items-center px-6 md:px-12 py-6 z-50 transition-all duration-500" id="main-header">
         <div class="flex items-center w-1/4">
             <button id="menu-btn" class="hover:opacity-50 transition flex items-center gap-2 p-2">
                 <i data-feather="menu" class="w-5 h-5"></i>
@@ -65,8 +33,7 @@
             </button>
         </div>
         <div class="flex justify-center w-1/2 md:w-1/3">
-            <a href="index.html" class="text-4xl md:text-6xl zara-logo transition-all duration-500"
-                id="header-logo">SELENE&nbsp;LUXE</a>
+            <a href="index.html" class="text-4xl md:text-6xl zara-logo transition-all duration-500" id="header-logo">SELENE&nbsp;LUXE</a>
         </div>
         <div class="flex items-center justify-end gap-3 md:gap-6 w-1/4">
             <button id="search-btn" class="hover:opacity-50 transition flex items-center gap-2 p-2">
@@ -95,8 +62,7 @@
     </main>
 
     <!-- OVERLAYS -->
-    <div id="side-menu"
-        class="fixed top-0 left-0 w-full md:w-[400px] h-full bg-white z-[100] transform -translate-x-full transition-transform duration-500 p-10 shadow-2xl flex flex-col">
+    <div id="side-menu" class="fixed top-0 left-0 w-full md:w-[400px] h-full bg-white z-[100] transform -translate-x-full transition-transform duration-500 p-10 shadow-2xl flex flex-col">
         <button id="close-menu" class="self-end mb-10 hover:rotate-90 transition-transform duration-300">
             <i data-feather="x" class="w-6 h-6"></i>
         </button>
@@ -106,22 +72,19 @@
             <a href="shop.html?cat=kids" class="hover:pl-4 transition-all">Kids</a>
             <a href="outfits.html" class="hover:pl-4 transition-all border-t border-gray-100 pt-8 mt-4">Outfits</a>
         </nav>
-        <div
-            class="mt-auto pt-10 border-t border-gray-100 text-[10px] uppercase tracking-widest font-bold text-gray-400 flex flex-col gap-4">
+        <div class="mt-auto pt-10 border-t border-gray-100 text-[10px] uppercase tracking-widest font-bold text-gray-400 flex flex-col gap-4">
             <a href="about.html">About Us</a>
             <a href="disclosure.html">Affiliate Disclosure</a>
             <a href="privacy.html">Privacy Policy</a>
         </div>
     </div>
 
-    <div id="search-overlay"
-        class="fixed inset-0 bg-white z-[110] hidden flex flex-col items-center justify-center p-6 opacity-0 transition-opacity duration-500">
+    <div id="search-overlay" class="fixed inset-0 bg-white z-[110] hidden flex flex-col items-center justify-center p-6 opacity-0 transition-opacity duration-500">
         <button id="close-search" class="absolute top-10 right-10 hover:rotate-90 transition-transform duration-300">
             <i data-feather="x" class="w-8 h-8"></i>
         </button>
         <div class="w-full max-w-2xl">
-            <input id="search-input" type="text" placeholder="SEARCH"
-                class="w-full text-4xl md:text-6xl font-serif italic border-b border-black focus:outline-none pb-4 uppercase">
+            <input id="search-input" type="text" placeholder="SEARCH" class="w-full text-4xl md:text-6xl font-serif italic border-b border-black focus:outline-none pb-4 uppercase">
         </div>
     </div>
 
@@ -194,5 +157,4 @@
         feather.replace();
     </script>
 </body>
-
 </html>
