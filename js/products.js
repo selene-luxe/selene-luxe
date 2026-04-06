@@ -235,6 +235,45 @@ const products = [
         image2: "images/white-headband.jpg",
         affiliateLink: "https://amzn.to/4uYG4QX",
         buttonText: "Shop on Amazon"
+    },
+    {
+        id: 30,
+        outfitId: "cosmetics-skincare-edit",
+        category: "women",
+        brand: "SELENE LUXE",
+        name: "Berry Lip Sleeping Mask",
+        price: "Check Price",
+        badge: "Style Inspiration",
+        image1: "images/lineage1.jpg",
+        image2: "images/lineage1.jpg",
+        affiliateLink: "https://amzn.to/41BzvX7",
+        buttonText: "Shop on Amazon"
+    },
+    {
+        id: 31,
+        outfitId: "cosmetics-skincare-edit",
+        category: "women",
+        brand: "SELENE LUXE",
+        name: "Snail Mucin Power Repairing Essence",
+        price: "Check Price",
+        badge: "Style Inspiration",
+        image1: "images/COSRX1.jpg",
+        image2: "images/COSRX1.jpg",
+        affiliateLink: "https://amzn.to/4c4Vj1R",
+        buttonText: "Shop on Amazon"
+    },
+    {
+        id: 32,
+        outfitId: "cosmetics-skincare-edit",
+        category: "women",
+        brand: "SELENE LUXE",
+        name: "Advanced Snail 96 Mucin Essence",
+        price: "Check Price",
+        badge: "Style Inspiration",
+        image1: "images/COSRX2.jpg",
+        image2: "images/COSRX2.jpg",
+        affiliateLink: "https://amzn.to/4crVMMW",
+        buttonText: "Shop on Amazon"
     }
 ];
 
@@ -259,5 +298,12 @@ const outfits = [
         description: "A whimsical, vintage-inspired collection for your little one. This edit pairs a tan gingham blouse with a sweet suspender skirt, finished with charming accessories like a little bear crossbody and ruffle-trim socks.",
         heroImage: "images/pink-meadow-hero.jpg",
         category: "Kids"
+    },
+    {
+        id: "cosmetics-skincare-edit",
+        name: "The Cosmetics & Skincare Edit",
+        description: "A curated selection of premium Korean beauty essentials. This collection features hydrating lip masks and powerful snail mucin essences for radiant, healthy skin.",
+        heroImage: "images/cosmetics-hero.jpg",
+        category: "Beauty"
     }
 ];
