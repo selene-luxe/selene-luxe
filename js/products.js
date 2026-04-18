@@ -274,6 +274,74 @@ const products = [
         image2: "images/COSRX2.jpg",
         affiliateLink: "https://amzn.to/4crVMMW",
         buttonText: "Shop on Amazon"
+    },
+    {
+        id: 33,
+        category: "women",
+        brand: "HEAWISH",
+        name: "Women's Floral Ballet Flats",
+        price: "Check Price",
+        badge: "Style Inspiration",
+        image1: "images/HEAWISH Women's Floral Ballet Flats white.jpeg",
+        image2: "images/HEAWISH Women's Floral Ballet Flats white.jpeg",
+        affiliateLink: "https://amzn.to/3OLY4h2",
+        buttonText: "Shop on Amazon",
+        variants: [
+            {
+                color: "White",
+                colorCode: "#ffffff",
+                image: "images/HEAWISH Women's Floral Ballet Flats white.jpeg",
+                affiliateLink: "https://amzn.to/3OLY4h2"
+            },
+            {
+                color: "Beige",
+                colorCode: "#f5f5dc",
+                image: "images/HEAWISH Women's Floral Ballet Flats beige.jpeg",
+                affiliateLink: "https://amzn.to/4eBg3kC"
+            },
+            {
+                color: "Black",
+                colorCode: "#000000",
+                image: "images/HEAWISH Women's Floral Ballet Flats black.jpeg",
+                affiliateLink: "https://amzn.to/4dQhz2a"
+            },
+            {
+                color: "Grey",
+                colorCode: "#808080",
+                image: "images/HEAWISH Women's Floral Ballet Flats grey.jpeg",
+                affiliateLink: "https://amzn.to/4cAPcTo"
+            },
+            {
+                color: "Chocolate",
+                colorCode: "#7b3f00",
+                image: "images/HEAWISH Women's Floral Ballet Flats chocolate.jpeg",
+                affiliateLink: "https://amzn.to/4tVIm1B"
+            },
+            {
+                color: "Light Blue",
+                colorCode: "#add8e6",
+                image: "images/HEAWISH Women's Floral Ballet Flats light blue.jpeg",
+                affiliateLink: "https://amzn.to/4dVhQ3Z"
+            },
+            {
+                color: "Light Green",
+                colorCode: "#90ee90",
+                image: "images/HEAWISH Women's Floral Ballet Flats light green.jpeg",
+                affiliateLink: "https://amzn.to/41IeutF"
+            },
+            {
+                color: "Pink",
+                colorCode: "#ffc0cb",
+                image: "images/HEAWISH Women's Floral Ballet Flats pink.jpeg",
+                affiliateLink: "https://amzn.to/4evx2Vu"
+            },
+            {
+                color: "Red",
+                colorCode: "#ff0000",
+                image: "images/HEAWISH Women's Floral Ballet Flats red.jpeg",
+                affiliateLink: "https://amzn.to/4mIOt7q"
+            }
+        ]
     }
 ];
 

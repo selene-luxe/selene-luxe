@@ -18,6 +18,29 @@
             text-transform: uppercase;
             word-spacing: 0.2em;
         }
+        
+        /* COLOR SWATCH STYLES */
+        .color-swatch {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+        .color-swatch.active {
+            border-color: #000000;
+            box-shadow: 0 0 0 2px white, 0 0 0 4px #000000;
+        }
+        .color-swatch[data-color="White"],
+        .color-swatch[data-color="Cream"],
+        .color-swatch[data-color="Ivory"] {
+            border: 1px solid #e5e5e5;
+        }
     </style>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
@@ -53,6 +76,12 @@
                 <div class="aspect-[3/4] overflow-hidden bg-gray-50">
                     <img id="img1" src="" class="w-full h-full object-cover transition duration-700 hover:scale-105">
                 </div>
+                
+                <!-- COLOR VARIANT SELECTOR -->
+                <div id="variant-selector" class="hidden mt-6">
+                    <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-3">Select Color</p>
+                    <div id="color-swatches" class="flex flex-wrap gap-3"></div>
+                </div>
             </div>
 
             <!-- RIGHT SIDE: DETAILS -->
@@ -69,6 +98,12 @@
                     </div>
 
                     <div class="border-t border-gray-100 pt-4 md:pt-8">
+                        <!-- SELECTED COLOR DISPLAY -->
+                        <div id="selected-color-container" class="hidden mb-4">
+                            <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Selected</p>
+                            <p id="selected-color-name" class="text-sm font-medium text-gray-900">Default</p>
+                        </div>
+                        
                         <a id="btn" href="#" target="_blank" class="w-full block text-center bg-black text-white py-3 md:py-5 text-[8px] md:text-[10px] font-bold uppercase tracking-widest hover:bg-neutral-800 transition duration-300 mb-2">
                             Check Availability
                         </a>
@@ -170,6 +205,93 @@
             document.getElementById('btn').innerText = product.buttonText || "Shop on Amazon";
             
             document.title = `LUXE | ${product.name}`;
+            
+            // HANDLE COLOR VARIANTS
+            if (product.variants && product.variants.length > 0) {
+                const variantSelector = document.getElementById('variant-selector');
+                const colorSwatches = document.getElementById('color-swatches');
+                const selectedColorContainer = document.getElementById('selected-color-container');
+                const selectedColorName = document.getElementById('selected-color-name');
+                const img1 = document.getElementById('img1');
+                const btn = document.getElementById('btn');
+                
+                // Show variant selector and selected color display
+                variantSelector.classList.remove('hidden');
+                selectedColorContainer.classList.remove('hidden');
+                
+                let currentVariantIndex = 0;
+                let autoRotateInterval;
+                let isAutoRotating = true;
+                let isPaused = false;
+                
+                // Function to select a variant by index
+                function selectVariant(index) {
+                    const variant = product.variants[index];
+                    
+                    // Update active state on swatches
+                    document.querySelectorAll('.color-swatch').forEach((s, i) => {
+                        s.classList.toggle('active', i === index);
+                    });
+                    
+                    // Update image
+                    img1.src = variant.image;
+                    
+                    // Update button link
+                    btn.href = variant.affiliateLink;
+                    
+                    // Update selected color text
+                    selectedColorName.innerText = variant.color;
+                }
+                
+                // Render color swatches
+                product.variants.forEach((variant, index) => {
+                    const swatch = document.createElement('div');
+                    swatch.className = 'color-swatch' + (index === 0 ? ' active' : '');
+                    swatch.style.backgroundColor = variant.colorCode;
+                    swatch.setAttribute('data-color', variant.color);
+                    swatch.title = variant.color;
+                    
+                    swatch.addEventListener('click', () => {
+                        // Stop auto-rotation on manual click
+                        isAutoRotating = false;
+                        clearInterval(autoRotateInterval);
+                        
+                        currentVariantIndex = index;
+                        selectVariant(index);
+                    });
+                    
+                    colorSwatches.appendChild(swatch);
+                });
+                
+                // Set initial selected color
+                selectedColorName.innerText = product.variants[0].color;
+                
+                // Update initial image and link to first variant
+                img1.src = product.variants[0].image;
+                btn.href = product.variants[0].affiliateLink;
+                
+                // Auto-rotation function
+                function startAutoRotate() {
+                    autoRotateInterval = setInterval(() => {
+                        if (!isPaused && isAutoRotating) {
+                            currentVariantIndex = (currentVariantIndex + 1) % product.variants.length;
+                            selectVariant(currentVariantIndex);
+                        }
+                    }, 5000); // 5 seconds
+                }
+                
+                // Start auto-rotation
+                startAutoRotate();
+                
+                // Pause on hover over image
+                const imageContainer = img1.parentElement;
+                imageContainer.addEventListener('mouseenter', () => {
+                    isPaused = true;
+                });
+                imageContainer.addEventListener('mouseleave', () => {
+                    isPaused = false;
+                });
+            }
         }
 
         const saveBtn = document.getElementById('save-wishlist-btn');
