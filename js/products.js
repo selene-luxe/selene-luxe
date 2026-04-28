@@ -430,14 +430,14 @@ const products = [
                 affiliateLink: "https://amzn.to/3Qzgoup"
             },
             {
-                color: "Burgundy",
-                colorCode: "#800020",
+                color: "Burgundy Dark",
+                colorCode: "#4a0404",
                 image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress burgundy.jpeg",
                 affiliateLink: "https://amzn.to/4vXyoii"
             },
             {
-                color: "Burgundy Dark",
-                colorCode: "#4a0404",
+                color: "Burgundy",
+                colorCode: "#800020",
                 image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress burgundy2.jpeg",
                 affiliateLink: "https://amzn.to/4ukXwhn"
             },
