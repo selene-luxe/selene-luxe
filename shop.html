@@ -18,6 +18,27 @@
             text-transform: uppercase;
             word-spacing: 0.2em;
         }
+        .color-dots {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+        .color-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid transparent;
+        }
+        .color-dot.light {
+            border-color: #d4d4d4;
+        }
+        .more-colors {
+            font-size: 10px;
+            color: #999;
+            margin-left: 2px;
+        }
     </style>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
@@ -97,7 +118,7 @@
                 <a href="about.html" class="hover:text-black transition">About</a>
             </div>
             <p class="mt-16 text-[9px] text-gray-300 uppercase tracking-[0.5em]">
-                © 2024 SELENE LUXE CURATED
+                2024 SELENE LUXE CURATED
             </p>
         </div>
     </footer>
@@ -105,6 +126,10 @@
     <script src="js/products.js"></script>
     <script src="js/main.js"></script>
     <script>
+        function isLightColor(hex) {
+            const lightColors = ['#ffffff', '#f5f5dc', '#fff8e7', '#fffff0', '#f5f5f5', '#add8e6', '#90ee90', '#ffc0cb'];
+            return lightColors.includes(hex.toLowerCase());
+        }
         const grid = document.getElementById('product-grid');
         const urlParams = new URLSearchParams(window.location.search);
         
@@ -127,6 +152,15 @@
         }
 
         grid.innerHTML = ""; 
+        function renderColorDots(product) {
+            if (!product.variants || product.variants.length === 0) return '';
+            const dots = product.variants.slice(0, 3).map(v => 
+                `<span class="color-dot ${isLightColor(v.colorCode) ? 'light' : ''}" style="background-color: ${v.colorCode};"></span>`
+            ).join('');
+            const more = product.variants.length > 3 ? `<span class="more-colors">+${product.variants.length - 3}</span>` : '';
+            return `<div class="color-dots">${dots}${more}</div>`;
+        }
+
         if (filteredProducts.length === 0) {
             grid.innerHTML = `
             <div class="col-span-full text-center py-20">
@@ -145,6 +179,7 @@
                     <div class="space-y-1">
                         <p class="text-[9px] text-gray-400 uppercase tracking-widest">${p.brand}</p>
                         <h2 class="text-sm font-medium tracking-tight text-neutral-800">${p.name}</h2>
+                        ${renderColorDots(p)}
                         <p class="text-[10px] font-bold text-neutral-500 uppercase tracking-widest pt-1">Check Price</p> 
                     </div>
                 </a>`;
