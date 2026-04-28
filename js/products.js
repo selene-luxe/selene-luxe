@@ -380,6 +380,74 @@ const products = [
                 affiliateLink: "https://amzn.to/4cUPuok"
             }
         ]
+    },
+    {
+        id: 35,
+        category: "women",
+        brand: "WOOSEA",
+        name: "Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress",
+        price: "Check Price",
+        badge: "Style Inspiration",
+        image1: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress black.jpeg",
+        image2: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress black.jpeg",
+        affiliateLink: "https://amzn.to/3QO8xsU",
+        buttonText: "Shop on Amazon",
+        variants: [
+            {
+                color: "Purple",
+                colorCode: "#800080",
+                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress purple.jpeg",
+                affiliateLink: "https://amzn.to/3OQvsDd"
+            },
+            {
+                color: "Green",
+                colorCode: "#008000",
+                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress green.jpeg",
+                affiliateLink: "https://amzn.to/4eNvdTZ"
+            },
+            {
+                color: "Red",
+                colorCode: "#ff0000",
+                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress red.jpeg",
+                affiliateLink: "https://amzn.to/4ucVW0G"
+            },
+            {
+                color: "Black",
+                colorCode: "#000000",
+                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress black.jpeg",
+                affiliateLink: "https://amzn.to/3QO8xsU"
+            },
+            {
+                color: "Navy Blue",
+                colorCode: "#000080",
+                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress navy blue.jpeg",
+                affiliateLink: "https://amzn.to/42150Kk"
+            },
+            {
+                color: "Royal Blue",
+                colorCode: "#4169E1",
+                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress royal blue.jpeg",
+                affiliateLink: "https://amzn.to/3Qzgoup"
+            },
+            {
+                color: "Burgundy",
+                colorCode: "#800020",
+                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress burgundy.jpeg",
+                affiliateLink: "https://amzn.to/4vXyoii"
+            },
+            {
+                color: "Burgundy Dark",
+                colorCode: "#4a0404",
+                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress burgundy2.jpeg",
+                affiliateLink: "https://amzn.to/4ukXwhn"
+            },
+            {
+                color: "Magenta",
+                colorCode: "#ff00ff",
+                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress magenta.jpeg",
+                affiliateLink: "https://amzn.to/48W0WPe"
+            }
+        ]
     }
 ];
 
