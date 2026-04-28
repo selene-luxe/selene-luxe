@@ -342,6 +342,44 @@ const products = [
                 affiliateLink: "https://amzn.to/4mIOt7q"
             }
         ]
+    },
+    {
+        id: 34,
+        category: "women",
+        brand: "WOOSEA",
+        name: "Women's Split Bodycon Mermaid Evening Cocktail Long Dress",
+        price: "Check Price",
+        badge: "Style Inspiration",
+        image1: "images/WOOSEA Women's Split Bodycon Mermaid Evening Dress black.jpeg",
+        image2: "images/WOOSEA Women's Split Bodycon Mermaid Evening Dress black.jpeg",
+        affiliateLink: "https://amzn.to/4t3Hibn",
+        buttonText: "Shop on Amazon",
+        variants: [
+            {
+                color: "Black",
+                colorCode: "#000000",
+                image: "images/WOOSEA Women's Split Bodycon Mermaid Evening Dress black.jpeg",
+                affiliateLink: "https://amzn.to/4t3Hibn"
+            },
+            {
+                color: "Purple",
+                colorCode: "#800080",
+                image: "images/WOOSEA Women's Split Bodycon Mermaid Evening Dress purple.jpeg",
+                affiliateLink: "https://amzn.to/4tFC6vq"
+            },
+            {
+                color: "Navy Blue",
+                colorCode: "#000080",
+                image: "images/WOOSEA Women's Split Bodycon Mermaid Evening Dress navy blue.jpeg",
+                affiliateLink: "https://amzn.to/4u6BxdG"
+            },
+            {
+                color: "Royal Blue",
+                colorCode: "#4169E1",
+                image: "images/WOOSEA Women's Split Bodycon Mermaid Evening Dress royal blue.jpeg",
+                affiliateLink: "https://amzn.to/4cUPuok"
+            }
+        ]
     }
 ];
 
