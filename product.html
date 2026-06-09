@@ -3,30 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SELENE LUXE | Product Details</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>The Silk and Sand | Product Details</title>
+    <meta name="description" content="View product details, color variants, and curated recommendations at The Silk and Sand.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
-        ::-webkit-scrollbar { display: none; }
-        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #000000; scroll-behavior: smooth; }
-        .font-serif { font-family: 'Playfair Display', serif; }
-        .zara-logo { 
-            letter-spacing: -0.05em; 
-            font-weight: 900; 
-            font-family: 'Playfair Display', serif;
-            text-transform: uppercase;
-            word-spacing: 0.2em;
+        .product-page-layout {
+            padding-top: 8rem;
+            padding-bottom: 5rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        @media(min-width: 768px) {
+            .product-page-layout {
+                padding-top: 10rem;
+                grid-template-columns: 2fr 1fr;
+                gap: 5rem;
+            }
         }
         
-        /* COLOR SWATCH STYLES */
+        /* IMAGE SECTION */
+        .product-gallery {
+            width: 100%;
+        }
+        .main-image-container {
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            background: #FAFAFA;
+            margin-bottom: 2rem;
+        }
+        .main-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.5s var(--transition-smooth);
+        }
+        .main-image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        /* DETAILS SECTION */
+        .product-details {
+            position: sticky;
+            top: 8rem;
+        }
+        .curator-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        .curator-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+        }
+        .brand-name {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.5rem;
+        }
+        .product-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+        .product-price {
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* COLOR SWATCHES */
+        .variant-section {
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
+            margin-top: 2rem;
+        }
+        .variant-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .selected-color-name {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+        .color-swatches {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
         .color-swatch {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
             border: 2px solid transparent;
-            transition: all 0.2s ease;
+            transition: transform 0.2s ease;
             position: relative;
         }
         .color-swatch:hover {
@@ -41,84 +136,197 @@
         .color-swatch[data-color="Ivory"] {
             border: 1px solid #e5e5e5;
         }
+
+        /* BUTTONS */
+        .btn-amazon {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: background-color var(--transition-fast);
+            margin-bottom: 1rem;
+        }
+        .btn-amazon:hover {
+            background-color: #333;
+            opacity: 1;
+        }
+        .btn-wishlist {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: background-color var(--transition-fast);
+        }
+        .btn-wishlist:hover {
+            background-color: #FAFAFA;
+        }
+        .btn-wishlist.added {
+            background-color: #F0F0F0;
+        }
+
+        /* DISCLAIMERS */
+        .price-disclaimer {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        .notice-box {
+            background-color: #FAFAFA;
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 1px solid var(--border-color);
+        }
+        .notice-title {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+        .notice-text {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* ASSURANCE SECTION */
+        .assurance-section {
+            border-top: 1px solid var(--border-color);
+            padding: 5rem 0;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .assurance-title {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+        .assurance-item {
+            margin-bottom: 3rem;
+        }
+        .assurance-item h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .assurance-item p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-weight: 300;
+        }
     </style>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
-<body class="antialiased">
+<body>
 
     <!-- GLOBAL HEADER -->
-    <header class="fixed top-0 w-full flex justify-between items-center px-6 md:px-12 py-6 z-50 transition-all duration-500" id="main-header">
-        <div class="flex items-center w-1/4">
-            <button id="menu-btn" class="hover:opacity-50 transition flex items-center gap-2 p-2">
-                <i data-feather="menu" class="w-5 h-5"></i>
-                <span class="text-[10px] uppercase tracking-widest font-bold hidden md:block">Menu</span>
-            </button>
+    <header class="header" id="main-header">
+        <div class="announcement-bar">
+            <a href="https://selene-luxe-2.myshopify.com" target="_blank" rel="noopener noreferrer">Shop Custom Designs</a>
+            <div class="announcement-socials">
+                <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+                <a href="https://tiktok.com/" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a>
+                <a href="https://pinterest.com/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.183 0 7.439 2.981 7.439 6.969 0 4.156-2.616 7.502-6.248 7.502-1.22 0-2.37-.633-2.76-1.385l-.752 2.87c-.27 1.033-1.002 2.324-1.492 3.116 1.185.36 2.454.554 3.76.554 6.621 0 11.988-5.367 11.988-11.987C24.005 5.367 18.638 0 12.017 0z"/></svg></a>
+            </div>
         </div>
-        <div class="flex justify-center w-1/2 md:w-1/3">
-            <a href="index.html" class="text-4xl md:text-6xl zara-logo transition-all duration-500" id="header-logo">SELENE&nbsp;LUXE</a>
-        </div>
-        <div class="flex items-center justify-end gap-3 md:gap-6 w-1/4">
-            <button id="search-btn" class="hover:opacity-50 transition flex items-center gap-2 p-2">
-                <span class="text-[10px] uppercase tracking-widest font-bold hidden md:block">Search</span>
-                <i data-feather="search" class="w-4 h-4 md:w-5 md:h-5"></i>
-            </button>
-            <a href="wishlist.html" class="hover:opacity-50 transition p-2">
-                <i data-feather="heart" class="w-4 h-4 md:w-5 md:h-5"></i>
-            </a>
+        <div class="header-main">
+            <div style="flex: 1;">
+                <button id="menu-btn" class="icon-btn" aria-label="Menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    <span>Menu</span>
+                </button>
+            </div>
+            <div style="flex: 1; display: flex; justify-content: center;">
+                <a href="index.html" class="logo-link" id="header-logo">The Silk and Sand</a>
+            </div>
+            <div style="flex: 1; display: flex; justify-content: flex-end;" class="nav-actions">
+                <button id="search-btn" class="icon-btn" aria-label="Search">
+                    <span>Search</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+                <a href="wishlist.html" class="icon-btn" aria-label="Wishlist">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </a>
+            </div>
         </div>
     </header>
 
-    <main class="pt-24 md:pt-32 pb-20 px-4 md:px-12 max-w-[1800px] mx-auto">
-        <div class="grid grid-cols-2 md:grid-cols-12 gap-4 md:gap-12">
+    <main class="container">
+        <div class="product-page-layout">
             
             <!-- LEFT SIDE: IMAGE -->
-            <div class="col-span-1 md:col-span-8 order-1">
-                <div class="aspect-[3/4] overflow-hidden bg-gray-50">
-                    <img id="img1" src="" class="w-full h-full object-cover transition duration-700 hover:scale-105">
+            <div class="product-gallery">
+                <div class="main-image-container">
+                    <img id="img1" src="" alt="Product Image">
                 </div>
                 
-                <!-- COLOR VARIANT SELECTOR -->
-                <div id="variant-selector" class="hidden mt-6">
-                    <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-3">Select Color</p>
-                    <div id="color-swatches" class="flex flex-wrap gap-3"></div>
-                </div>
             </div>
 
             <!-- RIGHT SIDE: DETAILS -->
-            <div class="col-span-1 md:col-span-4 order-2">
-                <div class="md:sticky md:top-32 space-y-4 md:space-y-8">
-                    <div class="flex items-center gap-2 mb-2">
-                        <span class="w-2 h-2 bg-black rounded-full"></span>
-                        <p class="text-[10px] uppercase tracking-widest font-bold">Curated by SELENE LUXE</p>
+            <div>
+                <div class="product-details">
+                    <div class="curator-tag">
+                        <span class="curator-dot"></span>
+                        <p>Curated by THE SILK AND SAND</p>
                     </div>
                     <div>
-                        <p id="brand" class="text-[8px] md:text-[10px] text-gray-400 uppercase tracking-widest mb-1 md:mb-4"></p>
-                        <h1 id="name" class="text-lg md:text-4xl font-serif italic mb-1 md:mb-4 text-gray-900 leading-tight"></h1>
-                        <p id="price" class="text-[9px] md:text-sm font-bold uppercase tracking-widest text-neutral-500"></p>
+                        <p id="brand" class="brand-name"></p>
+                        <h1 id="name" class="product-title italic"></h1>
+                        <p id="price" class="product-price"></p>
                     </div>
 
-                    <div class="border-t border-gray-100 pt-4 md:pt-8">
+                    <div class="variant-section">
+                        <!-- COLOR VARIANT SELECTOR -->
+                        <div id="variant-selector" style="display: none; margin-bottom: 1.5rem;">
+                            <p style="font-size: 0.8rem; font-weight: 500; color: #111111; margin-bottom: 1rem; padding: 0.5rem; background: #f5f0eb; border-left: 2px solid #111111;">
+                                Select your color below to check live Amazon inventory.
+                            </p>
+                            <div id="color-swatches" class="color-swatches" style="margin-bottom: 1rem;"></div>
+                        </div>
+
                         <!-- SELECTED COLOR DISPLAY -->
-                        <div id="selected-color-container" class="hidden mb-4">
-                            <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Selected</p>
-                            <p id="selected-color-name" class="text-sm font-medium text-gray-900">Default</p>
+                        <div id="selected-color-container" style="display: none; margin-bottom: 1.5rem;">
+                            <p class="variant-label" style="margin-bottom: 0.5rem;">Selected Color</p>
+                            <p id="selected-color-name" class="selected-color-name">Default</p>
                         </div>
                         
-                        <a id="btn" href="#" target="_blank" class="w-full block text-center bg-black text-white py-3 md:py-5 text-[8px] md:text-[10px] font-bold uppercase tracking-widest hover:bg-neutral-800 transition duration-300 mb-2">
+                        <a id="btn" href="#" target="_blank" class="btn-amazon">
                             Check Availability
                         </a>
-                        <p class="text-[7px] md:text-[9px] text-gray-400 text-center mb-2 md:mb-6 italic">
+                        <p class="price-disclaimer">
                             *Prices and availability are accurate as of the date/time indicated and are subject to change.
                         </p>
                         
-                        <button id="save-wishlist-btn" class="w-full flex items-center justify-center gap-2 border border-neutral-200 text-black py-3 md:py-5 text-[8px] md:text-[10px] font-bold uppercase tracking-widest hover:bg-neutral-50 transition duration-300">
-                            <i data-feather="heart" class="w-3 h-3 md:w-4 md:h-4"></i> Add to Wishlist
+                        <button id="save-wishlist-btn" class="btn-wishlist">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                            Add to Wishlist
                         </button>
                     </div>
 
-                    <div class="mt-4 md:mt-12 bg-gray-50 p-3 md:p-6 hidden md:block">
-                        <p class="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-widest mb-2">Notice</p>
-                        <p class="text-[8px] md:text-[9px] text-gray-500 italic leading-relaxed">
+                    <div class="notice-box">
+                        <p class="notice-title">Notice</p>
+                        <p class="notice-text">
                             Images on this site are for style inspiration and illustrative purposes only. The actual product on Amazon may vary in appearance. As an Amazon Associate I earn from qualifying purchases.
                         </p>
                     </div>
@@ -126,188 +334,233 @@
             </div>
         </div>
 
+        <!-- MORE LIKE THIS -->
+        <section class="section-padding" style="border-top: 1px solid var(--border-color); margin-top: 2rem;">
+            <div class="container">
+                <h2 class="section-title italic" style="text-align: center; font-size: 2rem; margin-bottom: 2rem;">You Might Also Like</h2>
+                <div id="related-products-grid" class="grid-3" style="gap: 2rem;">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+        </section>
+
         <!-- BOUTIQUE ASSURANCE -->
-        <section class="mt-24 pt-16 border-t border-gray-100 max-w-2xl mx-auto text-center">
-            <h2 class="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-6">The SELENE LUXE Assurance</h2>
-            <div class="space-y-8">
-                <div>
-                    <h3 class="font-serif italic text-2xl mb-2">Curated with Purpose</h3>
-                    <p class="text-xs text-neutral-500 font-light leading-relaxed">
-                        Every item in our collection is hand-selected by our editors. We focus on high-reputation pieces that offer timeless style and quality, ensuring you only see the best of what's available.
-                    </p>
-                </div>
-                <div>
-                    <h3 class="font-serif italic text-2xl mb-2">Verified Reputation</h3>
-                    <p class="text-xs text-neutral-500 font-light leading-relaxed">
-                        We prioritize products with proven track records and positive feedback, simplifying your search for the perfect addition to your wardrobe.
-                    </p>
-                </div>
+        <section class="assurance-section">
+            <h2 class="assurance-title">The Silk and Sand Assurance</h2>
+            <div class="assurance-item">
+                <h3 class="italic">Curated with Purpose</h3>
+                <p>
+                    Every item in our collection is hand-selected by our editors. We focus on high-reputation pieces that offer timeless style and quality, ensuring you only see the best of what's available.
+                </p>
+            </div>
+            <div class="assurance-item">
+                <h3 class="italic">Verified Reputation</h3>
+                <p>
+                    We prioritize products with proven track records and positive feedback, simplifying your search for the perfect addition to your wardrobe.
+                </p>
             </div>
         </section>
     </main>
 
     <!-- OVERLAYS -->
-    <div id="side-menu" class="fixed top-0 left-0 w-full md:w-[400px] h-full bg-white z-[100] transform -translate-x-full transition-transform duration-500 p-10 shadow-2xl flex flex-col">
-        <button id="close-menu" class="self-end mb-10 hover:rotate-90 transition-transform duration-300">
-            <i data-feather="x" class="w-6 h-6"></i>
+    <div id="side-menu" class="overlay" style="align-items: flex-start; justify-content: flex-start; max-width: 400px; background: white; transform: translateX(-100%); transition: transform var(--transition-smooth); opacity: 1;">
+        <button id="close-menu" class="close-btn" aria-label="Close Menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
-        <nav class="flex flex-col gap-8 text-2xl font-serif italic">
-            <a href="shop.html?cat=women" class="hover:pl-4 transition-all">Women</a>
-            <a href="shop.html?cat=men" class="hover:pl-4 transition-all">Men</a>
-            <a href="shop.html?cat=kids" class="hover:pl-4 transition-all">Kids</a>
-            <a href="outfits.html" class="hover:pl-4 transition-all border-t border-gray-100 pt-8 mt-4">Outfits</a>
+        <nav class="menu-nav">
+            <a href="shop.html?cat=women">Women</a>
+            <a href="shop.html?cat=men">Men</a>
+            <a href="shop.html?cat=kids">Kids</a>
+            <a href="outfits.html">Outfits</a>
+            <a href="https://selene-luxe-2.myshopify.com" target="_blank" rel="noopener noreferrer" style="margin-top: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem; font-size: 1.2rem; color: var(--text-color); font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;">Custom POD Shop</a>
+            <div style="display: flex; gap: 1.5rem; margin-top: 1rem;">
+                <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="color: var(--text-color); transition: opacity 0.2s;">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                </a>
+                <a href="https://tiktok.com/" target="_blank" rel="noopener noreferrer" aria-label="TikTok" style="color: var(--text-color); transition: opacity 0.2s;">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                </a>
+                <a href="https://pinterest.com/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" style="color: var(--text-color); transition: opacity 0.2s;">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.183 0 7.439 2.981 7.439 6.969 0 4.156-2.616 7.502-6.248 7.502-1.22 0-2.37-.633-2.76-1.385l-.752 2.87c-.27 1.033-1.002 2.324-1.492 3.116 1.185.36 2.454.554 3.76.554 6.621 0 11.988-5.367 11.988-11.987C24.005 5.367 18.638 0 12.017 0z"/></svg>
+                </a>
+            </div>
         </nav>
-        <div class="mt-auto pt-10 border-t border-gray-100 text-[10px] uppercase tracking-widest font-bold text-gray-400 flex flex-col gap-4">
+        <div style="margin-top: auto; display: flex; flex-direction: column; gap: 1rem;" class="curator-tag">
             <a href="about.html">About Us</a>
             <a href="disclosure.html">Affiliate Disclosure</a>
             <a href="privacy.html">Privacy Policy</a>
         </div>
     </div>
 
-    <div id="search-overlay" class="fixed inset-0 bg-white z-[110] hidden flex flex-col items-center justify-center p-6 opacity-0 transition-opacity duration-500">
-        <button id="close-search" class="absolute top-10 right-10 hover:rotate-90 transition-transform duration-300">
-            <i data-feather="x" class="w-8 h-8"></i>
+    <div id="search-overlay" class="overlay" style="background: rgba(255,255,255,0.98);">
+        <button id="close-search" class="close-btn" aria-label="Close Search" style="position: absolute; top: 2rem; right: 2rem;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
-        <div class="w-full max-w-2xl">
-            <input id="search-input" type="text" placeholder="SEARCH" class="w-full text-4xl md:text-6xl font-serif italic border-b border-black focus:outline-none pb-4 uppercase">
+        <div class="search-input-wrapper">
+            <input id="search-input" type="text" placeholder="SEARCH" class="search-input" aria-label="Search">
         </div>
     </div>
 
-    <footer class="py-20 bg-white border-t border-gray-50">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <p class="text-[10px] text-gray-400 uppercase tracking-[0.2em] mb-10">
-                As an Amazon Associate I earn from qualifying purchases.
-            </p>
-            <div class="flex justify-center gap-10 text-[10px] uppercase tracking-widest font-bold text-neutral-400">
-                <a href="privacy.html" class="hover:text-black transition">Privacy</a>
-                <a href="disclosure.html" class="hover:text-black transition">Disclosure</a>
-                <a href="about.html" class="hover:text-black transition">About</a>
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-disclosure">As an Amazon Associate I earn from qualifying purchases.</p>
+            <div class="footer-links" style="flex-wrap: wrap;">
+                <a href="https://selene-luxe-2.myshopify.com" target="_blank" rel="noopener noreferrer">Custom POD Shop</a>
+                <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://tiktok.com/" target="_blank" rel="noopener noreferrer">TikTok</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="disclosure.html">Disclosure</a>
+                <a href="about.html">About</a>
             </div>
-            <p class="mt-16 text-[9px] text-gray-300 uppercase tracking-[0.5em]">
-                © 2024 SELENE LUXE CURATED
-            </p>
+            <p class="footer-copyright">© 2026 THE SILK AND SAND CURATED</p>
         </div>
     </footer>
 
     <script src="js/products.js"></script>
     <script src="js/main.js"></script>
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const productID = parseInt(urlParams.get('id'));
-        const product = products.find(p => p.id === productID);
-
-        if (product) {
-            document.getElementById('name').innerText = product.name;
-            document.getElementById('brand').innerText = product.brand;
-            document.getElementById('price').innerText = product.price;
-            document.getElementById('img1').src = product.image1;
-            document.getElementById('btn').href = product.affiliateLink;
-            document.getElementById('btn').innerText = product.buttonText || "Shop on Amazon";
+        document.addEventListener('DOMContentLoaded', () => {
+            const sideMenu = document.getElementById('side-menu');
+            const menuBtn = document.getElementById('menu-btn');
+            const closeMenuBtn = document.getElementById('close-menu');
             
-            document.title = `LUXE | ${product.name}`;
-            
-            // HANDLE COLOR VARIANTS
-            if (product.variants && product.variants.length > 0) {
-                const variantSelector = document.getElementById('variant-selector');
-                const colorSwatches = document.getElementById('color-swatches');
-                const selectedColorContainer = document.getElementById('selected-color-container');
-                const selectedColorName = document.getElementById('selected-color-name');
-                const img1 = document.getElementById('img1');
-                const btn = document.getElementById('btn');
-                
-                // Show variant selector and selected color display
-                variantSelector.classList.remove('hidden');
-                selectedColorContainer.classList.remove('hidden');
-                
-                let currentVariantIndex = 0;
-                let autoRotateInterval;
-                let isAutoRotating = true;
-                let isPaused = false;
-                
-                // Function to select a variant by index
-                function selectVariant(index) {
-                    const variant = product.variants[index];
-                    
-                    // Update active state on swatches
-                    document.querySelectorAll('.color-swatch').forEach((s, i) => {
-                        s.classList.toggle('active', i === index);
-                    });
-                    
-                    // Update image
-                    img1.src = variant.image;
-                    
-                    // Update button link
-                    btn.href = variant.affiliateLink;
-                    
-                    // Update selected color text
-                    selectedColorName.innerText = variant.color;
-                }
-                
-                // Render color swatches
-                product.variants.forEach((variant, index) => {
-                    const swatch = document.createElement('div');
-                    swatch.className = 'color-swatch' + (index === 0 ? ' active' : '');
-                    swatch.style.backgroundColor = variant.colorCode;
-                    swatch.setAttribute('data-color', variant.color);
-                    swatch.title = variant.color;
-                    
-                    swatch.addEventListener('click', () => {
-                        // Stop auto-rotation on manual click
-                        isAutoRotating = false;
-                        clearInterval(autoRotateInterval);
-                        
-                        currentVariantIndex = index;
-                        selectVariant(index);
-                    });
-                    
-                    colorSwatches.appendChild(swatch);
+            if (menuBtn && sideMenu) {
+                menuBtn.addEventListener('click', () => {
+                    sideMenu.style.pointerEvents = 'auto';
+                    sideMenu.style.transform = 'translateX(0)';
                 });
-                
-                // Set initial selected color
-                selectedColorName.innerText = product.variants[0].color;
-                
-                // Update initial image and link to first variant
-                img1.src = product.variants[0].image;
-                btn.href = product.variants[0].affiliateLink;
-                
-                // Auto-rotation function
-                function startAutoRotate() {
-                    autoRotateInterval = setInterval(() => {
-                        if (!isPaused && isAutoRotating) {
-                            currentVariantIndex = (currentVariantIndex + 1) % product.variants.length;
-                            selectVariant(currentVariantIndex);
-                        }
-                    }, 5000); // 5 seconds
-                }
-                
-                // Start auto-rotation
-                startAutoRotate();
-                
-                // Pause on hover over image
-                const imageContainer = img1.parentElement;
-                imageContainer.addEventListener('mouseenter', () => {
-                    isPaused = true;
-                });
-                imageContainer.addEventListener('mouseleave', () => {
-                    isPaused = false;
+                closeMenuBtn.addEventListener('click', () => {
+                    sideMenu.style.transform = 'translateX(-100%)';
                 });
             }
-        }
 
-        const saveBtn = document.getElementById('save-wishlist-btn');
-        saveBtn.addEventListener('click', () => {
-            let wishlist = JSON.parse(localStorage.getItem('myWishlist')) || [];
-            if (!wishlist.includes(productID)) {
-                wishlist.push(productID);
-                localStorage.setItem('myWishlist', JSON.stringify(wishlist));
-                saveBtn.innerText = "Added to Wishlist";
-                saveBtn.classList.add('bg-gray-100');
-            } else {
-                alert("Already in your wishlist!");
+            const urlParams = new URLSearchParams(window.location.search);
+            const productID = parseInt(urlParams.get('id'));
+            const product = products.find(p => p.id === productID);
+
+            if (product) {
+                document.getElementById('name').innerText = product.name;
+                document.getElementById('brand').innerText = product.brand;
+                document.getElementById('price').innerText = product.price;
+                document.getElementById('img1').src = product.image1;
+                document.getElementById('img1').alt = product.name;
+                document.getElementById('btn').href = product.affiliateLink;
+                document.getElementById('btn').innerText = product.buttonText || "Shop on Amazon";
+                
+                document.title = `The Silk and Sand | ${product.name}`;
+                
+                // HANDLE COLOR VARIANTS
+                if (product.variants && product.variants.length > 0) {
+                    const variantSelector = document.getElementById('variant-selector');
+                    const colorSwatches = document.getElementById('color-swatches');
+                    const selectedColorContainer = document.getElementById('selected-color-container');
+                    const selectedColorName = document.getElementById('selected-color-name');
+                    const img1 = document.getElementById('img1');
+                    const btn = document.getElementById('btn');
+                    
+                    variantSelector.style.display = 'block';
+                    selectedColorContainer.style.display = 'block';
+                    
+                    let currentVariantIndex = 0;
+                    let autoRotateInterval;
+                    let isAutoRotating = true;
+                    let isPaused = false;
+                    
+                    function selectVariant(index) {
+                        const variant = product.variants[index];
+                        document.querySelectorAll('.color-swatch').forEach((s, i) => {
+                            if (i === index) s.classList.add('active');
+                            else s.classList.remove('active');
+                        });
+                        img1.src = variant.image;
+                        btn.href = variant.affiliateLink;
+                        selectedColorName.innerText = variant.color;
+                    }
+                    
+                    product.variants.forEach((variant, index) => {
+                        const swatch = document.createElement('div');
+                        swatch.className = 'color-swatch' + (index === 0 ? ' active' : '');
+                        swatch.style.backgroundColor = variant.colorCode;
+                        swatch.setAttribute('data-color', variant.color);
+                        swatch.title = variant.color;
+                        
+                        swatch.addEventListener('click', () => {
+                            isAutoRotating = false;
+                            clearInterval(autoRotateInterval);
+                            currentVariantIndex = index;
+                            selectVariant(index);
+                        });
+                        
+                        colorSwatches.appendChild(swatch);
+                    });
+                    
+                    selectedColorName.innerText = product.variants[0].color;
+                    img1.src = product.variants[0].image;
+                    btn.href = product.variants[0].affiliateLink;
+                    
+                    function startAutoRotate() {
+                        autoRotateInterval = setInterval(() => {
+                            if (!isPaused && isAutoRotating) {
+                                currentVariantIndex = (currentVariantIndex + 1) % product.variants.length;
+                                selectVariant(currentVariantIndex);
+                            }
+                        }, 5000);
+                    }
+                    
+                    startAutoRotate();
+                    
+                    const imageContainer = img1.parentElement;
+                    imageContainer.addEventListener('mouseenter', () => isPaused = true);
+                    imageContainer.addEventListener('mouseleave', () => isPaused = false);
+                }
+            }
+
+            const saveBtn = document.getElementById('save-wishlist-btn');
+            saveBtn.addEventListener('click', () => {
+                let wishlist = JSON.parse(localStorage.getItem('myWishlist')) || [];
+                if (!wishlist.includes(productID)) {
+                    wishlist.push(productID);
+                    localStorage.setItem('myWishlist', JSON.stringify(wishlist));
+                    saveBtn.innerText = "Added to Wishlist";
+                    saveBtn.classList.add('added');
+                } else {
+                    alert("Already in your wishlist!");
+                }
+            });
+
+            // RELATED PRODUCTS LOGIC
+            if (product) {
+                const grid = document.getElementById('related-products-grid');
+                if (grid) {
+                    // Try to match outfitId first, then category
+                    let related = products.filter(p => p.id !== product.id && p.outfitId === product.outfitId);
+                    
+                    if (related.length < 3) {
+                        const sameCat = products.filter(p => p.id !== product.id && p.category === product.category && !related.includes(p));
+                        related = related.concat(sameCat);
+                    }
+                    
+                    // Take up to 3 items
+                    related = related.slice(0, 3);
+                    
+                    related.forEach(item => {
+                        const img = item.image1 || item.image || item.image2;
+                        const card = document.createElement('a');
+                        card.href = `product.html?id=${item.id}`;
+                        card.className = 'curation-card'; // Reuse the aesthetic card style
+                        
+                        card.innerHTML = `
+                            <img src="${img}" alt="${item.name}" loading="lazy" style="width:100%; aspect-ratio:3/4; object-fit:cover;">
+                            <div class="curation-overlay" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 1.5rem;">
+                                <p class="curation-tag" style="color: #eee; margin-bottom: 0.5rem; font-size: 0.65rem;">${item.brand}</p>
+                                <h3 class="curation-name italic" style="font-size: 1.25rem;">${item.name}</h3>
+                            </div>
+                        `;
+                        grid.appendChild(card);
+                    });
+                }
             }
         });
-
-        feather.replace();
     </script>
 </body>
 </html>
