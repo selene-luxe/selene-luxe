@@ -44,12 +44,12 @@
             0%   { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
-        .featured-section { padding: 8rem 0; border-bottom: 1px solid var(--border-color); }
+        .featured-section { padding: 8rem 0; background: #F9F5F0; }
         .section-eyebrow { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 5rem; }
         .eyebrow-line { width: 3.5rem; height: 1px; background: #111; display: block; flex-shrink: 0; }
         .eyebrow-text { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.35em; font-weight: 600; }
         .featured-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 7rem; align-items: center; }
-        .featured-visual { aspect-ratio: 3/4; overflow: hidden; display: block; background: #f5f0eb; }
+        .featured-visual { aspect-ratio: 3/4; overflow: hidden; display: block; background: #e8e0d8; }
         .featured-visual img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s cubic-bezier(0.19,1,0.22,1); }
         .featured-visual:hover img { transform: scale(1.04); }
         .featured-look-tag { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.3em; font-weight: 600; color: #999; margin-bottom: 1.5rem; }
@@ -57,9 +57,13 @@
         .featured-desc { font-size: 0.95rem; color: #777; line-height: 2; font-weight: 300; margin-bottom: 3.5rem; max-width: 38ch; }
         .btn-dark { display: inline-block; padding: 1rem 3rem; border: 1px solid #111; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 600; transition: background 0.3s ease, color 0.3s ease; }
         .btn-dark:hover { background: #111; color: #fff; opacity: 1; }
-        .looks-section { padding: 8rem 0; border-bottom: 1px solid var(--border-color); }
+        .category-section { padding: 8rem 0; background: #0D0D0D; }
+        .category-section .eyebrow-line { background: rgba(255,255,255,0.18); }
+        .category-section .eyebrow-text { color: rgba(255,255,255,0.38); }
+        .looks-section { padding: 8rem 0; background: #F9F5F0; }
+        .looks-section .section-title { color: var(--text-color); }
+        .looks-section .view-all { color: var(--text-color); border-bottom-color: #111; }
         .looks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-        .category-section { padding: 8rem 0; }
         @media (max-width: 768px) {
             .featured-grid { grid-template-columns: 1fr; gap: 3rem; }
             .featured-section { padding: 5rem 0; }
@@ -116,7 +120,7 @@
                 <p class="hero-subtitle">New Season Edit &nbsp;—&nbsp; SS 2026</p>
                 <h1 class="hero-title italic">The Art of<br>Effortless Style</h1>
                 <div class="btn-group">
-                    <a href="outfits.html" class="btn btn-primary">Explore the Collection</a>
+                    <a href="outfit-details.html?id=blush-ivory-edit" class="btn btn-primary">Explore the Outfit</a>
                 </div>
             </div>
         </section>
@@ -160,12 +164,36 @@
             </div>
         </section>
 
-        <!-- ── THE EDIT: 3-look grid ── -->
+        <!-- ── SHOP BY CATEGORY ── -->
+        <section class="category-section">
+            <div class="container">
+                <div class="section-eyebrow" style="margin-bottom: 4rem;">
+                    <span class="eyebrow-line"></span>
+                    <p class="eyebrow-text">Shop by Category</p>
+                </div>
+                <div class="grid-3">
+                    <a href="shop.html?cat=women" class="category-card">
+                        <img src="images/priscilla-du-preez-dlxLGIy-2VU-unsplash.webp" alt="Shop Women" loading="lazy" width="600" height="800">
+                        <div class="category-title italic">Women</div>
+                    </a>
+                    <a href="shop.html?cat=men" class="category-card">
+                        <img src="images/shopmen.webp" alt="Shop Men" loading="lazy" width="600" height="800">
+                        <div class="category-title italic">Men</div>
+                    </a>
+                    <a href="shop.html?cat=kids" class="category-card">
+                        <img src="images/shopkids.webp" alt="Shop Kids" loading="lazy" width="600" height="800">
+                        <div class="category-title italic">Kids</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── MORE LOOKS: 3-look grid ── -->
         <section class="looks-section">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title italic">The Edit</h2>
-                    <a href="outfits.html" class="view-all">View All Looks</a>
+                    <h2 class="section-title italic">More Looks</h2>
+                    <a href="outfits.html" class="view-all">View All</a>
                 </div>
                 <div class="looks-grid">
                     <a href="outfit-details.html?id=birmingham-edit" class="curation-card">
@@ -188,30 +216,6 @@
                             <p class="curation-tag">Look 03</p>
                             <h3 class="curation-name italic">The Pink Meadow Edit</h3>
                         </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- ── SHOP BY CATEGORY ── -->
-        <section class="category-section">
-            <div class="container">
-                <div class="section-eyebrow" style="margin-bottom: 4rem;">
-                    <span class="eyebrow-line"></span>
-                    <p class="eyebrow-text">Shop by Category</p>
-                </div>
-                <div class="grid-3">
-                    <a href="shop.html?cat=women" class="category-card">
-                        <img src="images/priscilla-du-preez-dlxLGIy-2VU-unsplash.webp" alt="Shop Women" loading="lazy" width="600" height="800">
-                        <div class="category-title italic">Women</div>
-                    </a>
-                    <a href="shop.html?cat=men" class="category-card">
-                        <img src="images/shopmen.webp" alt="Shop Men" loading="lazy" width="600" height="800">
-                        <div class="category-title italic">Men</div>
-                    </a>
-                    <a href="shop.html?cat=kids" class="category-card">
-                        <img src="images/shopkids.webp" alt="Shop Kids" loading="lazy" width="600" height="800">
-                        <div class="category-title italic">Kids</div>
                     </a>
                 </div>
             </div>
