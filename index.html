@@ -44,23 +44,51 @@
             0%   { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
-        .featured-section { padding: 8rem 0; background: #F9F5F0; }
+        /* ── Section Backgrounds ── */
+        .featured-section {
+            padding: 8rem 0;
+            background-color: #FAF4EC;
+            background-image:
+                radial-gradient(ellipse at 12% 20%, rgba(225,165,138,0.36) 0%, transparent 52%),
+                radial-gradient(ellipse at 88% 80%, rgba(206,152,168,0.28) 0%, transparent 52%),
+                radial-gradient(ellipse at 55% 48%, rgba(242,222,208,0.18) 0%, transparent 60%);
+        }
         .section-eyebrow { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 5rem; }
         .eyebrow-line { width: 3.5rem; height: 1px; background: #111; display: block; flex-shrink: 0; }
         .eyebrow-text { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.35em; font-weight: 600; }
         .featured-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 7rem; align-items: center; }
-        .featured-visual { aspect-ratio: 3/4; overflow: hidden; display: block; background: #e8e0d8; }
+        .featured-visual {
+            aspect-ratio: 3/4; overflow: hidden; display: block;
+            background: #e8ddd4;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.08);
+        }
         .featured-visual img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s cubic-bezier(0.19,1,0.22,1); }
         .featured-visual:hover img { transform: scale(1.04); }
-        .featured-look-tag { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.3em; font-weight: 600; color: #999; margin-bottom: 1.5rem; }
+        .featured-look-tag { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.3em; font-weight: 600; color: #b89480; margin-bottom: 1.5rem; }
         .featured-title { font-family: var(--font-serif); font-style: italic; font-size: clamp(3rem, 4.5vw, 5.5rem); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 2.5rem; }
-        .featured-desc { font-size: 0.95rem; color: #777; line-height: 2; font-weight: 300; margin-bottom: 3.5rem; max-width: 38ch; }
-        .btn-dark { display: inline-block; padding: 1rem 3rem; border: 1px solid #111; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 600; transition: background 0.3s ease, color 0.3s ease; }
-        .btn-dark:hover { background: #111; color: #fff; opacity: 1; }
-        .category-section { padding: 8rem 0; background: #0D0D0D; }
-        .category-section .eyebrow-line { background: rgba(255,255,255,0.18); }
-        .category-section .eyebrow-text { color: rgba(255,255,255,0.38); }
-        .looks-section { padding: 8rem 0; background: #F9F5F0; }
+        .featured-desc { font-size: 0.95rem; color: #7a6a62; line-height: 2; font-weight: 300; margin-bottom: 3.5rem; max-width: 38ch; }
+        .btn-dark { display: inline-block; padding: 1rem 3rem; border: 1px solid #3a2e28; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 600; color: #3a2e28; transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
+        .btn-dark:hover { background: #3a2e28; color: #FAF4EC; border-color: #3a2e28; opacity: 1; }
+        /* Category — warm linen with diamond wallpaper */
+        .category-section {
+            padding: 8rem 0;
+            background-color: #F2EAE0;
+            background-image:
+                linear-gradient(45deg,  rgba(148,100,70,0.055) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(148,100,70,0.055) 25%, transparent 25%),
+                linear-gradient(45deg,  transparent 75%, rgba(148,100,70,0.055) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(148,100,70,0.055) 75%);
+            background-size: 30px 30px;
+            background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
+        }
+        /* Looks — soft rose-ivory gradient */
+        .looks-section {
+            padding: 8rem 0;
+            background-color: #FAF5F0;
+            background-image:
+                radial-gradient(ellipse at 82% 14%, rgba(212,178,162,0.32) 0%, transparent 55%),
+                radial-gradient(ellipse at 14% 86%, rgba(188,165,180,0.22) 0%, transparent 55%);
+        }
         .looks-section .section-title { color: var(--text-color); }
         .looks-section .view-all { color: var(--text-color); border-bottom-color: #111; }
         .looks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
