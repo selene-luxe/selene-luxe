@@ -497,6 +497,18 @@ const products = [
         image2: "images/summer dress 4.webp",
         affiliateLink: "https://a.co/d/05l2Bh9T",
         buttonText: "Shop on Amazon"
+    },
+    {
+        id: 40,
+        category: "women",
+        brand: "TANKANEO",
+        name: "Cropped Cotton Collared Button-Down Blouse",
+        price: "Check Price",
+        badge: "Style Inspiration",
+        image1: "images/e6156b53-34f7-4e37-bbf2-1ec17640a4cc.jpg",
+        image2: "images/e6156b53-34f7-4e37-bbf2-1ec17640a4cc.jpg",
+        affiliateLink: "https://a.co/d/014lDOPH",
+        buttonText: "Shop on Amazon"
     }
 ];
 
