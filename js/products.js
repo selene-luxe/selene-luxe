@@ -540,7 +540,7 @@ const outfits = [
         name: "The Blush & Ivory Edit",
         description: "A soft, feminine study in contrast. This edit pairs a blush pink cropped cotton button-down blouse with flowing ivory wide-leg pleated trousers — an effortlessly polished look that bridges casual comfort with refined elegance.",
         heroImage: "images/blush-ivory-hero.webp",
-        heroVideo: "images/A_photorealistic_vertical_vide.mp4",
+        heroVideo: "images/A_fast_paced_high_fashion_cin.mp4",
         category: "Women"
     },
     {
