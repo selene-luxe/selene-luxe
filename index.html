@@ -81,6 +81,10 @@
             background-size: 30px 30px;
             background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
         }
+        .category-section .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
         /* Looks — soft rose-ivory gradient */
         .looks-section {
             padding: 8rem 0;
@@ -99,6 +103,7 @@
             .looks-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
             .section-eyebrow { margin-bottom: 3rem; }
             .category-section { padding: 5rem 0; }
+            .category-section .grid-3 { grid-template-columns: 1fr; }
         }
     </style>
 </head>
