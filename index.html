@@ -19,6 +19,56 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/global.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        /* ── Home Page ── */
+        .hero-video {
+            width: 100%; height: 100%;
+            object-fit: cover; opacity: 0.72;
+        }
+        .ticker-strip {
+            background: #111; padding: 0.9rem 0;
+            overflow: hidden; user-select: none;
+        }
+        .ticker-track {
+            display: flex; width: max-content;
+            animation: tickerRoll 28s linear infinite;
+        }
+        .ticker-item {
+            white-space: nowrap; padding: 0 2.5rem;
+            font-size: 0.6rem; text-transform: uppercase;
+            letter-spacing: 0.3em; font-weight: 600;
+            color: rgba(255,255,255,0.55);
+        }
+        .ticker-item.dot { color: rgba(255,255,255,0.25); padding: 0 0.5rem; }
+        @keyframes tickerRoll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .featured-section { padding: 8rem 0; border-bottom: 1px solid var(--border-color); }
+        .section-eyebrow { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 5rem; }
+        .eyebrow-line { width: 3.5rem; height: 1px; background: #111; display: block; flex-shrink: 0; }
+        .eyebrow-text { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.35em; font-weight: 600; }
+        .featured-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 7rem; align-items: center; }
+        .featured-visual { aspect-ratio: 3/4; overflow: hidden; display: block; background: #f5f0eb; }
+        .featured-visual img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s cubic-bezier(0.19,1,0.22,1); }
+        .featured-visual:hover img { transform: scale(1.04); }
+        .featured-look-tag { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.3em; font-weight: 600; color: #999; margin-bottom: 1.5rem; }
+        .featured-title { font-family: var(--font-serif); font-style: italic; font-size: clamp(3rem, 4.5vw, 5.5rem); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 2.5rem; }
+        .featured-desc { font-size: 0.95rem; color: #777; line-height: 2; font-weight: 300; margin-bottom: 3.5rem; max-width: 38ch; }
+        .btn-dark { display: inline-block; padding: 1rem 3rem; border: 1px solid #111; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 600; transition: background 0.3s ease, color 0.3s ease; }
+        .btn-dark:hover { background: #111; color: #fff; opacity: 1; }
+        .looks-section { padding: 8rem 0; border-bottom: 1px solid var(--border-color); }
+        .looks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .category-section { padding: 8rem 0; }
+        @media (max-width: 768px) {
+            .featured-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .featured-section { padding: 5rem 0; }
+            .looks-section { padding: 5rem 0; }
+            .looks-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+            .section-eyebrow { margin-bottom: 3rem; }
+            .category-section { padding: 5rem 0; }
+        }
+    </style>
 </head>
 <body>
 
@@ -55,36 +105,69 @@
     </header>
 
     <main>
-        <!-- Section 1: Hero Curation -->
+
+        <!-- ── HERO: Full-screen video ── -->
         <section class="hero">
-            <img src="images/alexi-romano-CCx6Fz_CmOI-unsplash.webp" alt="Featured Curation" fetchpriority="high" width="1920" height="1080">
+            <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="images/blush-ivory-hero.webp">
+                <source src="images/A_photorealistic_vertical_vide.mp4" type="video/mp4">
+                <img src="images/alexi-romano-CCx6Fz_CmOI-unsplash.webp" alt="Selene Luxe">
+            </video>
             <div class="hero-content">
-                <p class="hero-subtitle">New Selection</p>
-                <h1 class="hero-title italic">The Signature Edit</h1>
+                <p class="hero-subtitle">New Season Edit &nbsp;—&nbsp; SS 2026</p>
+                <h1 class="hero-title italic">The Art of<br>Effortless Style</h1>
                 <div class="btn-group">
-                    <a href="outfits.html" class="btn btn-primary">Discover Outfits</a>
-                    <a href="shop.html" class="btn btn-outline">Browse All Items</a>
+                    <a href="outfits.html" class="btn btn-primary">Explore the Collection</a>
                 </div>
             </div>
         </section>
 
-        <!-- Section 2: Recent Curations -->
-        <section class="section-padding">
+        <!-- ── TICKER ── -->
+        <div class="ticker-strip" aria-hidden="true">
+            <div class="ticker-track">
+                <span class="ticker-item">New Arrivals</span><span class="ticker-item dot">&middot;</span>
+                <span class="ticker-item">Curated Looks</span><span class="ticker-item dot">&middot;</span>
+                <span class="ticker-item">Women&rsquo;s Fashion</span><span class="ticker-item dot">&middot;</span>
+                <span class="ticker-item">Shop The Look</span><span class="ticker-item dot">&middot;</span>
+                <span class="ticker-item">Amazon Picks</span><span class="ticker-item dot">&middot;</span>
+                <span class="ticker-item">Style Inspiration</span><span class="ticker-item dot">&middot;</span>
+                <span class="ticker-item">New Arrivals</span><span class="ticker-item dot">&middot;</span>
+                <span class="ticker-item">Curated Looks</span><span class="ticker-item dot">&middot;</span>
+                <span class="ticker-item">Women&rsquo;s Fashion</span><span class="ticker-item dot">&middot;</span>
+                <span class="ticker-item">Shop The Look</span><span class="ticker-item dot">&middot;</span>
+                <span class="ticker-item">Amazon Picks</span><span class="ticker-item dot">&middot;</span>
+                <span class="ticker-item">Style Inspiration</span><span class="ticker-item dot">&middot;</span>
+            </div>
+        </div>
+
+        <!-- ── FEATURED EDIT ── -->
+        <section class="featured-section">
+            <div class="container">
+                <div class="section-eyebrow">
+                    <span class="eyebrow-line"></span>
+                    <p class="eyebrow-text">Featured Edit</p>
+                </div>
+                <div class="featured-grid">
+                    <a href="outfit-details.html?id=blush-ivory-edit" class="featured-visual">
+                        <img src="images/blush-ivory-hero.webp" alt="The Blush & Ivory Edit" loading="eager">
+                    </a>
+                    <div>
+                        <p class="featured-look-tag">Look 04 &nbsp;&mdash;&nbsp; Women</p>
+                        <h2 class="featured-title">The Blush<br>&amp; Ivory<br>Edit</h2>
+                        <p class="featured-desc">A soft, feminine study in contrast &mdash; blush pink cotton blouse paired with flowing ivory wide-leg trousers. Effortless polish for the modern woman.</p>
+                        <a href="outfit-details.html?id=blush-ivory-edit" class="btn-dark">Shop The Look</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── THE EDIT: 3-look grid ── -->
+        <section class="looks-section">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title italic">Recent Curations</h2>
+                    <h2 class="section-title italic">The Edit</h2>
                     <a href="outfits.html" class="view-all">View All Looks</a>
                 </div>
-                <div class="grid-3" style="grid-template-columns: repeat(2,1fr);">
-                    <!-- Outfit 04 — newest first -->
-                    <a href="outfit-details.html?id=blush-ivory-edit" class="curation-card">
-                        <img src="images/blush-ivory-hero.webp" alt="The Blush & Ivory Edit" loading="eager" width="600" height="750">
-                        <div class="curation-overlay">
-                            <p class="curation-tag">Look 04</p>
-                            <h3 class="curation-name italic">The Blush & Ivory Edit</h3>
-                        </div>
-                    </a>
-                    <!-- Outfit 01 -->
+                <div class="looks-grid">
                     <a href="outfit-details.html?id=birmingham-edit" class="curation-card">
                         <img src="images/outfit1.webp" alt="The Birmingham Edit" loading="lazy" width="600" height="750">
                         <div class="curation-overlay">
@@ -92,7 +175,6 @@
                             <h3 class="curation-name italic">The Birmingham Edit</h3>
                         </div>
                     </a>
-                    <!-- Outfit 02 -->
                     <a href="outfit-details.html?id=navy-ivory-edit" class="curation-card">
                         <img src="images/navy-ivory-hero.webp" alt="The Navy & Ivory Edit" loading="lazy" width="600" height="750">
                         <div class="curation-overlay">
@@ -100,7 +182,6 @@
                             <h3 class="curation-name italic">The Navy & Ivory Edit</h3>
                         </div>
                     </a>
-                    <!-- Outfit 03 -->
                     <a href="outfit-details.html?id=pink-meadow-edit" class="curation-card">
                         <img src="images/pink-meadow-hero.webp" alt="The Pink Meadow Edit" loading="lazy" width="600" height="750">
                         <div class="curation-overlay">
@@ -112,11 +193,14 @@
             </div>
         </section>
 
-        <!-- Section 3: Direct Categories -->
-        <section class="section-padding" style="background-color: #fcfcfc;">
-            <div class="container text-center">
-                <p class="hero-subtitle" style="color: #999;">Browse by Category</p>
-                <div class="grid-3" style="margin-top: 3rem;">
+        <!-- ── SHOP BY CATEGORY ── -->
+        <section class="category-section">
+            <div class="container">
+                <div class="section-eyebrow" style="margin-bottom: 4rem;">
+                    <span class="eyebrow-line"></span>
+                    <p class="eyebrow-text">Shop by Category</p>
+                </div>
+                <div class="grid-3">
                     <a href="shop.html?cat=women" class="category-card">
                         <img src="images/priscilla-du-preez-dlxLGIy-2VU-unsplash.webp" alt="Shop Women" loading="lazy" width="600" height="800">
                         <div class="category-title italic">Women</div>
@@ -132,6 +216,7 @@
                 </div>
             </div>
         </section>
+
     </main>
 
     <!-- OVERLAYS -->
