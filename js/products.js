@@ -120,7 +120,7 @@ const products = [
     },
     {
         id: 21,
-        outfitId: "navy-ivory-edit",
+        outfitId: ["navy-ivory-edit", "blush-ivory-edit"],
         category: "women",
         brand: "SELENE LUXE",
         name: "Ivory Wide-Leg Pleated Trousers",
@@ -507,6 +507,7 @@ const products = [
         badge: "Style Inspiration",
         image1: "images/e6156b53-34f7-4e37-bbf2-1ec17640a4cc.jpg",
         image2: "images/e6156b53-34f7-4e37-bbf2-1ec17640a4cc.jpg",
+        outfitId: "blush-ivory-edit",
         affiliateLink: "https://a.co/d/014lDOPH",
         buttonText: "Shop on Amazon"
     }
@@ -533,6 +534,14 @@ const outfits = [
         description: "A whimsical, vintage-inspired collection for your little one. This edit pairs a tan gingham blouse with a sweet suspender skirt, finished with charming accessories like a little bear crossbody and ruffle-trim socks.",
         heroImage: "images/pink-meadow-hero.webp",
         category: "Kids"
+    },
+    {
+        id: "blush-ivory-edit",
+        name: "The Blush & Ivory Edit",
+        description: "A soft, feminine study in contrast. This edit pairs a blush pink cropped cotton button-down blouse with flowing ivory wide-leg pleated trousers — an effortlessly polished look that bridges casual comfort with refined elegance.",
+        heroImage: "images/blush-ivory-hero.webp",
+        heroVideo: "images/A_photorealistic_vertical_vide.mp4",
+        category: "Women"
     },
     {
         id: "cosmetics-skincare-edit",

@@ -533,7 +533,12 @@
                 const grid = document.getElementById('related-products-grid');
                 if (grid) {
                     // Try to match outfitId first, then category
-                    let related = products.filter(p => p.id !== product.id && p.outfitId === product.outfitId);
+                    const outfitMatch = (a, b) => {
+                        const aIds = Array.isArray(a.outfitId) ? a.outfitId : [a.outfitId];
+                        const bIds = Array.isArray(b.outfitId) ? b.outfitId : [b.outfitId];
+                        return aIds.some(id => id && bIds.includes(id));
+                    };
+                    let related = products.filter(p => p.id !== product.id && outfitMatch(p, product));
                     
                     if (related.length < 3) {
                         const sameCat = products.filter(p => p.id !== product.id && p.category === product.category && !related.includes(p));
