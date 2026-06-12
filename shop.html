@@ -7,7 +7,9 @@
     <meta name="description" content="Browse our curated collection of premium lifestyle pieces at Selene Luxe.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap"></noscript>
     <link rel="stylesheet" href="css/global.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
@@ -36,6 +38,17 @@
             letter-spacing: 0.15em;
             font-weight: 600;
         }
+        .filter-links a {
+            color: var(--text-muted);
+            padding-bottom: 0.2rem;
+            border-bottom: 1px solid transparent;
+            transition: color var(--transition-fast), border-color var(--transition-fast);
+        }
+        .filter-links a:hover { color: var(--text-color); opacity: 1; }
+        .filter-links a.active {
+            color: var(--text-color);
+            border-bottom-color: var(--text-color);
+        }
         .product-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -63,7 +76,7 @@
             position: relative;
             aspect-ratio: 3/4;
             overflow: hidden;
-            background: #FAFAFA;
+            background: var(--surface);
         }
         .product-image-container img {
             width: 100%;
@@ -111,8 +124,8 @@
         }
         .product-action {
             font-size: 0.65rem;
-            font-weight: 700;
-            color: #666;
+            font-weight: 600;
+            color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.1em;
             margin-top: 0.2rem;
@@ -187,7 +200,7 @@
     </main>
 
     <!-- OVERLAYS -->
-    <div id="side-menu" class="overlay" style="align-items: flex-start; justify-content: flex-start; max-width: 400px; background: white; transform: translateX(-100%); transition: transform var(--transition-smooth); opacity: 1;">
+    <div id="side-menu" class="overlay" style="align-items: flex-start; justify-content: flex-start; max-width: 400px; background: var(--bg-color); transform: translateX(-100%); transition: transform var(--transition-smooth); opacity: 1;">
         <button id="close-menu" class="close-btn" aria-label="Close Menu">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
@@ -216,7 +229,7 @@
         </div>
     </div>
 
-    <div id="search-overlay" class="overlay" style="background: rgba(255,255,255,0.98);">
+    <div id="search-overlay" class="overlay" style="background: rgba(250,248,244,0.98);">
         <button id="close-search" class="close-btn" aria-label="Close Search" style="position: absolute; top: 2rem; right: 2rem;">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
@@ -266,7 +279,15 @@
             const urlParams = new URLSearchParams(window.location.search);
             
             const categoryFilter = urlParams.get('cat');
-            const searchQuery = urlParams.get('q'); 
+            const searchQuery = urlParams.get('q');
+
+            document.querySelectorAll('.filter-links a').forEach(link => {
+                const href = link.getAttribute('href');
+                const linkCat = new URLSearchParams(href.split('?')[1] || '').get('cat');
+                if ((!categoryFilter && !linkCat) || linkCat === categoryFilter) {
+                    link.classList.add('active');
+                }
+            });
 
             let filteredProducts = products || [];
 
