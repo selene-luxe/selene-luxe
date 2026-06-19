@@ -696,7 +696,7 @@ const products = [
         badge: "Beauty Edit",
         image1: "images/cosmetics5.jpg",
         image2: "images/cosmetics5.jpg",
-        affiliateLink: "https://amzn.to/4eWhx7Z",
+        affiliateLink: "https://amzn.to/4b1u9Jx",
         buttonText: "Shop on Amazon"
     },
     {
@@ -710,7 +710,7 @@ const products = [
         badge: "Beauty Edit",
         image1: "images/cosmetics6.jpg",
         image2: "images/cosmetics6.jpg",
-        affiliateLink: "https://amzn.to/43GIszl",
+        affiliateLink: "https://amzn.to/4vfXl7K",
         buttonText: "Shop on Amazon"
     },
     {
@@ -724,7 +724,7 @@ const products = [
         badge: "Beauty Edit",
         image1: "images/cosmetics7.jpg",
         image2: "images/cosmetics7.jpg",
-        affiliateLink: "https://amzn.to/4eovf2Q",
+        affiliateLink: "https://amzn.to/4uNP9uv",
         buttonText: "Shop on Amazon"
     },
     {
