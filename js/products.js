@@ -638,7 +638,7 @@ const products = [
         trending: "Matte Lips ↑",
         image1: "images/cosmetics1.jpg",
         image2: "images/cosmetics1.jpg",
-        affiliateLink: "https://amzn.to/4ekaSFn",
+        affiliateLink: "https://amzn.to/43Pemts",
         buttonText: "Shop on Amazon"
     },
     {
@@ -653,7 +653,7 @@ const products = [
         trending: "Bold Lips ↑",
         image1: "images/cosmetics2.jpg",
         image2: "images/cosmetics2.jpg",
-        affiliateLink: "https://amzn.to/4eyAtJB",
+        affiliateLink: "https://amzn.to/4uPUNvX",
         buttonText: "Shop on Amazon"
     },
     {
@@ -667,7 +667,7 @@ const products = [
         badge: "Beauty Edit",
         image1: "images/cosmetics3.jpg",
         image2: "images/cosmetics3.jpg",
-        affiliateLink: "https://amzn.to/3S8PiLz",
+        affiliateLink: "https://amzn.to/4uRzZ7v",
         buttonText: "Shop on Amazon"
     },
     {
@@ -681,7 +681,7 @@ const products = [
         badge: "Beauty Edit",
         image1: "images/cosmetics4.jpg",
         image2: "images/cosmetics4.jpg",
-        affiliateLink: "https://amzn.to/4ezzZD9",
+        affiliateLink: "https://amzn.to/3SkRb7N",
         buttonText: "Shop on Amazon"
     },
     // LIPSTICK — L'ORÉAL PARIS COLOR RICHE
@@ -710,7 +710,7 @@ const products = [
         badge: "Beauty Edit",
         image1: "images/cosmetics6.jpg",
         image2: "images/cosmetics6.jpg",
-        affiliateLink: "https://amzn.to/3SkRb7N",
+        affiliateLink: "https://amzn.to/4ezzZD9",
         buttonText: "Shop on Amazon"
     },
     {
@@ -724,7 +724,7 @@ const products = [
         badge: "Beauty Edit",
         image1: "images/cosmetics7.jpg",
         image2: "images/cosmetics7.jpg",
-        affiliateLink: "https://amzn.to/4uRzZ7v",
+        affiliateLink: "https://amzn.to/3S8PiLz",
         buttonText: "Shop on Amazon"
     },
     {
@@ -738,7 +738,7 @@ const products = [
         badge: "Beauty Edit",
         image1: "images/cosmetics8.jpg",
         image2: "images/cosmetics8.jpg",
-        affiliateLink: "https://amzn.to/4uPUNvX",
+        affiliateLink: "https://amzn.to/4eyAtJB",
         buttonText: "Shop on Amazon"
     },
     // HOME — GARDEN
@@ -753,7 +753,7 @@ const products = [
         badge: "Home Edit",
         image1: "images/turtle1.jpg",
         image2: "images/turtle1.jpg",
-        affiliateLink: "https://amzn.to/43Pemts",
+        affiliateLink: "https://amzn.to/4ekaSFn",
         buttonText: "Shop on Amazon"
     }
 ];
