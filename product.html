@@ -255,6 +255,20 @@
             padding-bottom: 2rem;
             border-bottom: 1px solid var(--border-color);
         }
+        /* TRENDING BADGE */
+        .product-trending-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: var(--text-color);
+            color: var(--bg-color);
+            font-size: 0.58rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            padding: 0.32rem 0.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
         /* WISHLIST COUNT BADGE */
         .wishlist-count-badge {
             position: absolute;
@@ -434,6 +448,7 @@
             <a href="shop.html?cat=kids">Kids</a>
             <a href="outfits.html">Outfits</a>
             <a href="shop.html?cat=home">Home</a>
+            <a href="trending.html" style="color: var(--accent-warm);">&#x25B2; Trending</a>
             <a href="https://selene-luxe-2.myshopify.com" target="_blank" rel="noopener noreferrer" style="margin-top: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem; font-size: 1.2rem; color: var(--text-color); font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;">Custom POD Shop</a>
             <div style="display: flex; gap: 1.5rem; margin-top: 1rem;">
                 <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="color: var(--text-color); transition: opacity 0.2s;">
@@ -514,6 +529,12 @@
                 document.getElementById('name').innerText = product.name;
                 document.getElementById('brand').innerText = product.brand;
                 document.getElementById('price').innerText = product.price;
+                if (product.trending) {
+                    const tb = document.createElement('span');
+                    tb.className = 'product-trending-badge';
+                    tb.innerHTML = '&#x25B2; ' + product.trending;
+                    document.getElementById('price').after(tb);
+                }
                 document.getElementById('img1').src = product.image1;
                 document.getElementById('img1').alt = product.name;
                 document.getElementById('btn').href = product.affiliateLink;

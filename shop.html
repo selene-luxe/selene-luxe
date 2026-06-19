@@ -236,6 +236,23 @@
             transform: translateY(0);
         }
         .card-wishlist-btn.wishlisted svg { fill: var(--text-color); }
+        /* TRENDING BADGE */
+        .product-badge-trending {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            background: var(--text-color);
+            color: var(--bg-color);
+            font-size: 0.52rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            padding: 0.28rem 0.65rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            z-index: 3;
+        }
         /* WISHLIST COUNT BADGE */
         .wishlist-count-badge {
             position: absolute;
@@ -299,6 +316,7 @@
                 <a href="shop.html?cat=men">Men</a>
                 <a href="shop.html?cat=kids">Kids</a>
                 <a href="shop.html?cat=home">Home</a>
+                <a href="trending.html" style="color: var(--accent-warm);">&#x25B2; Trending</a>
             </div>
         </div>
         
@@ -459,7 +477,10 @@
                 const badge = isLifestyle
                     ? `<span class="product-badge-lifestyle">${p.badge || 'Lifestyle'}</span>`
                     : (p.badge && p.badge !== 'Style Inspiration' ? `<p class="product-badge">${p.badge}</p>` : '');
-                const bottomTag = isLifestyle ? '' : `<p class="product-inspiration">Curated Pick</p>`;
+                const trendingBadge = p.trending
+                    ? `<span class="product-badge-trending">&#x25B2; ${p.trending}</span>`
+                    : '';
+                const bottomTag = isLifestyle ? '' : (p.trending ? '' : `<p class="product-inspiration">Curated Pick</p>`);
                 const extra = isLifestyle
                     ? (p.description ? `<p class="product-desc-snippet">${p.description}</p>` : '')
                     : renderColorDots(p);
@@ -469,6 +490,7 @@
                         <div class="product-image-container">
                             <img src="${p.image1}" alt="${p.name}" loading="lazy" width="400" height="${imgH}">
                             ${badge}
+                            ${trendingBadge}
                             ${bottomTag}
                             <button class="card-wishlist-btn${isWishlisted ? ' wishlisted' : ''}" data-pid="${p.id}" aria-label="Save to wishlist" onclick="event.preventDefault();event.stopPropagation();toggleWishlist(${p.id},this);">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="${isWishlisted ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
