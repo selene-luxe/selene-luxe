@@ -60,6 +60,7 @@
         .category-section { padding: 9rem 0; border-top: 1px solid var(--border-color); }
         .category-section .grid-3 { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
         .category-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .category-grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; }
         .home-edit-section { padding: 9rem 0; border-top: 1px solid var(--border-color); }
         .home-edit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
         .home-edit-items { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -84,6 +85,7 @@
             .looks-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
             .category-section .grid-3 { grid-template-columns: 1fr 1fr; }
             .category-grid-4 { grid-template-columns: 1fr 1fr; }
+            .category-grid-5 { grid-template-columns: repeat(3, 1fr); }
             .home-edit-grid { grid-template-columns: 1fr; gap: 3rem; }
         }
         @media (max-width: 480px) {
@@ -91,6 +93,7 @@
             .looks-grid { grid-template-columns: 1fr; }
             .category-section .grid-3 { grid-template-columns: 1fr; }
             .category-grid-4 { grid-template-columns: 1fr 1fr; }
+            .category-grid-5 { grid-template-columns: 1fr 1fr; }
             .featured-title { font-size: clamp(2.4rem, 10vw, 3.5rem); }
         }
     </style>
@@ -153,6 +156,7 @@
                 <span class="ticker-item">Curated Looks</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">Women&rsquo;s Fashion</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">Home Edit</span><span class="ticker-item dot">&middot;</span>
+                <span class="ticker-item">Beauty Edit</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">Shop The Look</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">Amazon Picks</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">Curated Living</span><span class="ticker-item dot">&middot;</span>
@@ -161,6 +165,7 @@
                 <span class="ticker-item">Curated Looks</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">Women&rsquo;s Fashion</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">Home Edit</span><span class="ticker-item dot">&middot;</span>
+                <span class="ticker-item">Beauty Edit</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">Shop The Look</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">Amazon Picks</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">Curated Living</span><span class="ticker-item dot">&middot;</span>
@@ -196,7 +201,7 @@
                     <span class="eyebrow-line"></span>
                     <p class="eyebrow-text">Shop by Category</p>
                 </div>
-                <div class="category-grid-4">
+                <div class="category-grid-5">
                     <a href="shop.html?cat=women" class="category-card">
                         <img src="images/priscilla-du-preez-dlxLGIy-2VU-unsplash.webp" alt="Shop Women" loading="lazy" width="600" height="800">
                         <div class="category-title italic">Women</div>
@@ -212,6 +217,10 @@
                     <a href="shop.html?cat=home" class="category-card">
                         <img src="images/lamp1.jpg" alt="Home &amp; Lifestyle" loading="lazy" width="600" height="600" style="object-position: center;">
                         <div class="category-title italic">Home</div>
+                    </a>
+                    <a href="shop.html?cat=cosmetics" class="category-card">
+                        <img src="images/cosmetics1.jpg" alt="Beauty &amp; Cosmetics" loading="lazy" width="600" height="600" style="object-position: center top;">
+                        <div class="category-title italic">Beauty</div>
                     </a>
                 </div>
             </div>
@@ -240,6 +249,34 @@
                         <a href="product.html?id=43" class="home-edit-item" style="grid-column: 1 / -1; aspect-ratio: 2/1;">
                             <img src="images/radio1.jpg" alt="Victrola Bluetooth Radio" loading="lazy" width="800" height="400">
                         </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── BEAUTY EDIT CALLOUT ── -->
+        <section class="home-edit-section">
+            <div class="container">
+                <div class="home-edit-grid">
+                    <div class="home-edit-items">
+                        <a href="product.html?id=44" class="home-edit-item">
+                            <img src="images/cosmetics1.jpg" alt="Maybelline Founder Lipstick" loading="lazy" width="400" height="400">
+                        </a>
+                        <a href="product.html?id=46" class="home-edit-item">
+                            <img src="images/cosmetics3.jpg" alt="Maybelline Dreamer Lipstick" loading="lazy" width="400" height="400">
+                        </a>
+                        <a href="product.html?id=48" class="home-edit-item" style="grid-column: 1 / -1; aspect-ratio: 2/1;">
+                            <img src="images/cosmetics5.jpg" alt="L&apos;Or&eacute;al Berry Parisienne" loading="lazy" width="800" height="400">
+                        </a>
+                    </div>
+                    <div>
+                        <div class="section-eyebrow" style="margin-bottom: 2rem;">
+                            <span class="eyebrow-line"></span>
+                            <p class="eyebrow-text">Beauty &amp; Cosmetics</p>
+                        </div>
+                        <h2 class="featured-title" style="font-size: clamp(2rem, 3.5vw, 3.8rem);">The Beauty<br>Edit</h2>
+                        <p class="featured-desc">Curated lip colours and skincare essentials for the woman who considers beauty a ritual &mdash; from bold matte statements to quiet luxury nudes.</p>
+                        <a href="shop.html?cat=cosmetics" class="btn-dark">Explore the Edit</a>
                     </div>
                 </div>
             </div>
@@ -291,6 +328,7 @@
             <a href="shop.html?cat=kids">Kids</a>
             <a href="outfits.html">Outfits</a>
             <a href="shop.html?cat=home">Home</a>
+            <a href="shop.html?cat=cosmetics">Beauty</a>
             <a href="trending.html" style="color: var(--accent-warm);">&#x25B2; Trending</a>
             <a href="https://selene-luxe-2.myshopify.com" target="_blank" rel="noopener noreferrer" style="margin-top: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem; font-size: 1.2rem; color: var(--text-color); font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;">Custom POD Shop</a>
             <div style="display: flex; gap: 1.5rem; margin-top: 1rem;">
