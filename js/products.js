@@ -510,6 +510,44 @@ const products = [
         outfitId: "blush-ivory-edit",
         affiliateLink: "https://a.co/d/014lDOPH",
         buttonText: "Shop on Amazon"
+    },
+
+    // HOME & LIFESTYLE
+    {
+        id: 41,
+        category: "home",
+        brand: "Luckystyle",
+        name: "Dimmable Arc Floor Lamp with Remote",
+        price: "Check Price",
+        badge: "Home Edit",
+        image1: "images/lamp1.jpg",
+        image2: "images/lamp1.jpg",
+        affiliateLink: "https://a.co/d/05hw3ndJ",
+        buttonText: "Shop on Amazon"
+    },
+    {
+        id: 42,
+        category: "home",
+        brand: "Kockuu",
+        name: "6ft Artificial Olive Tree with White Pot",
+        price: "Check Price",
+        badge: "Home Edit",
+        image1: "images/plant1.jpg",
+        image2: "images/plant1.jpg",
+        affiliateLink: "https://a.co/d/02MSovsX",
+        buttonText: "Shop on Amazon"
+    },
+    {
+        id: 43,
+        category: "home",
+        brand: "Victrola",
+        name: "Willow Retro Wood Bluetooth Radio",
+        price: "Check Price",
+        badge: "Home Edit",
+        image1: "images/radio1.jpg",
+        image2: "images/radio1.jpg",
+        affiliateLink: "https://a.co/d/005FR4N6",
+        buttonText: "Shop on Amazon"
     }
 ];
 
