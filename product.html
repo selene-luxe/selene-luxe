@@ -4,7 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Selene Luxe | Product Details</title>
-    <meta name="description" content="View product details, color variants, and curated recommendations at Selene Luxe.">
+    <meta name="description" content="View product details, color variants, and curated recommendations at Selene Luxe." id="meta-description">
+    <link rel="canonical" href="https://seleneluxe.fashion/product.html" id="meta-canonical">
+    <meta property="og:type" content="product">
+    <meta property="og:title" content="Selene Luxe | Product" id="og-title">
+    <meta property="og:description" content="Curated by Selene Luxe." id="og-description">
+    <meta property="og:url" content="https://seleneluxe.fashion/product.html" id="og-url">
+    <meta property="og:image" content="" id="og-image">
+    <meta property="og:site_name" content="Selene Luxe">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap">
@@ -238,6 +246,53 @@
             line-height: 1.8;
             font-weight: 300;
         }
+        .product-description {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        /* WISHLIST COUNT BADGE */
+        .wishlist-count-badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: var(--accent-warm);
+            color: white;
+            font-size: 0.5rem;
+            font-weight: 700;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+        .nav-actions .icon-btn { position: relative; }
+        /* RELATED PRODUCTS CARDS */
+        .related-card {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .related-card-img {
+            overflow: hidden;
+            background: var(--surface);
+        }
+        .related-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s var(--transition-smooth);
+        }
+        .related-card:hover .related-card-img img { transform: scale(1.05); }
+        .related-card .rc-brand { font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.15em; }
+        .related-card .rc-name { font-size: 0.9rem; font-weight: 500; letter-spacing: -0.01em; line-height: 1.3; }
+        .related-card .rc-action { font-size: 0.65rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.2rem; }
     </style>
 </head>
 <body>
@@ -267,7 +322,7 @@
                     <span>Search</span>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 </button>
-                <a href="wishlist.html" class="icon-btn" aria-label="Wishlist">
+                <a href="wishlist.html" class="icon-btn" aria-label="Wishlist" id="wishlist-icon-link" style="position:relative;">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                 </a>
             </div>
@@ -299,6 +354,7 @@
                         <p id="brand" class="brand-name"></p>
                         <h1 id="name" class="product-title italic"></h1>
                         <p id="price" class="product-price"></p>
+                        <p id="description" class="product-description" style="display:none;"></p>
                     </div>
 
                     <div class="variant-section">
@@ -353,14 +409,14 @@
         <section class="assurance-section">
             <h2 class="assurance-title">Selene Luxe Assurance</h2>
             <div class="assurance-item">
-                <h3 class="italic">Curated with Purpose</h3>
-                <p>
+                <h3 class="italic" id="assurance-title-1">Curated with Purpose</h3>
+                <p id="assurance-body-1">
                     Every item in our collection is hand-selected by our editors. We focus on high-reputation pieces that offer timeless style and quality, ensuring you only see the best of what's available.
                 </p>
             </div>
             <div class="assurance-item">
-                <h3 class="italic">Verified Reputation</h3>
-                <p>
+                <h3 class="italic" id="assurance-title-2">Verified Reputation</h3>
+                <p id="assurance-body-2">
                     We prioritize products with proven track records and positive feedback, simplifying your search for the perfect addition to your wardrobe.
                 </p>
             </div>
@@ -444,6 +500,16 @@
             const productID = parseInt(urlParams.get('id'));
             const product = products.find(p => p.id === productID);
 
+            // WISHLIST BADGE
+            const wlIds = JSON.parse(localStorage.getItem('selene_wishlist') || '[]');
+            const wlLink = document.getElementById('wishlist-icon-link');
+            if (wlIds.length > 0 && wlLink) {
+                const badge = document.createElement('span');
+                badge.className = 'wishlist-count-badge';
+                badge.textContent = wlIds.length;
+                wlLink.appendChild(badge);
+            }
+
             if (product) {
                 document.getElementById('name').innerText = product.name;
                 document.getElementById('brand').innerText = product.brand;
@@ -452,8 +518,63 @@
                 document.getElementById('img1').alt = product.name;
                 document.getElementById('btn').href = product.affiliateLink;
                 document.getElementById('btn').innerText = product.buttonText || "Shop on Amazon";
-                
+
+                // SHOW DESCRIPTION
+                if (product.description) {
+                    const descEl = document.getElementById('description');
+                    descEl.textContent = product.description;
+                    descEl.style.display = 'block';
+                }
+
+                // TYPE-AWARE IMAGE RATIO
+                if (product.type === 'lifestyle') {
+                    document.querySelector('.main-image-container').style.aspectRatio = '1/1';
+                }
+
+                // TYPE-AWARE ASSURANCE COPY
+                if (product.type === 'lifestyle') {
+                    document.getElementById('assurance-title-1').textContent = 'Curated with Intent';
+                    document.getElementById('assurance-body-1').textContent = 'Every piece in our lifestyle edit is chosen for its ability to transform a space. We look for objects that balance beauty with function — things that elevate the everyday.';
+                    document.getElementById('assurance-title-2').textContent = 'Quality You Can Trust';
+                    document.getElementById('assurance-body-2').textContent = 'We only feature products with strong reputations and verified reviews. Discover pieces chosen for lasting impact, not fleeting trends.';
+                }
+
                 document.title = `Selene Luxe | ${product.name}`;
+
+                // DYNAMIC OG TAGS
+                const ogTitle = document.getElementById('og-title');
+                const ogDesc = document.getElementById('og-description');
+                const ogUrl = document.getElementById('og-url');
+                const ogImg = document.getElementById('og-image');
+                const metaDesc = document.getElementById('meta-description');
+                const canonical = document.getElementById('meta-canonical');
+                const pageUrl = `https://seleneluxe.fashion/product.html?id=${product.id}`;
+                if (ogTitle) ogTitle.setAttribute('content', `Selene Luxe | ${product.name}`);
+                if (ogDesc) ogDesc.setAttribute('content', product.description || `${product.name} — curated by Selene Luxe.`);
+                if (ogUrl) ogUrl.setAttribute('content', pageUrl);
+                if (ogImg) ogImg.setAttribute('content', `https://seleneluxe.fashion/${product.image1}`);
+                if (metaDesc) metaDesc.setAttribute('content', product.description || `${product.name} — curated by Selene Luxe.`);
+                if (canonical) canonical.setAttribute('href', pageUrl);
+
+                // JSON-LD STRUCTURED DATA
+                const jsonLd = document.createElement('script');
+                jsonLd.type = 'application/ld+json';
+                jsonLd.textContent = JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "Product",
+                    "name": product.name,
+                    "description": product.description || product.name,
+                    "image": `https://seleneluxe.fashion/${product.image1}`,
+                    "brand": { "@type": "Brand", "name": product.brand },
+                    "offers": {
+                        "@type": "Offer",
+                        "url": product.affiliateLink,
+                        "priceCurrency": "USD",
+                        "availability": "https://schema.org/InStock",
+                        "seller": { "@type": "Organization", "name": "Amazon" }
+                    }
+                });
+                document.head.appendChild(jsonLd);
                 
                 // HANDLE COLOR VARIANTS
                 if (product.variants && product.variants.length > 0) {
@@ -522,15 +643,23 @@
             }
 
             const saveBtn = document.getElementById('save-wishlist-btn');
+            const currentWl = JSON.parse(localStorage.getItem('selene_wishlist') || '[]');
+            if (currentWl.includes(productID)) {
+                saveBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> Saved to Wishlist`;
+                saveBtn.classList.add('added');
+            }
             saveBtn.addEventListener('click', () => {
-                let wishlist = JSON.parse(localStorage.getItem('myWishlist')) || [];
+                let wishlist = JSON.parse(localStorage.getItem('selene_wishlist') || '[]');
                 if (!wishlist.includes(productID)) {
                     wishlist.push(productID);
-                    localStorage.setItem('myWishlist', JSON.stringify(wishlist));
-                    saveBtn.innerText = "Added to Wishlist";
+                    localStorage.setItem('selene_wishlist', JSON.stringify(wishlist));
+                    saveBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> Saved to Wishlist`;
                     saveBtn.classList.add('added');
                 } else {
-                    alert("Already in your wishlist!");
+                    wishlist = wishlist.filter(i => i !== productID);
+                    localStorage.setItem('selene_wishlist', JSON.stringify(wishlist));
+                    saveBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> Add to Wishlist`;
+                    saveBtn.classList.remove('added');
                 }
             });
 
@@ -556,16 +685,18 @@
                     
                     related.forEach(item => {
                         const img = item.image1 || item.image || item.image2;
+                        const ratio = item.type === 'lifestyle' ? '1/1' : '3/4';
+                        const imgH = item.type === 'lifestyle' ? '400' : '533';
                         const card = document.createElement('a');
                         card.href = `product.html?id=${item.id}`;
-                        card.className = 'curation-card'; // Reuse the aesthetic card style
-                        
+                        card.className = 'related-card';
                         card.innerHTML = `
-                            <img src="${img}" alt="${item.name}" loading="lazy" style="width:100%; aspect-ratio:3/4; object-fit:cover;">
-                            <div class="curation-overlay" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 1.5rem;">
-                                <p class="curation-tag" style="color: #eee; margin-bottom: 0.5rem; font-size: 0.65rem;">${item.brand}</p>
-                                <h3 class="curation-name italic" style="font-size: 1.25rem;">${item.name}</h3>
+                            <div class="related-card-img" style="aspect-ratio:${ratio};">
+                                <img src="${img}" alt="${item.name}" loading="lazy" width="400" height="${imgH}">
                             </div>
+                            <p class="rc-brand">${item.brand}</p>
+                            <h3 class="rc-name">${item.name}</h3>
+                            <p class="rc-action">View Product &rarr;</p>
                         `;
                         grid.appendChild(card);
                     });

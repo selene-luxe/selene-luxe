@@ -1,23 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://thesilkandsand.com/</loc>
-    <lastmod>2026-06-02</lastmod>
+    <loc>https://seleneluxe.fashion/</loc>
+    <lastmod>2026-07-01</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://thesilkandsand.com/shop.html</loc>
-    <lastmod>2026-06-02</lastmod>
+    <loc>https://seleneluxe.fashion/shop.html</loc>
+    <lastmod>2026-07-01</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://seleneluxe.fashion/outfits.html</loc>
+    <lastmod>2026-07-01</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://thesilkandsand.com/outfits.html</loc>
-    <lastmod>2026-06-02</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://thesilkandsand.com/about.html</loc>
-    <lastmod>2026-06-02</lastmod>
+    <loc>https://seleneluxe.fashion/wishlist.html</loc>
+    <lastmod>2026-07-01</lastmod>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://seleneluxe.fashion/about.html</loc>
+    <lastmod>2026-07-01</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://seleneluxe.fashion/privacy.html</loc>
+    <lastmod>2026-07-01</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://seleneluxe.fashion/disclosure.html</loc>
+    <lastmod>2026-07-01</lastmod>
+    <priority>0.3</priority>
   </url>
 </urlset>

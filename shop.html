@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Selene Luxe | Collection</title>
     <meta name="description" content="Browse our curated collection of premium lifestyle pieces at Selene Luxe.">
+    <link rel="canonical" href="https://seleneluxe.fashion/shop.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Selene Luxe | Shop the Collection">
+    <meta property="og:description" content="Browse curated fashion and lifestyle pieces hand-selected by Selene Luxe editors.">
+    <meta property="og:url" content="https://seleneluxe.fashion/shop.html">
+    <meta property="og:image" content="https://seleneluxe.fashion/images/priscilla-du-preez-dlxLGIy-2VU-unsplash.webp">
+    <meta property="og:site_name" content="Selene Luxe">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap">
@@ -149,6 +157,103 @@
             color: #999;
             margin-left: 2px;
         }
+        /* LIFESTYLE CARD — square ratio */
+        .product-card-lifestyle .product-image-container {
+            aspect-ratio: 1/1;
+        }
+        .product-card-lifestyle .product-name {
+            font-size: 0.85rem;
+        }
+        .product-card-lifestyle .product-desc-snippet {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-top: 0.2rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        /* LIFESTYLE BADGE — warm earthy tone */
+        .product-badge-lifestyle {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--accent-warm);
+            color: white;
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            padding: 0.3rem 0.7rem;
+            font-weight: 700;
+        }
+        /* SECTION DIVIDER between fashion and lifestyle */
+        .shop-type-divider {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 2rem 0 0.5rem;
+            margin-top: 1rem;
+        }
+        .shop-type-divider span {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 700;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+        .shop-type-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+        /* WISHLIST QUICK-ADD on card */
+        .card-wishlist-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            width: 32px;
+            height: 32px;
+            background: rgba(250,248,244,0.9);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(-4px);
+            transition: opacity 0.2s, transform 0.2s;
+            color: var(--text-color);
+            z-index: 2;
+        }
+        .product-card:hover .card-wishlist-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .card-wishlist-btn.wishlisted svg { fill: var(--text-color); }
+        /* WISHLIST COUNT BADGE */
+        .wishlist-count-badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: var(--accent-warm);
+            color: white;
+            font-size: 0.5rem;
+            font-weight: 700;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+        .nav-actions .icon-btn { position: relative; }
     </style>
 </head>
 <body>
@@ -178,7 +283,7 @@
                     <span>Search</span>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 </button>
-                <a href="wishlist.html" class="icon-btn" aria-label="Wishlist">
+                <a href="wishlist.html" class="icon-btn" aria-label="Wishlist" id="wishlist-icon-link" style="position:relative;">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                 </a>
             </div>
@@ -307,39 +412,111 @@
                 document.getElementById('page-title').innerText = 'Search Results';
             }
 
-            grid.innerHTML = ""; 
+            // Load wishlist and update badge
+            const savedIds = JSON.parse(localStorage.getItem('selene_wishlist') || '[]');
+            const wishlistLink = document.getElementById('wishlist-icon-link');
+            if (savedIds.length > 0 && wishlistLink) {
+                const badge = document.createElement('span');
+                badge.className = 'wishlist-count-badge';
+                badge.id = 'wl-badge';
+                badge.textContent = savedIds.length;
+                wishlistLink.appendChild(badge);
+            }
+
+            function updateWishlistBadge() {
+                const ids = JSON.parse(localStorage.getItem('selene_wishlist') || '[]');
+                let badge = document.getElementById('wl-badge');
+                if (ids.length > 0) {
+                    if (!badge) {
+                        badge = document.createElement('span');
+                        badge.className = 'wishlist-count-badge';
+                        badge.id = 'wl-badge';
+                        wishlistLink.appendChild(badge);
+                    }
+                    badge.textContent = ids.length;
+                } else if (badge) {
+                    badge.remove();
+                }
+            }
+
+            grid.innerHTML = "";
+
             function renderColorDots(product) {
                 if (!product.variants || product.variants.length === 0) return '';
-                const dots = product.variants.slice(0, 3).map(v => 
+                const dots = product.variants.slice(0, 3).map(v =>
                     `<span class="color-dot ${isLightColor(v.colorCode) ? 'light' : ''}" style="background-color: ${v.colorCode};"></span>`
                 ).join('');
                 const more = product.variants.length > 3 ? `<span class="more-colors">+${product.variants.length - 3}</span>` : '';
                 return `<div class="color-dots">${dots}${more}</div>`;
             }
 
+            function renderCard(p) {
+                const isLifestyle = p.type === 'lifestyle';
+                const cardClass = isLifestyle ? 'product-card product-card-lifestyle' : 'product-card';
+                const imgH = isLifestyle ? '400' : '533';
+                const wlIds = JSON.parse(localStorage.getItem('selene_wishlist') || '[]');
+                const isWishlisted = wlIds.includes(p.id);
+                const badge = isLifestyle
+                    ? `<span class="product-badge-lifestyle">${p.badge || 'Lifestyle'}</span>`
+                    : (p.badge && p.badge !== 'Style Inspiration' ? `<p class="product-badge">${p.badge}</p>` : '');
+                const bottomTag = isLifestyle ? '' : `<p class="product-inspiration">Curated Pick</p>`;
+                const extra = isLifestyle
+                    ? (p.description ? `<p class="product-desc-snippet">${p.description}</p>` : '')
+                    : renderColorDots(p);
+                return `
+                <div class="${cardClass}" data-id="${p.id}">
+                    <a href="product.html?id=${p.id}" style="display:contents;">
+                        <div class="product-image-container">
+                            <img src="${p.image1}" alt="${p.name}" loading="lazy" width="400" height="${imgH}">
+                            ${badge}
+                            ${bottomTag}
+                            <button class="card-wishlist-btn${isWishlisted ? ' wishlisted' : ''}" data-pid="${p.id}" aria-label="Save to wishlist" onclick="event.preventDefault();event.stopPropagation();toggleWishlist(${p.id},this);">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="${isWishlisted ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                            </button>
+                        </div>
+                    </a>
+                    <a href="product.html?id=${p.id}">
+                        <p class="product-brand">${p.brand}</p>
+                        <h2 class="product-name">${p.name}</h2>
+                        ${extra}
+                        <p class="product-action">Shop on Amazon &rarr;</p>
+                    </a>
+                </div>`;
+            }
+
+            window.toggleWishlist = function(pid, btn) {
+                let ids = JSON.parse(localStorage.getItem('selene_wishlist') || '[]');
+                if (ids.includes(pid)) {
+                    ids = ids.filter(i => i !== pid);
+                    btn.classList.remove('wishlisted');
+                    btn.querySelector('svg').setAttribute('fill', 'none');
+                } else {
+                    ids.push(pid);
+                    btn.classList.add('wishlisted');
+                    btn.querySelector('svg').setAttribute('fill', 'currentColor');
+                }
+                localStorage.setItem('selene_wishlist', JSON.stringify(ids));
+                updateWishlistBadge();
+            };
+
             if (filteredProducts.length === 0) {
                 grid.innerHTML = `
                 <div style="grid-column: 1 / -1; text-align: center; padding: 5rem 0;">
-                    <p style="color: #999; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.7rem;">No items found.</p>
+                    <p style="color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.7rem;">No items found.</p>
                     <a href="shop.html" style="font-size: 0.7rem; text-decoration: underline; margin-top: 1rem; display: inline-block; text-transform: uppercase; letter-spacing: 0.1em;">View All</a>
                 </div>`;
             } else {
-                filteredProducts.forEach(p => {
-                    grid.innerHTML += `
-                    <a href="product.html?id=${p.id}" class="product-card">
-                        <div class="product-image-container">
-                            <img src="${p.image1}" alt="${p.name}" loading="lazy" width="400" height="500">
-                            <p class="product-inspiration">Style Inspiration</p>
-                            ${p.badge && p.badge !== 'Style Inspiration' ? `<p class="product-badge">${p.badge}</p>` : ''}
-                        </div>
-                        <div>
-                            <p class="product-brand">${p.brand}</p>
-                            <h2 class="product-name">${p.name}</h2>
-                            ${renderColorDots(p)}
-                            <p class="product-action">Check Price</p> 
-                        </div>
-                    </a>`;
-                });
+                const fashionProducts = filteredProducts.filter(p => p.type === 'fashion' || !p.type);
+                const lifestyleProducts = filteredProducts.filter(p => p.type === 'lifestyle');
+                const showBothGroups = fashionProducts.length > 0 && lifestyleProducts.length > 0;
+
+                fashionProducts.forEach(p => { grid.innerHTML += renderCard(p); });
+
+                if (showBothGroups) {
+                    grid.innerHTML += `<div class="shop-type-divider"><span>Home &amp; Lifestyle</span></div>`;
+                }
+
+                lifestyleProducts.forEach(p => { grid.innerHTML += renderCard(p); });
             }
         });
     </script>

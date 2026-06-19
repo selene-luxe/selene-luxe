@@ -6,6 +6,17 @@
     <title>Selene Luxe | Home</title>
     <meta name="description" content="Discover curated lifestyle looks and outfits. Selene Luxe brings you premium amazon affiliate selections.">
     <meta name="p:domain_verify" content="b8da9d87bf6d43870c239b1e734232a4"/>
+    <link rel="canonical" href="https://seleneluxe.fashion/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Selene Luxe | Curated Fashion &amp; Lifestyle">
+    <meta property="og:description" content="Discover curated lifestyle looks and outfits. Hand-selected fashion and home pieces from Amazon.">
+    <meta property="og:url" content="https://seleneluxe.fashion/">
+    <meta property="og:image" content="https://seleneluxe.fashion/images/blush-ivory-hero.webp">
+    <meta property="og:site_name" content="Selene Luxe">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Selene Luxe | Curated Fashion &amp; Lifestyle">
+    <meta name="twitter:description" content="Discover curated lifestyle looks and outfits. Hand-selected fashion and home pieces from Amazon.">
+    <meta name="twitter:image" content="https://seleneluxe.fashion/images/blush-ivory-hero.webp">
     
     <!-- Preconnect to Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,6 +59,15 @@
         /* \u2500\u2500 Category \u2500\u2500 */
         .category-section { padding: 9rem 0; border-top: 1px solid var(--border-color); }
         .category-section .grid-3 { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .category-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .home-edit-section { padding: 9rem 0; border-top: 1px solid var(--border-color); }
+        .home-edit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .home-edit-items { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .home-edit-item { aspect-ratio: 1/1; overflow: hidden; background: var(--surface); display: block; }
+        .home-edit-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--transition-smooth); }
+        .home-edit-item:hover img { transform: scale(1.05); }
+        .wishlist-count-badge { position: absolute; top: -6px; right: -6px; background: var(--accent-warm); color: white; font-size: 0.5rem; font-weight: 700; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; line-height: 1; }
+        .nav-actions .icon-btn { position: relative; }
 
         /* \u2500\u2500 More Looks \u2500\u2500 */
         .looks-section { padding: 9rem 0; border-top: 1px solid var(--border-color); }
@@ -58,16 +78,19 @@
             .featured-grid { gap: 5rem; }
         }
         @media (max-width: 768px) {
-            .featured-section, .category-section, .looks-section { padding: 5rem 0; }
+            .featured-section, .category-section, .looks-section, .home-edit-section { padding: 5rem 0; }
             .featured-grid { grid-template-columns: 1fr; gap: 3rem; }
             .section-eyebrow { margin-bottom: 3rem; }
             .looks-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
             .category-section .grid-3 { grid-template-columns: 1fr 1fr; }
+            .category-grid-4 { grid-template-columns: 1fr 1fr; }
+            .home-edit-grid { grid-template-columns: 1fr; gap: 3rem; }
         }
         @media (max-width: 480px) {
-            .featured-section, .category-section, .looks-section { padding: 4rem 0; }
+            .featured-section, .category-section, .looks-section, .home-edit-section { padding: 4rem 0; }
             .looks-grid { grid-template-columns: 1fr; }
             .category-section .grid-3 { grid-template-columns: 1fr; }
+            .category-grid-4 { grid-template-columns: 1fr 1fr; }
             .featured-title { font-size: clamp(2.4rem, 10vw, 3.5rem); }
         }
     </style>
@@ -99,7 +122,7 @@
                     <span>Search</span>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 </button>
-                <a href="wishlist.html" class="icon-btn" aria-label="Wishlist">
+                <a href="wishlist.html" class="icon-btn" aria-label="Wishlist" id="wishlist-icon-link" style="position:relative;">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                 </a>
             </div>
@@ -110,7 +133,7 @@
 
         <!-- ── HERO: Full-screen video ── -->
         <section class="hero">
-            <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="images/blush-ivory-hero.webp">
+            <video class="hero-video" autoplay muted loop playsinline preload="none" poster="images/blush-ivory-hero.webp">
                 <source src="images/A_photorealistic_vertical_vide.mp4" type="video/mp4">
                 <img src="images/alexi-romano-CCx6Fz_CmOI-unsplash.webp" alt="Selene Luxe">
             </video>
@@ -129,14 +152,18 @@
                 <span class="ticker-item">New Arrivals</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">Curated Looks</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">Women&rsquo;s Fashion</span><span class="ticker-item dot">&middot;</span>
+                <span class="ticker-item">Home Edit</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">Shop The Look</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">Amazon Picks</span><span class="ticker-item dot">&middot;</span>
+                <span class="ticker-item">Curated Living</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">Style Inspiration</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">New Arrivals</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">Curated Looks</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">Women&rsquo;s Fashion</span><span class="ticker-item dot">&middot;</span>
+                <span class="ticker-item">Home Edit</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">Shop The Look</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">Amazon Picks</span><span class="ticker-item dot">&middot;</span>
+                <span class="ticker-item">Curated Living</span><span class="ticker-item dot">&middot;</span>
                 <span class="ticker-item">Style Inspiration</span><span class="ticker-item dot">&middot;</span>
             </div>
         </div>
@@ -169,7 +196,7 @@
                     <span class="eyebrow-line"></span>
                     <p class="eyebrow-text">Shop by Category</p>
                 </div>
-                <div class="grid-3">
+                <div class="category-grid-4">
                     <a href="shop.html?cat=women" class="category-card">
                         <img src="images/priscilla-du-preez-dlxLGIy-2VU-unsplash.webp" alt="Shop Women" loading="lazy" width="600" height="800">
                         <div class="category-title italic">Women</div>
@@ -182,6 +209,38 @@
                         <img src="images/shopkids.webp" alt="Shop Kids" loading="lazy" width="600" height="800">
                         <div class="category-title italic">Kids</div>
                     </a>
+                    <a href="shop.html?cat=home" class="category-card">
+                        <img src="images/lamp1.jpg" alt="Home &amp; Lifestyle" loading="lazy" width="600" height="600" style="object-position: center;">
+                        <div class="category-title italic">Home</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── HOME EDIT CALLOUT ── -->
+        <section class="home-edit-section">
+            <div class="container">
+                <div class="home-edit-grid">
+                    <div>
+                        <div class="section-eyebrow" style="margin-bottom: 2rem;">
+                            <span class="eyebrow-line"></span>
+                            <p class="eyebrow-text">Home &amp; Lifestyle</p>
+                        </div>
+                        <h2 class="featured-title" style="font-size: clamp(2rem, 3.5vw, 3.8rem);">The Home<br>Edit</h2>
+                        <p class="featured-desc">Curated objects that transform a space. From ambient light to living greenery &mdash; pieces chosen for the way they make a room feel, not just look.</p>
+                        <a href="shop.html?cat=home" class="btn-dark">Explore the Edit</a>
+                    </div>
+                    <div class="home-edit-items">
+                        <a href="product.html?id=41" class="home-edit-item">
+                            <img src="images/lamp1.jpg" alt="Dimmable Arc Floor Lamp" loading="lazy" width="400" height="400">
+                        </a>
+                        <a href="product.html?id=42" class="home-edit-item">
+                            <img src="images/plant1.jpg" alt="Artificial Olive Tree" loading="lazy" width="400" height="400">
+                        </a>
+                        <a href="product.html?id=43" class="home-edit-item" style="grid-column: 1 / -1; aspect-ratio: 2/1;">
+                            <img src="images/radio1.jpg" alt="Victrola Bluetooth Radio" loading="lazy" width="800" height="400">
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -278,7 +337,6 @@
 
     <script src="js/main.js"></script>
     <script>
-        // Inline script to handle menu slide-in which is slightly different than fade-in
         document.addEventListener('DOMContentLoaded', () => {
             const sideMenu = document.getElementById('side-menu');
             const menuBtn = document.getElementById('menu-btn');
@@ -291,6 +349,26 @@
                 });
                 closeMenuBtn.addEventListener('click', () => {
                     sideMenu.style.transform = 'translateX(-100%)';
+                });
+            }
+
+            // WISHLIST BADGE
+            const wlIds = JSON.parse(localStorage.getItem('selene_wishlist') || '[]');
+            const wlLink = document.getElementById('wishlist-icon-link');
+            if (wlIds.length > 0 && wlLink) {
+                const badge = document.createElement('span');
+                badge.className = 'wishlist-count-badge';
+                badge.textContent = wlIds.length;
+                wlLink.appendChild(badge);
+            }
+
+            // SEARCH ROUTING — sends query to shop.html
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) {
+                searchInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && searchInput.value.trim()) {
+                        window.location.href = `shop.html?q=${encodeURIComponent(searchInput.value.trim())}`;
+                    }
                 });
             }
         });

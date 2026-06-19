@@ -254,7 +254,7 @@
             const grid = document.getElementById('wishlist-grid');
             const emptyMsg = document.getElementById('empty-msg');
             
-            let savedIDs = JSON.parse(localStorage.getItem('myWishlist')) || [];
+            let savedIDs = JSON.parse(localStorage.getItem('selene_wishlist') || '[]');
             
             if (typeof products !== 'undefined') {
                 const lovedProducts = products.filter(p => savedIDs.includes(p.id));
@@ -266,13 +266,13 @@
                         grid.innerHTML += `
                             <div class="product-card" style="position: relative;">
                                 <a href="product.html?id=${p.id}" style="text-decoration: none;">
-                                    <div class="product-image-container">
-                                        <img src="${p.image1}" alt="${p.name}" loading="lazy">
+                                    <div class="product-image-container" style="aspect-ratio: ${p.type === 'lifestyle' ? '1/1' : '3/4'};">
+                                        <img src="${p.image1}" alt="${p.name}" loading="lazy" width="400" height="${p.type === 'lifestyle' ? '400' : '533'}">
                                     </div>
                                     <div>
                                         <p class="product-brand">${p.brand}</p>
                                         <h2 class="product-name">${p.name}</h2>
-                                        <p class="product-action">Check Price</p>
+                                        <p class="product-action">View Product &rarr;</p>
                                     </div>
                                 </a>
                                 <button onclick="removeFromWishlist(${p.id})" class="remove-btn" aria-label="Remove from wishlist">
@@ -286,9 +286,9 @@
         });
 
         window.removeFromWishlist = function(id) {
-            let wishlist = JSON.parse(localStorage.getItem('myWishlist')) || [];
+            let wishlist = JSON.parse(localStorage.getItem('selene_wishlist') || '[]');
             wishlist = wishlist.filter(item => item !== id);
-            localStorage.setItem('myWishlist', JSON.stringify(wishlist));
+            localStorage.setItem('selene_wishlist', JSON.stringify(wishlist));
             location.reload();
         }
     </script>
