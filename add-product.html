@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Add Product | Selene Luxe Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        :root {
+            --sans:   'Inter', sans-serif;
+            --serif:  'Playfair Display', serif;
+            --warm:   #C4956A;
+            --text:   #1A1A18;
+            --muted:  #888;
+            --border: #E8E4DF;
+            --bg:     #F9F7F4;
+            --radius: 10px;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--sans); background: var(--bg); color: var(--text); min-height: 100vh; }
+
+        /* ── Header ── */
+        .admin-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1rem 2rem; background: white;
+            border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .header-left { display: flex; align-items: center; gap: 0.75rem; }
+        .header-wordmark { font-family: var(--serif); font-size: 1.1rem; }
+        .header-divider { color: var(--muted); }
+        .header-subtitle { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+        .header-right { display: flex; align-items: center; gap: 0.75rem; }
+        .header-link {
+            font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--muted); text-decoration: none;
+            border: 1px solid var(--border); padding: 0.35rem 0.9rem;
+            border-radius: 2rem; transition: all 0.15s;
+        }
+        .header-link:hover { border-color: var(--warm); color: var(--warm); }
+        .header-badge {
+            display: flex; align-items: center; gap: 0.4rem;
+            background: var(--text); color: white;
+            font-size: 0.65rem; letter-spacing: 0.1em;
+            text-transform: uppercase; padding: 0.35rem 0.9rem; border-radius: 2rem;
+        }
+
+        /* ── Main ── */
+        main { max-width: 1080px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+        .page-header { margin-bottom: 2rem; }
+        .page-title { font-family: var(--serif); font-size: 2rem; font-weight: 400; font-style: italic; margin-bottom: 0.4rem; }
+        .page-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+        /* ── Form layout ── */
+        .form-cols { display: grid; grid-template-columns: 1fr 300px; gap: 1.5rem; align-items: start; }
+        .form-card {
+            background: white; border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 1.75rem;
+        }
+        .form-section-label {
+            font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--muted); margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem; border-bottom: 1px solid var(--border);
+        }
+        .field-group { margin-bottom: 1.1rem; }
+        .field-group:last-child { margin-bottom: 0; }
+        .field-label {
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em;
+            text-transform: uppercase; display: block; margin-bottom: 0.4rem;
+        }
+        .field-label .opt { font-weight: 400; color: var(--muted); text-transform: none; letter-spacing: 0; }
+        .form-input, .form-select, .form-textarea {
+            width: 100%; padding: 0.6rem 0.85rem;
+            border: 1px solid var(--border); border-radius: 7px;
+            font-family: var(--sans); font-size: 0.85rem;
+            color: var(--text); background: var(--bg);
+            transition: border-color 0.15s; outline: none;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--warm); background: white; }
+        .form-textarea { resize: vertical; min-height: 85px; line-height: 1.55; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+
+        /* ── Image upload ── */
+        .image-drop {
+            border: 2px dashed var(--border); border-radius: var(--radius);
+            padding: 2rem 1rem; text-align: center; cursor: pointer;
+            transition: border-color 0.15s, background 0.15s;
+            background: var(--bg); margin-bottom: 1rem;
+        }
+        .image-drop:hover, .image-drop.drag-over { border-color: var(--warm); background: #FBF8F5; }
+        .drop-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .drop-text { font-size: 0.76rem; color: var(--muted); line-height: 1.5; }
+        .image-preview {
+            width: 100%; aspect-ratio: 3/4; object-fit: cover;
+            border-radius: 8px; display: none; margin-bottom: 1rem;
+        }
+        .field-hint { font-size: 0.72rem; color: var(--muted); margin-top: 0.35rem; line-height: 1.4; }
+
+        /* ── Submit ── */
+        .submit-btn {
+            width: 100%; padding: 0.9rem;
+            background: var(--text); color: white; border: none;
+            border-radius: 8px; font-family: var(--sans); font-size: 0.78rem;
+            font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+            cursor: pointer; transition: opacity 0.15s, transform 0.15s;
+            margin-top: 1.25rem;
+        }
+        .submit-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+        .submit-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+        /* ── Results ── */
+        .results-panel { display: none; margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid var(--border); }
+        .results-panel.show { display: block; }
+        .results-heading { font-family: var(--serif); font-size: 1.4rem; font-style: italic; margin-bottom: 1.5rem; }
+        .steps { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+        .step-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+        .step-card.full { grid-column: 1 / -1; }
+        .step-num { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--warm); font-weight: 700; margin-bottom: 0.35rem; }
+        .step-label { font-size: 0.88rem; font-weight: 600; margin-bottom: 1rem; }
+        .code-block {
+            background: #1A1A18; color: #D4CFC9;
+            border-radius: 7px; padding: 1rem 1.1rem;
+            font-family: 'Courier New', monospace; font-size: 0.72rem;
+            line-height: 1.65; overflow-x: auto; max-height: 280px;
+            overflow-y: auto; white-space: pre; margin-bottom: 0.75rem;
+        }
+        .action-row { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; }
+        .copy-btn {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.45rem 1rem; border: 1px solid var(--border);
+            border-radius: 6px; background: white; font-family: var(--sans);
+            font-size: 0.72rem; font-weight: 500; cursor: pointer;
+            color: var(--muted); transition: all 0.15s;
+        }
+        .copy-btn:hover { border-color: var(--warm); color: var(--warm); }
+        .copy-btn.copied { border-color: #4CAF50; color: #4CAF50; }
+        .dl-btn {
+            display: inline-flex; align-items: center; gap: 0.45rem;
+            padding: 0.6rem 1.25rem; background: var(--warm); color: white;
+            border: none; border-radius: 8px; font-family: var(--sans);
+            font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: opacity 0.15s;
+        }
+        .dl-btn:hover { opacity: 0.85; }
+        .dl-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .step-note { font-size: 0.75rem; color: var(--muted); line-height: 1.55; margin-top: 0.75rem; }
+        .step-note code { background: var(--bg); padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.7rem; }
+
+        /* ── Toast ── */
+        .toast {
+            position: fixed; bottom: 2rem; left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: #1A1A18; color: white;
+            padding: 0.7rem 1.4rem; border-radius: 8px;
+            font-size: 0.78rem; pointer-events: none;
+            transition: transform 0.28s ease, opacity 0.28s ease;
+            opacity: 0; z-index: 9999;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+        @media (max-width: 760px) {
+            .form-cols, .steps, .form-row { grid-template-columns: 1fr; }
+            .step-card.full { grid-column: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="admin-header">
+    <div class="header-left">
+        <span class="header-wordmark">Selene Luxe</span>
+        <span class="header-divider">·</span>
+        <span class="header-subtitle">Add New Product</span>
+    </div>
+    <div class="header-right">
+        <a href="pinterest-admin.html" class="header-link">← Pin Tool</a>
+        <div class="header-badge">Admin · Product Manager</div>
+    </div>
+</header>
+
+<main>
+    <div class="page-header">
+        <h1 class="page-title">Add a New Product</h1>
+        <p class="page-desc">Fill in the details, upload your image, then click Generate. You'll get the exact code to paste into <code style="font-size:0.8rem;background:var(--border);padding:0.1rem 0.4rem;border-radius:4px;">products.js</code> — no manual editing needed.</p>
+    </div>
+
+    <form id="product-form" novalidate>
+        <div class="form-cols">
+
+            <!-- Left: product info -->
+            <div class="form-card">
+                <div class="form-section-label">Product Information</div>
+
+                <div class="field-group">
+                    <label class="field-label" for="f-category">Category</label>
+                    <select id="f-category" class="form-select" required>
+                        <option value="">— Select a category —</option>
+                        <option value="cosmetics">Beauty (Cosmetics &amp; Skincare)</option>
+                        <option value="women">Women's Fashion</option>
+                        <option value="men">Men's Fashion</option>
+                        <option value="kids">Kids Fashion</option>
+                        <option value="home">Home &amp; Lifestyle</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="field-group">
+                        <label class="field-label" for="f-brand">Brand Name</label>
+                        <input type="text" id="f-brand" class="form-input" placeholder="e.g. CERAVE" required>
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label" for="f-price">Price <span class="opt">(optional)</span></label>
+                        <input type="text" id="f-price" class="form-input" placeholder="e.g. $24.99">
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label" for="f-name">Product Name</label>
+                    <input type="text" id="f-name" class="form-input" placeholder="e.g. Moisturizing Cream" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label" for="f-desc">Description</label>
+                    <textarea id="f-desc" class="form-textarea" placeholder="Short, compelling description shown on the product card (1–2 sentences)." required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="field-group">
+                        <label class="field-label" for="f-badge">Badge <span class="opt">(auto-filled)</span></label>
+                        <input type="text" id="f-badge" class="form-input" placeholder="e.g. Beauty Edit">
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label" for="f-trending">Trending Text <span class="opt">(optional)</span></label>
+                        <input type="text" id="f-trending" class="form-input" placeholder="e.g. Glass Skin ↑">
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label" for="f-link">Amazon Affiliate Link</label>
+                    <input type="url" id="f-link" class="form-input" placeholder="https://amzn.to/xxxxxxx" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label" for="f-btn">Button Text</label>
+                    <input type="text" id="f-btn" class="form-input" value="Check Availability on Amazon">
+                </div>
+            </div>
+
+            <!-- Right: image -->
+            <div>
+                <div class="form-card">
+                    <div class="form-section-label">Product Image</div>
+
+                    <img id="img-preview" class="image-preview" alt="Preview">
+
+                    <div class="image-drop" id="img-drop">
+                        <div class="drop-icon">🖼️</div>
+                        <div class="drop-text">Click to select or drag &amp; drop<br>your AI-generated product image</div>
+                    </div>
+                    <input type="file" id="img-file" accept="image/*" style="display:none">
+
+                    <div class="field-group">
+                        <label class="field-label" for="img-filename">Image Filename</label>
+                        <input type="text" id="img-filename" class="form-input" placeholder="e.g. cosmetics14.jpg" required>
+                        <p class="field-hint">Use <code>.jpg</code> or <code>.webp</code>. This must match exactly when you save the file to <code>/images/</code>.</p>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submit-btn">Generate Product Code →</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- ── Results ── -->
+    <div class="results-panel" id="results">
+        <h2 class="results-heading">Ready to add — 3 steps to go live</h2>
+        <div class="steps">
+
+            <div class="step-card">
+                <div class="step-num">Step 1</div>
+                <div class="step-label">Save the image to <code style="font-weight:400;font-size:0.8rem;">/images/</code></div>
+                <div class="action-row">
+                    <button class="dl-btn" id="dl-btn" disabled>⬇ Download Image</button>
+                </div>
+                <p class="step-note" id="img-note">Upload an image above to enable the download.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-num">Step 2</div>
+                <div class="step-label">Paste this into <code style="font-weight:400;font-size:0.8rem;">js/products.js</code></div>
+                <pre class="code-block" id="code-out"></pre>
+                <div class="action-row">
+                    <button class="copy-btn" id="copy-code">
+                        <svg viewBox="0 0 16 16" fill="currentColor" width="11" height="11"><path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"/><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"/></svg>
+                        Copy Code
+                    </button>
+                </div>
+                <p class="step-note">Open <code>js/products.js</code> and paste just before the closing <code>];</code> at the bottom of the file.</p>
+            </div>
+
+            <div class="step-card full">
+                <div class="step-num">Step 3</div>
+                <div class="step-label">Commit &amp; deploy</div>
+                <pre class="code-block" id="git-out"></pre>
+                <div class="action-row">
+                    <button class="copy-btn" id="copy-git">
+                        <svg viewBox="0 0 16 16" fill="currentColor" width="11" height="11"><path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"/><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"/></svg>
+                        Copy Git Commands
+                    </button>
+                </div>
+                <p class="step-note">Run these commands from your project folder in the terminal. Netlify auto-deploys in ~30 seconds. The product will immediately appear on your site and in the <a href="pinterest-admin.html" style="color:var(--warm);">Pinterest admin tool</a> — no other file changes needed.</p>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+    /* ── Category defaults ── */
+    const CAT_CFG = {
+        cosmetics: { type: 'lifestyle', badge: 'Beauty Edit',      btn: 'Check Availability on Amazon' },
+        women:     { type: 'fashion',   badge: 'New Arrival',       btn: 'Shop on Amazon' },
+        men:       { type: 'fashion',   badge: 'Birmingham Edit',   btn: 'Shop on Amazon' },
+        kids:      { type: 'fashion',   badge: 'Pink Meadow Edit',  btn: 'Shop on Amazon' },
+        home:      { type: 'lifestyle', badge: 'Home Edit',         btn: 'Shop on Amazon' }
+    };
+
+    /* ── Fetch next ID from products.js ── */
+    let nextId = 58;
+    (async () => {
+        try {
+            const text = await fetch('js/products.js?nc=' + Date.now()).then(r => r.text());
+            const ids  = [...text.matchAll(/\bid\s*:\s*(\d+)/g)].map(m => +m[1]);
+            if (ids.length) nextId = Math.max(...ids) + 1;
+        } catch (_) {}
+    })();
+
+    /* ── Category change → auto-fill badge & button text ── */
+    document.getElementById('f-category').addEventListener('change', function () {
+        const cfg = CAT_CFG[this.value];
+        if (!cfg) return;
+        const badgeEl = document.getElementById('f-badge');
+        const btnEl   = document.getElementById('f-btn');
+        if (!badgeEl.dataset.edited) badgeEl.value = cfg.badge;
+        if (!btnEl.dataset.edited)   btnEl.value   = cfg.btn;
+        suggestFilename();
+    });
+    document.getElementById('f-badge').addEventListener('input', function () { this.dataset.edited = '1'; });
+    document.getElementById('f-btn').addEventListener('input',   function () { this.dataset.edited = '1'; });
+
+    /* ── Image upload ── */
+    let uploadedFile = null;
+    const imgInput   = document.getElementById('img-file');
+    const imgDrop    = document.getElementById('img-drop');
+    const imgPreview = document.getElementById('img-preview');
+
+    imgDrop.addEventListener('click', () => imgInput.click());
+    imgInput.addEventListener('change', e => { if (e.target.files[0]) handleFile(e.target.files[0]); });
+
+    imgDrop.addEventListener('dragover',  e => { e.preventDefault(); imgDrop.classList.add('drag-over'); });
+    imgDrop.addEventListener('dragleave', () => imgDrop.classList.remove('drag-over'));
+    imgDrop.addEventListener('drop', e => {
+        e.preventDefault();
+        imgDrop.classList.remove('drag-over');
+        if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+    });
+
+    function handleFile(file) {
+        uploadedFile = file;
+        const reader = new FileReader();
+        reader.onload = e => {
+            imgPreview.src = e.target.result;
+            imgPreview.style.display = 'block';
+            imgDrop.querySelector('.drop-icon').textContent = '✓';
+            imgDrop.querySelector('.drop-text').textContent = file.name + ' — click to change';
+        };
+        reader.readAsDataURL(file);
+        suggestFilename();
+    }
+
+    /* ── Auto-suggest filename ── */
+    document.getElementById('f-brand').addEventListener('input', suggestFilename);
+    document.getElementById('f-name').addEventListener('input',  suggestFilename);
+    document.getElementById('img-filename').addEventListener('input', function () { this.dataset.edited = '1'; });
+
+    function suggestFilename() {
+        const fnEl = document.getElementById('img-filename');
+        if (fnEl.dataset.edited) return;
+        const brand = document.getElementById('f-brand').value.trim();
+        const name  = document.getElementById('f-name').value.trim();
+        const ext   = uploadedFile ? uploadedFile.name.split('.').pop().toLowerCase() : 'jpg';
+        if (!brand && !name) return;
+        const slug = (brand + '-' + name)
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '')
+            .slice(0, 38);
+        fnEl.value = slug + '.' + ext;
+    }
+
+    /* ── Form submit ── */
+    document.getElementById('product-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const btn = document.getElementById('submit-btn');
+        btn.disabled = true;
+        btn.textContent = 'Generating…';
+
+        /* Refresh next ID */
+        try {
+            const text = await fetch('js/products.js?nc=' + Date.now()).then(r => r.text());
+            const ids  = [...text.matchAll(/\bid\s*:\s*(\d+)/g)].map(m => +m[1]);
+            if (ids.length) nextId = Math.max(...ids) + 1;
+        } catch (_) {}
+
+        const cat      = document.getElementById('f-category').value;
+        const cfg      = CAT_CFG[cat] || { type: 'lifestyle' };
+        const brand    = document.getElementById('f-brand').value.trim();
+        const name     = document.getElementById('f-name').value.trim();
+        const desc     = document.getElementById('f-desc').value.trim();
+        const price    = document.getElementById('f-price').value.trim();
+        const badge    = document.getElementById('f-badge').value.trim();
+        const trending = document.getElementById('f-trending').value.trim();
+        const link     = document.getElementById('f-link').value.trim();
+        const btnTxt   = document.getElementById('f-btn').value.trim();
+        const imgFile  = document.getElementById('img-filename').value.trim();
+
+        /* Generate code */
+        document.getElementById('code-out').textContent = buildCode({ id: nextId, cat, type: cfg.type, brand, name, desc, price, badge, trending, link, btnTxt, imgFile });
+        document.getElementById('git-out').textContent  = `git add .\ngit commit -m "Add product: ${brand} ${name}"\ngit push`;
+
+        /* Image download */
+        const dlBtn = document.getElementById('dl-btn');
+        document.getElementById('img-note').textContent = uploadedFile
+            ? `Save to: images/${imgFile}`
+            : 'No image uploaded — add the image manually to your /images/ folder.';
+        if (uploadedFile) {
+            dlBtn.disabled = false;
+            dlBtn.textContent = `⬇ Download — ${imgFile}`;
+            dlBtn.onclick = () => downloadFile(uploadedFile, imgFile);
+        } else {
+            dlBtn.disabled = true;
+            dlBtn.textContent = 'No image uploaded';
+        }
+
+        /* Show results */
+        const panel = document.getElementById('results');
+        panel.classList.add('show');
+        setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+
+        btn.disabled = false;
+        btn.textContent = 'Generate Product Code →';
+    });
+
+    /* ── Code builder ── */
+    function buildCode({ id, cat, type, brand, name, desc, price, badge, trending, link, btnTxt, imgFile }) {
+        const q = s => s.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+        const lines = [
+            `    {`,
+            `        id: ${id},`,
+            `        category: "${cat}",`,
+            `        type: "${type}",`,
+            `        brand: "${q(brand)}",`,
+            `        name: "${q(name)}",`,
+            `        description: "${q(desc)}",`,
+        ];
+        if (price)    lines.push(`        price: "${q(price)}",`);
+        if (badge)    lines.push(`        badge: "${q(badge)}",`);
+        if (trending) lines.push(`        trending: "${q(trending)}",`);
+        lines.push(
+            `        image1: "images/${imgFile}",`,
+            `        image2: "images/${imgFile}",`,
+            `        affiliateLink: "${q(link)}",`,
+            `        buttonText: "${q(btnTxt)}"`,
+            `    },`
+        );
+        return lines.join('\n');
+    }
+
+    /* ── File download ── */
+    function downloadFile(file, filename) {
+        const url = URL.createObjectURL(file);
+        const a = document.createElement('a');
+        a.href = url; a.download = filename;
+        document.body.appendChild(a); a.click();
+        document.body.removeChild(a); URL.revokeObjectURL(url);
+    }
+
+    /* ── Toast + copy buttons ── */
+    let toastTimer;
+    function showToast(msg) {
+        const el = document.getElementById('toast');
+        el.textContent = msg; el.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => el.classList.remove('show'), 2800);
+    }
+
+    function makeCopyBtn(id, getContent) {
+        document.getElementById(id).addEventListener('click', function () {
+            navigator.clipboard.writeText(getContent()).then(() => {
+                const orig = this.innerHTML;
+                this.innerHTML = this.innerHTML.replace(/Copy\w*/g, 'Copied ✓');
+                this.classList.add('copied');
+                setTimeout(() => { this.innerHTML = orig; this.classList.remove('copied'); }, 2000);
+                showToast('✓ Copied to clipboard');
+            });
+        });
+    }
+
+    makeCopyBtn('copy-code', () => document.getElementById('code-out').textContent);
+    makeCopyBtn('copy-git',  () => document.getElementById('git-out').textContent);
+</script>
+</body>
+</html>
