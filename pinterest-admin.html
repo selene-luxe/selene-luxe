@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinterest Quick Post — Selene Luxe Admin</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500;600&display=swap">
+    <style>
+        :root {
+            --bg:      #FAF8F4;
+            --surface: #F3EDE4;
+            --text:    #1A1A18;
+            --muted:   #7C7870;
+            --warm:    #C4956A;
+            --pin-red: #E60023;
+            --border:  rgba(26,26,24,0.09);
+            --serif:   'Playfair Display', Georgia, serif;
+            --sans:    'Inter', system-ui, sans-serif;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Header ── */
+        .admin-header {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 1.25rem 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 12px rgba(26,26,24,0.05);
+        }
+        .header-left { display: flex; align-items: baseline; gap: 1rem; }
+        .header-wordmark {
+            font-family: var(--serif);
+            font-size: 1.35rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+        .header-divider { color: var(--border); font-size: 1rem; }
+        .header-subtitle {
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-weight: 400;
+        }
+        .header-badge {
+            background: var(--pin-red);
+            color: white;
+            font-size: 0.68rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.28rem 0.8rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* ── Main ── */
+        main {
+            max-width: 1460px;
+            margin: 0 auto;
+            padding: 2.5rem 2.5rem 4rem;
+        }
+
+        /* ── How-to banner ── */
+        .how-to {
+            background: #fff8f2;
+            border: 1px solid rgba(196,149,106,0.28);
+            border-radius: 14px;
+            padding: 1.25rem 1.75rem;
+            margin-bottom: 2.75rem;
+            display: flex;
+            gap: 1.1rem;
+            align-items: flex-start;
+        }
+        .how-to-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.05rem; }
+        .how-to-title {
+            font-size: 0.68rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--warm);
+            font-weight: 600;
+            margin-bottom: 0.45rem;
+        }
+        .how-to-steps { font-size: 0.85rem; color: var(--text); line-height: 1.8; }
+        .how-to-steps strong { color: var(--warm); }
+
+        /* ── Section label ── */
+        .section-meta {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 1.75rem;
+        }
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+        .product-count {
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+
+        /* ── Grid ── */
+        .pin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* ── Card ── */
+        .pin-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 14px rgba(26,26,24,0.055);
+            transition: box-shadow 0.25s ease, transform 0.25s ease;
+        }
+        .pin-card:hover {
+            box-shadow: 0 10px 36px rgba(26,26,24,0.11);
+            transform: translateY(-2px);
+        }
+
+        /* Card header */
+        .card-head {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+        }
+        .card-thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: var(--border);
+        }
+        .card-meta { flex: 1; min-width: 0; }
+        .card-brand {
+            font-size: 0.66rem;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+            color: var(--warm);
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+        }
+        .card-name {
+            font-family: var(--serif);
+            font-size: 0.92rem;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Card body */
+        .card-body {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* Copy row */
+        .copy-row { display: flex; flex-direction: column; gap: 0.38rem; }
+        .copy-row-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .field-label {
+            font-size: 0.66rem;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-weight: 500;
+        }
+        .copy-btn {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.18rem 0.55rem;
+            font-family: var(--sans);
+            font-size: 0.66rem;
+            color: var(--muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: border-color 0.15s, color 0.15s;
+            white-space: nowrap;
+        }
+        .copy-btn:hover { border-color: var(--warm); color: var(--warm); }
+        .copy-btn.copied { border-color: #22c55e; color: #22c55e; }
+        .copy-btn svg { width: 11px; height: 11px; flex-shrink: 0; }
+
+        .field-text {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            padding: 0.6rem 0.85rem;
+            font-size: 0.82rem;
+            color: var(--text);
+            line-height: 1.58;
+            font-family: var(--sans);
+        }
+        .field-text.is-desc {
+            font-size: 0.8rem;
+            line-height: 1.65;
+            color: #3a3a36;
+        }
+
+        /* Topics */
+        .topics-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: rgba(196,149,106,0.1);
+            border: 1px solid rgba(196,149,106,0.25);
+            color: var(--warm);
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.3rem 0.75rem;
+            border-radius: 2rem;
+        }
+
+        /* Card footer */
+        .card-foot { padding: 0 1.25rem 1.25rem; }
+        .create-btn {
+            width: 100%;
+            background: var(--pin-red);
+            color: white;
+            border: none;
+            border-radius: 11px;
+            padding: 0.82rem 1.25rem;
+            font-family: var(--sans);
+            font-size: 0.86rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            transition: opacity 0.15s, transform 0.15s;
+        }
+        .create-btn:hover  { opacity: 0.9; transform: translateY(-1px); }
+        .create-btn:active { opacity: 1; transform: translateY(0); }
+        .create-btn svg { width: 17px; height: 17px; flex-shrink: 0; }
+
+        /* ── Toast ── */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: #1A1A18;
+            color: white;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 9999;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* ── Responsive ── */
+        @media (max-width: 860px) {
+            .pin-grid { grid-template-columns: 1fr; }
+            main { padding: 1.75rem 1.25rem 3rem; }
+            .admin-header { padding: 1rem 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="admin-header">
+    <div class="header-left">
+        <span class="header-wordmark">Selene Luxe</span>
+        <span class="header-divider">·</span>
+        <span class="header-subtitle">Pinterest Quick Post</span>
+    </div>
+    <div class="header-badge">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+        Admin · Beauty Edit
+    </div>
+</header>
+
+<main>
+    <div class="how-to">
+        <div class="how-to-icon">📌</div>
+        <div>
+            <div class="how-to-title">How to Post in 5 Steps</div>
+            <div class="how-to-steps">
+                <strong>1.</strong> Click <strong>Copy Title</strong> — it lands on your clipboard instantly. &nbsp;
+                <strong>2.</strong> Click <strong>Create Pin on Pinterest</strong> — opens Pinterest pre-filled with the image, product link &amp; description. &nbsp;
+                <strong>3.</strong> Paste the title in Pinterest's title field (Ctrl+V / ⌘V). &nbsp;
+                <strong>4.</strong> Pick your board and add the suggested overlay text from below. &nbsp;
+                <strong>5.</strong> Tag the suggested topics, then hit <strong>Save</strong>.
+            </div>
+        </div>
+    </div>
+
+    <div class="section-meta">
+        <span class="section-label">Beauty Edit — All Products</span>
+        <span class="product-count" id="product-count"></span>
+    </div>
+
+    <div class="pin-grid" id="pin-grid"></div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/products.js"></script>
+<script>
+    const BASE = 'https://seleneluxe.fashion';
+
+    /* ── Pre-written Pinterest content, keyed by product ID ── */
+    const PIN = {
+        30: {
+            title:   'Berry Lip Sleeping Mask | Overnight Lip Treatment',
+            desc:    'Seal in moisture overnight and wake up to softer, plumper lips. The easiest upgrade to your skincare routine — a rich overnight treatment that works while you sleep. Shop on Amazon. #LipCare #OvernightSkincare #KBeauty #LipMask #SeleneLuxe',
+            overlay: 'Wake Up to Softer Lips',
+            topics:  'Beauty › Skincare › Lip Care'
+        },
+        31: {
+            title:   'COSRX Snail Mucin Essence | K-Beauty Glass Skin',
+            desc:    '96% snail secretion filtrate in a lightweight essence. COSRX\'s cult-favourite formula repairs skin, reduces fine lines and delivers glass-skin hydration in every drop — a K-beauty essential. Shop on Amazon. #GlassSkin #COSRX #KoreanSkincare #SnailMucin #SeleneLuxe',
+            overlay: 'The K-Beauty Icon',
+            topics:  'Beauty › Skincare › Serum'
+        },
+        32: {
+            title:   'COSRX Advanced Snail 96 Mucin | Barrier Restore',
+            desc:    'The gold standard of K-beauty hydration. COSRX\'s concentrated Snail 96 Mucin Essence deeply restores the skin barrier, improves texture and delivers long-lasting moisture. Shop on Amazon. #SnailMucin #KoreanBeauty #COSRX #SkinBarrier #SeleneLuxe',
+            overlay: 'Gold Standard K-Beauty',
+            topics:  'Beauty › Skincare › Serum'
+        },
+        44: {
+            title:   'Maybelline SuperStay Matte Ink | 16-Hour Matte Lip',
+            desc:    'Bold wine-dark matte that stays for 16 hours with zero transfer. Maybelline SuperStay Matte Ink Shade 115 Founder delivers velvety, saturated colour from morning to midnight. Shop on Amazon. #MatteLips #MaybellineMakeup #LiquidLipstick #BeautyEdit #SeleneLuxe',
+            overlay: '16-Hour Matte Wear',
+            topics:  'Beauty › Makeup › Lip Makeup'
+        },
+        45: {
+            title:   'Maybelline Matte Ink Shade 55 Composer | Bold Lip',
+            desc:    'Intense indigo-purple liquid lipstick with 16 hours of transfer-proof matte wear. Bold, saturated and built to hold — Shade 55 Composer by Maybelline. Shop on Amazon. #BoldLips #MatteLipstick #Maybelline #LipColour #SeleneLuxe',
+            overlay: 'Transfer-Proof. All Day.',
+            topics:  'Beauty › Makeup › Lip Makeup'
+        },
+        46: {
+            title:   'Maybelline Matte Ink Shade 10 Dreamer | Pink Matte',
+            desc:    'A warm pink matte that flatters every skin tone. Maybelline SuperStay Matte Ink Dreamer gives you 16 hours of flawless, transfer-proof wear — the effortless everyday lip. Shop on Amazon. #EverydayMakeup #PinkLip #MaybellineMakeup #MatteLips #SeleneLuxe',
+            overlay: 'Your Everyday Pink',
+            topics:  'Beauty › Makeup › Lip Makeup'
+        },
+        47: {
+            title:   'Maybelline Matte Ink Shade 160 Mover | Mauve Nude',
+            desc:    'The mauve-brown that always gets noticed. Maybelline SuperStay Matte Ink Mover is a sophisticated, transfer-proof shade that suits all skin tones and holds 16 hours strong. Shop on Amazon. #MauveLip #Maybelline #NudeLipstick #MatteLips #SeleneLuxe',
+            overlay: 'Understated. Unforgettable.',
+            topics:  'Beauty › Makeup › Lip Makeup'
+        },
+        48: {
+            title:   'L\'Oréal Color Riche Lipstick | Brazil Nut Nude',
+            desc:    'Quiet luxury in one swipe. L\'Oréal Color Riche Shade 850 Brazil Nut is the warm earthy nude formulated with Omega-3, Vitamin E and Argan Oil — hydrating satin colour that elevates every look. Shop on Amazon. #NudeLipstick #QuietLuxury #LOreal #SatinLip #SeleneLuxe',
+            overlay: 'Quiet Luxury Lip',
+            topics:  'Beauty › Makeup › Lip Makeup'
+        },
+        49: {
+            title:   'L\'Oréal Color Riche | Berry Parisienne Lipstick',
+            desc:    'Bold berry-magenta with a luxurious creamy-satin finish. L\'Oréal Color Riche Shade 137 Berry Parisienne is formulated with Omega-3, Vitamin E and Argan Oil for colour and care in one. Shop on Amazon. #BerryLip #LOreal #ParisianBeauty #LipstickLovers #SeleneLuxe',
+            overlay: 'Très Parisien',
+            topics:  'Beauty › Makeup › Lip Makeup'
+        },
+        50: {
+            title:   'L\'Oréal Color Riche Lipstick | Peach Fuzz Nude',
+            desc:    'The peach-nude that works on every skin tone. L\'Oréal Color Riche Shade 417 Peach Fuzz combines luxurious moisture with vibrant satin-finish colour — effortlessly wearable from day to evening. Shop on Amazon. #PeachFuzz #LOreal #NudeLipstick #SatinLip #SeleneLuxe',
+            overlay: 'Colour of the Moment',
+            topics:  'Beauty › Makeup › Lip Makeup'
+        },
+        51: {
+            title:   'L\'Oréal Color Riche | Ballerina Shoes Sheer Pink',
+            desc:    'Softly luminous sheer-pink with a pearl finish. L\'Oréal Color Riche Shade 135 Ballerina Shoes adds refined femininity to any look — light-catching, radiant and elegant on all skin tones. Shop on Amazon. #SheerLip #LOreal #PearlLip #FeminineMakeup #SeleneLuxe',
+            overlay: 'Grace in Every Swipe',
+            topics:  'Beauty › Makeup › Lip Makeup'
+        },
+        53: {
+            title:   'BIODANCE Bio-Collagen Overnight Mask | K-Beauty',
+            desc:    'Wake up to plumper, smoother skin. BIODANCE\'s overnight hydrogel mask infuses real collagen to tighten pores, boost elasticity and deeply hydrate while you sleep — 4 sheets of pure recovery. Shop on Amazon. #KoreanBeauty #OvernightMask #CollagenSkincare #SkincareMask #SeleneLuxe',
+            overlay: 'Wake Up Glowing',
+            topics:  'Beauty › Skincare › Face Mask'
+        },
+        54: {
+            title:   'CeraVe Moisturizing Cream | Barrier-Restoring',
+            desc:    'The dermatologist-trusted moisturizer that truly repairs. Ceramide + hyaluronic acid formula restores your skin barrier for lasting hydration — fragrance-free, non-comedogenic and gentle for all skin types. Shop on Amazon. #CeraVe #BarrierRepair #DrySkintok #SkincareEssentials #SeleneLuxe',
+            overlay: 'Dermatologist Trusted',
+            topics:  'Beauty › Skincare › Moisturizer'
+        },
+        55: {
+            title:   'Dr.Althea 345 Relief Cream | Post-Acne K-Beauty',
+            desc:    'The K-beauty secret to clear skin. Dr.Althea combines PDRN + Niacinamide + Centella to calm blemishes, fade marks and restore your skin barrier — vegan, clinical, effective. Shop on Amazon. #KoreanSkincare #PostAcneSkin #NiacinamideSkincare #ClearSkin #SeleneLuxe',
+            overlay: 'Clear Skin Starts Here',
+            topics:  'Beauty › Skincare › Moisturizer'
+        },
+        56: {
+            title:   'BYOMA Moisturizing Gel Cream | Barrier Repair',
+            desc:    'Clinically developed barrier repair in a lightweight gel. BYOMA\'s tri-ceramide + niacinamide formula is alcohol-free, oil-free and strengthens compromised skin with every use. Shop on Amazon. #BarrierRepair #Byoma #GelMoisturizer #SensitiveSkin #SeleneLuxe',
+            overlay: 'Barrier First. Always.',
+            topics:  'Beauty › Skincare › Moisturizer'
+        },
+        57: {
+            title:   'Florence Vitamin C Serum | Glow + Dark Spot Serum',
+            desc:    'Your shortcut to glowing skin. Florence\'s Vitamin C + Hyaluronic Acid + Vitamin E serum fades dark spots, evens skin tone and smooths fine lines — 2 fl oz of pure radiance. Shop on Amazon. #VitaminCSerum #GlowingSkin #BrighteningSerum #AntiAging #SeleneLuxe',
+            overlay: 'Your Glow, Amplified',
+            topics:  'Beauty › Skincare › Serum'
+        }
+    };
+
+    /* ── Helpers ── */
+    function absoluteImage(product) {
+        return BASE + '/' + product.image1.replace('.webp', '.jpg').replace('.jpeg', '.jpg');
+    }
+
+    function productUrl(product) {
+        return BASE + '/product.html?id=' + product.id;
+    }
+
+    function buildPinterestUrl(product, desc) {
+        return 'https://www.pinterest.com/pin/create/button/?' +
+            'url='         + encodeURIComponent(productUrl(product)) +
+            '&media='      + encodeURIComponent(absoluteImage(product)) +
+            '&description=' + encodeURIComponent(desc);
+    }
+
+    /* ── Toast ── */
+    let toastTimer;
+    function showToast(msg) {
+        const el = document.getElementById('toast');
+        el.textContent = msg;
+        el.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => el.classList.remove('show'), 3000);
+    }
+
+    /* ── Copy to clipboard ── */
+    function copyText(text, btn) {
+        navigator.clipboard.writeText(text).then(() => {
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg> Copied';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2000);
+        }).catch(() => showToast('Please copy the text manually.'));
+    }
+
+    /* ── Open Pinterest popup (title already on clipboard from copy-btn click OR copy here) ── */
+    function openPinterest(url, title) {
+        navigator.clipboard.writeText(title).then(() => {
+            showToast('✓ Title copied — paste it in Pinterest\'s title field!');
+        }).catch(() => {});
+        window.open(url, 'pinterest-create', 'width=760,height=680,left=200,top=80');
+    }
+
+    /* ── SVG icons ── */
+    const ICON_COPY = `<svg viewBox="0 0 16 16" fill="currentColor" width="11" height="11"><path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"/><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"/></svg>`;
+    const ICON_PIN  = `<svg viewBox="0 0 24 24" fill="white" width="17" height="17"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>`;
+    const ICON_TAG  = `<svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12"><path d="M2.5 1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 1.5 6.586V2a.5.5 0 0 1 .5-.5zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>`;
+
+    /* ── Build card DOM ── */
+    function buildCard(product) {
+        const pin = PIN[product.id] || {
+            title:   product.brand + ' ' + product.name,
+            desc:    product.description + ' Shop on Amazon. #BeautyEdit #SeleneLuxe',
+            overlay: 'Shop the Beauty Edit',
+            topics:  'Beauty › Beauty Products'
+        };
+
+        const pUrl = buildPinterestUrl(product, pin.desc);
+
+        const card = document.createElement('div');
+        card.className = 'pin-card';
+
+        card.innerHTML = `
+            <div class="card-head">
+                <img class="card-thumb" src="${product.image1}" alt="${product.name}" loading="lazy">
+                <div class="card-meta">
+                    <div class="card-brand">${product.brand}</div>
+                    <div class="card-name">${product.name}</div>
+                </div>
+            </div>
+
+            <div class="card-body">
+
+                <div class="copy-row">
+                    <div class="copy-row-label">
+                        <span class="field-label">Pinterest Title</span>
+                        <button class="copy-btn" data-copy="title">${ICON_COPY} Copy Title</button>
+                    </div>
+                    <div class="field-text">${pin.title}</div>
+                </div>
+
+                <div class="copy-row">
+                    <div class="copy-row-label">
+                        <span class="field-label">Description + Hashtags</span>
+                        <button class="copy-btn" data-copy="desc">${ICON_COPY} Copy</button>
+                    </div>
+                    <div class="field-text is-desc">${pin.desc}</div>
+                </div>
+
+                <div class="copy-row">
+                    <div class="copy-row-label">
+                        <span class="field-label">Overlay Text</span>
+                        <button class="copy-btn" data-copy="overlay">${ICON_COPY} Copy</button>
+                    </div>
+                    <div class="field-text">${pin.overlay}</div>
+                </div>
+
+                <div class="copy-row">
+                    <div class="copy-row-label">
+                        <span class="field-label">Suggested Topics</span>
+                    </div>
+                    <span class="topics-pill">${ICON_TAG} ${pin.topics}</span>
+                </div>
+
+            </div>
+
+            <div class="card-foot">
+                <button class="create-btn" data-action="create-pin">
+                    ${ICON_PIN} Create Pin on Pinterest ↗
+                </button>
+            </div>
+        `;
+
+        /* Attach event listeners (no inline JS — safe for all string content) */
+        card.querySelector('[data-copy="title"]').addEventListener('click', function () {
+            copyText(pin.title, this);
+        });
+        card.querySelector('[data-copy="desc"]').addEventListener('click', function () {
+            copyText(pin.desc, this);
+        });
+        card.querySelector('[data-copy="overlay"]').addEventListener('click', function () {
+            copyText(pin.overlay, this);
+        });
+        card.querySelector('[data-action="create-pin"]').addEventListener('click', function () {
+            openPinterest(pUrl, pin.title);
+        });
+
+        return card;
+    }
+
+    /* ── Render ── */
+    const beautyProducts = products.filter(p => p.category === 'cosmetics');
+    document.getElementById('product-count').textContent = beautyProducts.length + ' products';
+
+    const grid = document.getElementById('pin-grid');
+    beautyProducts.forEach(p => grid.appendChild(buildCard(p)));
+</script>
+
+</body>
+</html>
