@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pinterest Quick Post — Selene Luxe Admin</title>
+    <title>Pinterest Quick Post — Selene Luxe Admin · All Products</title>
     <meta name="robots" content="noindex, nofollow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -273,6 +273,43 @@
         .create-btn:active { opacity: 1; transform: translateY(0); }
         .create-btn svg { width: 17px; height: 17px; flex-shrink: 0; }
 
+        /* ── Filter bar ── */
+        .filter-bar {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+        .filter-btn {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 2rem;
+            padding: 0.35rem 1rem;
+            font-family: var(--sans);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.18s;
+        }
+        .filter-btn:hover { border-color: var(--warm); color: var(--warm); }
+        .filter-btn.active { background: var(--text); border-color: var(--text); color: white; }
+        .cat-divider {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem 0 0.25rem;
+        }
+        .cat-divider-label {
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+        .cat-divider-line { flex: 1; height: 1px; background: var(--border); }
+
         /* ── Toast ── */
         .toast {
             position: fixed;
@@ -310,7 +347,7 @@
     </div>
     <div class="header-badge">
         <svg viewBox="0 0 24 24" width="12" height="12" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
-        Admin · Beauty Edit
+        Admin · All Products
     </div>
 </header>
 
@@ -329,8 +366,17 @@
         </div>
     </div>
 
+    <div class="filter-bar" id="filter-bar">
+        <button class="filter-btn active" data-cat="all">All Products</button>
+        <button class="filter-btn" data-cat="cosmetics">Beauty</button>
+        <button class="filter-btn" data-cat="women">Women</button>
+        <button class="filter-btn" data-cat="men">Men</button>
+        <button class="filter-btn" data-cat="kids">Kids</button>
+        <button class="filter-btn" data-cat="home">Home</button>
+    </div>
+
     <div class="section-meta">
-        <span class="section-label">Beauty Edit — All Products</span>
+        <span class="section-label" id="section-label">All Products</span>
         <span class="product-count" id="product-count"></span>
     </div>
 
@@ -343,8 +389,39 @@
 <script>
     const BASE = 'https://seleneluxe.fashion';
 
-    /* ── Pre-written Pinterest content, keyed by product ID ── */
+    /* ── Category defaults for auto-generating content on future products ── */
+    const CAT = {
+        cosmetics: { label: 'Beauty Edit',      hashtags: '#BeautyEdit #Skincare #MakeupLovers #SeleneLuxe',              topics: 'Beauty › Beauty Products' },
+        women:     { label: "Women's Fashion",  hashtags: '#WomensFashion #OOTD #StyleInspo #AmazonFashion #SeleneLuxe',  topics: "Women's Fashion › Clothing" },
+        men:       { label: "Men's Fashion",    hashtags: '#MensFashion #MensStyle #MensOOTD #AmazonFashion #SeleneLuxe', topics: "Men's Fashion › Clothing" },
+        kids:      { label: 'Kids Fashion',     hashtags: '#KidsFashion #MiniStyle #KidsOOTD #GirlsOutfit #SeleneLuxe',  topics: "Kids Fashion › Children's Clothing" },
+        home:      { label: 'Home & Lifestyle', hashtags: '#HomeDecor #InteriorDesign #HomeAesthetic #AmazonHome #SeleneLuxe', topics: 'Home Decor › Interior Design' }
+    };
+
+    /* ── Pre-written Pinterest content for every current product ── */
     const PIN = {
+        /* Men's — Birmingham Edit */
+        12: { title: "Herringbone Newsboy Cap | The Birmingham Edit", desc: "A heritage classic reimagined for the modern wardrobe. This structured herringbone newsboy cap channels early 20th-century craftsmanship with a commanding edge. Shop on Amazon. #MensFashion #NewsboyCapStyle #HeritageStyle #MensAccessories #SeleneLuxe", overlay: "Heritage Character", topics: "Men's Fashion › Accessories › Hats" },
+        13: { title: "Heritage Leather Braces | English Tailoring Style", desc: "Hand-stitched leather braces that define the silhouette. A statement accessory rooted in English tailoring tradition — the finishing touch to any sharp look. Shop on Amazon. #MensAccessories #LeatherBraces #TailoredStyle #BirminghamEdit #SeleneLuxe", overlay: "Define Your Silhouette", topics: "Men's Fashion › Accessories" },
+        14: { title: "Cable-Knit Heritage Sweater | Men's Knitwear", desc: "Chunky cable-knit construction in a rich neutral tone. Layers effortlessly under a structured coat or stands alone with quiet authority. Shop on Amazon. #MensFashion #CableKnit #WinterStyle #HeritageSweater #SeleneLuxe", overlay: "Layer with Authority", topics: "Men's Fashion › Clothing › Sweaters" },
+        15: { title: "Classic Double-Breasted Trench | Men's Coat", desc: "A timeless double-breasted silhouette in water-resistant fabric. This coat anchors any look with confident, lasting elegance. Shop on Amazon. #MensFashion #TrenchCoat #MensOuterwear #ClassicStyle #SeleneLuxe", overlay: "Confident Elegance", topics: "Men's Fashion › Clothing › Coats" },
+        16: { title: "Tweed Herringbone Tailored Trousers | Men's Style", desc: "Tailored tweed trousers in a classic herringbone weave. The tapered leg and heritage fabric make these a cornerstone of any refined wardrobe. Shop on Amazon. #MensFashion #TweedTrousers #HeritageStyle #TailoredLook #SeleneLuxe", overlay: "Cornerstone of Style", topics: "Men's Fashion › Clothing › Trousers" },
+        17: { title: "Antique Mechanical Pocket Watch | Heritage Style", desc: "An intricate mechanical pocket watch with antique gold toning. A conversation piece that bridges the past and present. Shop on Amazon. #MensAccessories #PocketWatch #VintageStyle #HeritagePiece #SeleneLuxe", overlay: "Past Meets Present", topics: "Men's Fashion › Accessories › Watches" },
+        18: { title: "Cap-Toe Heritage Combat Boots | Men's Footwear", desc: "Cap-toe leather boots with a Goodyear-welted sole. Built for longevity, styled for impact. Shop on Amazon. #MensFashion #MensBoots #HeritageFootwear #CombatBoots #SeleneLuxe", overlay: "Built to Last", topics: "Men's Fashion › Footwear › Boots" },
+        /* Women's — Navy & Ivory Edit */
+        19: { title: "Oversized Navy Wool-Blend Maxi Coat | Luxe Style", desc: "Drama and polish in equal measure. This oversized wool-blend maxi coat drapes with architectural confidence — quiet luxury at its finest. Shop on Amazon. #WomensFashion #MaxiCoat #NavyStyle #OldMoney #SeleneLuxe", overlay: "Drama + Polish", topics: "Women's Fashion › Clothing › Coats" },
+        20: { title: "Classic Navy Crewneck Knit Sweater | Women's Style", desc: "The understated backbone of the capsule wardrobe. This navy crewneck sweater moves seamlessly from weekend mornings to styled evenings. Shop on Amazon. #WomensFashion #KnitwearStyle #ClassicSweater #CapsuleWardrobe #SeleneLuxe", overlay: "Effortlessly Polished", topics: "Women's Fashion › Clothing › Sweaters" },
+        21: { title: "Ivory Wide-Leg Pleated Trousers | Old Money Style", desc: "Wide-leg pleated trousers in crisp ivory. The high waist elongates while the relaxed leg breathes with effortless modern grace — the old money silhouette. Shop on Amazon. #WomensFashion #WideLegTrousers #OldMoney #IvoryStyle #SeleneLuxe", overlay: "Old Money Aesthetic", topics: "Women's Fashion › Clothing › Trousers" },
+        22: { title: "Structured Lime Green Top-Handle Bag | Statement", desc: "A burst of structured colour that transforms a neutral palette into a statement. This lime green top-handle bag is the deliberate contrast every outfit needs. Shop on Amazon. #WomensFashion #StatementBag #HandbagStyle #LuxuryBag #SeleneLuxe", overlay: "The Statement Piece", topics: "Women's Fashion › Accessories › Bags" },
+        23: { title: "Pointed-Toe Ivory Ankle Booties | Women's Shoes", desc: "Pointed-toe booties in soft ivory leather. A refined finishing touch that sharpens every look from the ground up. Shop on Amazon. #WomensFashion #AnkleBooties #IvoryShoes #ShoeStyle #SeleneLuxe", overlay: "Polish from the Ground Up", topics: "Women's Fashion › Footwear › Boots" },
+        /* Kids — Pink Meadow Edit */
+        24: { title: "Vintage Gingham Button-Up Blouse | Kids Fashion", desc: "A sweet nod to vintage charm with a peter pan collar. This tan gingham button-up blouse features timeless details that photograph beautifully. Shop on Amazon. #KidsFashion #GinghamStyle #MiniOOTD #GirlsOutfit #SeleneLuxe", overlay: "Vintage Charm", topics: "Kids Fashion › Girls › Tops" },
+        25: { title: "Stretchy Cotton Suspender Skirt | Kids Style", desc: "Stretchy cotton suspender skirt in warm tones — easy to style, comfortable to wear, and endlessly charming for any little one. Shop on Amazon. #KidsFashion #SuspenderSkirt #GirlsStyle #MiniFashion #SeleneLuxe", overlay: "Effortless Charm", topics: "Kids Fashion › Girls › Skirts" },
+        26: { title: "Little Bear Leather Crossbody | Kids Accessory", desc: "A whimsical little bear crossbody that doubles as a playful accessory and a practical carry-all for the little adventurer. Shop on Amazon. #KidsFashion #KidsBag #MiniFashion #GirlsAccessories #SeleneLuxe", overlay: "Whimsical + Practical", topics: "Kids Fashion › Girls › Bags & Accessories" },
+        27: { title: "Classic T-Strap Mary Jane Flats | Kids Shoes", desc: "Classic T-strap mary jane flats in smooth leather. Timeless, practical, and utterly sweet — the shoe that never goes out of style for girls. Shop on Amazon. #KidsFashion #MaryJane #KidsShoes #GirlsShoes #SeleneLuxe", overlay: "Timeless & Sweet", topics: "Kids Fashion › Girls › Shoes" },
+        28: { title: "Ruffle-Trim Ankle Socks | Girls Fashion Detail", desc: "Delicate ruffle-trim ankle socks that add a touch of feminine detail from the ankles up. The smallest detail that makes the biggest difference. Shop on Amazon. #KidsFashion #RuffleSocks #GirlsStyle #MiniFashion #SeleneLuxe", overlay: "The Finishing Touch", topics: "Kids Fashion › Girls › Socks & Tights" },
+        29: { title: "Wide Fabric Knot Headband | Kids Hair Accessory", desc: "A wide fabric knot headband that keeps hair styled while adding a polished finishing touch to any look. Shop on Amazon. #KidsFashion #KidsHeadband #GirlsHairAccessory #MiniFashion #SeleneLuxe", overlay: "Polished Finish", topics: "Kids Fashion › Girls › Hair Accessories" },
+        /* K-Beauty Cosmetics */
         30: {
             title:   'Berry Lip Sleeping Mask | Overnight Lip Treatment',
             desc:    'Seal in moisture overnight and wake up to softer, plumper lips. The easiest upgrade to your skincare routine — a rich overnight treatment that works while you sleep. Shop on Amazon. #LipCare #OvernightSkincare #KBeauty #LipMask #SeleneLuxe',
@@ -363,6 +440,20 @@
             overlay: 'Gold Standard K-Beauty',
             topics:  'Beauty › Skincare › Serum'
         },
+        /* Women's — Dresses & Blouse */
+        33: { title: "HEAWISH Floral Ballet Flats | Women's Cute Shoes", desc: "The most charming ballet flat you'll ever own. HEAWISH's floral-detailed flat comes in a stunning range of colours — perfect feminine footwear for spring and summer. Shop on Amazon. #BalletFlats #WomensFashion #SpringShoes #FloralShoes #SeleneLuxe", overlay: "Your New Favourite Flat", topics: "Women's Fashion › Footwear › Flats" },
+        34: { title: "WOOSEA Mermaid Evening Dress | Sculpted Silhouette", desc: "A sculptural mermaid silhouette with a daring thigh split that commands attention from every angle. Available in multiple stunning colours. Shop on Amazon. #EveningDress #MermaidDress #FormalWear #GalaStyle #SeleneLuxe", overlay: "Command the Room", topics: "Women's Fashion › Dresses › Evening & Formal" },
+        35: { title: "WOOSEA High Neck Mermaid Dress | Formal Elegance", desc: "A high-neck interpretation of the classic mermaid gown. Understated from the front, unforgettable from behind. Available in 9 colour options. Shop on Amazon. #EveningWear #FormalDress #MermaidSilhouette #GalaOutfit #SeleneLuxe", overlay: "Unforgettable Silhouette", topics: "Women's Fashion › Dresses › Evening & Formal" },
+        36: { title: "Bowknot Lace Mini Dress | Summer Style 2025", desc: "Playful lace with a dainty bowknot detail — light as air, designed for golden-hour moments. The summer mini dress for effortless feminine style. Shop on Amazon. #SummerFashion #MiniDress #VacationOutfit #LaceDress #SeleneLuxe", overlay: "Golden Hour Ready", topics: "Women's Fashion › Dresses › Mini" },
+        37: { title: "Flowy Tiered Maxi Dress | Vacation Outfit Inspo", desc: "A cascading tiered maxi dress that moves with every step — the dress that photographs itself. Perfect for vacation, beach dinners or summer celebrations. Shop on Amazon. #VacationOutfit #MaxiDress #SummerFashion #TieredDress #SeleneLuxe", overlay: "It Photographs Itself", topics: "Women's Fashion › Dresses › Maxi" },
+        38: { title: "Crochet Tassel Maxi Dress | Boho Summer Look", desc: "Hand-crafted crochet texture meets a dramatic tassel trim. A bohemian statement for the woman who dresses with intention. Shop on Amazon. #BohoFashion #CrochetDress #SummerStyle #TasselDress #SeleneLuxe", overlay: "Bohemian Statement", topics: "Women's Fashion › Dresses › Boho" },
+        39: { title: "Bohemian Halter Mini Dress | Beach Vacation Outfit", desc: "A breezy halter-neck mini in soft drape fabric. Carefree silhouette, careful construction — for sun-soaked days that deserve a great outfit. Shop on Amazon. #SummerFashion #HalterDress #BeachOutfit #VacationOOTD #SeleneLuxe", overlay: "Carefree Summer Energy", topics: "Women's Fashion › Dresses › Summer" },
+        40: { title: "Cropped Cotton Button-Down Blouse | Women's Top", desc: "A cropped cotton blouse with a classic collared neckline — clean, crisp, and endlessly versatile. The perfect foundational piece for the Blush and Ivory aesthetic. Shop on Amazon. #WomensFashion #CroppedTop #BlushStyle #OldMoney #SeleneLuxe", overlay: "Clean & Crisp", topics: "Women's Fashion › Tops › Blouses" },
+        /* Home & Lifestyle */
+        41: { title: "Dimmable Arc Floor Lamp | Modern Home Lighting", desc: "A sleek dimmable arc floor lamp with warm LED illumination and full remote control. Instantly elevates any living space with ambient, directional light. Shop on Amazon. #HomeDecor #FloorLamp #InteriorDesign #AmbientLighting #SeleneLuxe", overlay: "Set the Mood", topics: "Home Decor › Lighting › Floor Lamps" },
+        42: { title: "6ft Artificial Olive Tree | Mediterranean Home Decor", desc: "The quiet grandeur of a Mediterranean courtyard, brought inside. A 6ft artificial olive tree in a white ceramic pot — zero maintenance, endless elegance. Shop on Amazon. #HomeDecor #ArtificialPlant #InteriorDesign #MediterraneanStyle #SeleneLuxe", overlay: "Mediterranean Grandeur", topics: "Home Decor › Plants & Greenery" },
+        43: { title: "Victrola Retro Bluetooth Radio | Vintage Home Decor", desc: "The Victrola Willow — a retro-wood Bluetooth radio that's as much a room statement as a music player. Vintage aesthetic, modern wireless streaming. Shop on Amazon. #HomeDecor #VintageDecor #VictrolaRadio #RetroStyle #SeleneLuxe", overlay: "Vintage Vibes, Modern Sound", topics: "Home Decor › Audio & Entertainment" },
+        /* Maybelline SuperStay Matte Ink */
         44: {
             title:   'Maybelline SuperStay Matte Ink | 16-Hour Matte Lip',
             desc:    'Bold wine-dark matte that stays for 16 hours with zero transfer. Maybelline SuperStay Matte Ink Shade 115 Founder delivers velvety, saturated colour from morning to midnight. Shop on Amazon. #MatteLips #MaybellineMakeup #LiquidLipstick #BeautyEdit #SeleneLuxe',
@@ -411,6 +502,9 @@
             overlay: 'Grace in Every Swipe',
             topics:  'Beauty › Makeup › Lip Makeup'
         },
+        /* Home — Garden */
+        52: { title: "Solar Garden Turtle Statue | Succulent Garden Decor", desc: "A hand-painted resin turtle adorned with vivid succulents — solar-powered with up to 10 hours of auto-lighting. IP65 waterproof and UV-resistant for year-round charm. Shop on Amazon. #GardenDecor #SolarLights #GardenArt #OutdoorDecor #SeleneLuxe", overlay: "Garden Character", topics: "Gardening › Garden Decor › Statues & Sculptures" },
+        /* Skincare — New Products */
         53: {
             title:   'BIODANCE Bio-Collagen Overnight Mask | K-Beauty',
             desc:    'Wake up to plumper, smoother skin. BIODANCE\'s overnight hydrogel mask infuses real collagen to tighten pores, boost elasticity and deeply hydrate while you sleep — 4 sheets of pure recovery. Shop on Amazon. #KoreanBeauty #OvernightMask #CollagenSkincare #SkincareMask #SeleneLuxe',
@@ -442,6 +536,19 @@
             topics:  'Beauty › Skincare › Serum'
         }
     };
+
+    /* ── Auto-generate Pinterest content for any future product not in PIN ── */
+    function autoPin(product) {
+        const cat = CAT[product.category] || CAT.women;
+        let title = product.brand + ' ' + product.name;
+        if (title.length > 58) title = title.substring(0, 55) + '...';
+        else title += ' | ' + (product.badge || cat.label);
+        const desc = product.description + ' Shop on Amazon. ' + cat.hashtags;
+        const overlay = product.trending
+            ? product.trending.replace(/\s*[↑↓]\d*%?.*$/, '').trim() + ' — Shop Now'
+            : 'Shop This Look';
+        return { title, desc, overlay, topics: cat.topics };
+    }
 
     /* ── Helpers ── */
     function absoluteImage(product) {
@@ -494,17 +601,12 @@
 
     /* ── Build card DOM ── */
     function buildCard(product) {
-        const pin = PIN[product.id] || {
-            title:   product.brand + ' ' + product.name,
-            desc:    product.description + ' Shop on Amazon. #BeautyEdit #SeleneLuxe',
-            overlay: 'Shop the Beauty Edit',
-            topics:  'Beauty › Beauty Products'
-        };
-
+        const pin = PIN[product.id] || autoPin(product);
         const pUrl = buildPinterestUrl(product, pin.desc);
 
         const card = document.createElement('div');
         card.className = 'pin-card';
+        card.dataset.category = product.category;
 
         card.innerHTML = `
             <div class="card-head">
@@ -574,12 +676,40 @@
         return card;
     }
 
-    /* ── Render ── */
-    const beautyProducts = products.filter(p => p.category === 'cosmetics');
-    document.getElementById('product-count').textContent = beautyProducts.length + ' products';
-
+    /* ── Render all products grouped by category ── */
+    const CAT_ORDER  = ['cosmetics', 'women', 'men', 'kids', 'home'];
+    const CAT_LABELS = { cosmetics: 'Beauty Edit', women: "Women's Fashion", men: "Men's Fashion", kids: 'Kids Fashion', home: 'Home & Lifestyle' };
     const grid = document.getElementById('pin-grid');
-    beautyProducts.forEach(p => grid.appendChild(buildCard(p)));
+
+    CAT_ORDER.forEach(cat => {
+        const group = products.filter(p => p.category === cat);
+        if (!group.length) return;
+        const div = document.createElement('div');
+        div.className = 'cat-divider';
+        div.dataset.divider = cat;
+        div.innerHTML = `<span class="cat-divider-label">${CAT_LABELS[cat] || cat}</span><span class="cat-divider-line"></span>`;
+        grid.appendChild(div);
+        group.forEach(p => grid.appendChild(buildCard(p)));
+    });
+
+    document.getElementById('product-count').textContent = products.length + ' products';
+
+    /* ── Filter logic ── */
+    document.getElementById('filter-bar').addEventListener('click', function (e) {
+        const btn = e.target.closest('.filter-btn');
+        if (!btn) return;
+        const cat = btn.dataset.cat;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b === btn));
+        document.querySelectorAll('.pin-card').forEach(c => {
+            c.style.display = (cat === 'all' || c.dataset.category === cat) ? '' : 'none';
+        });
+        document.querySelectorAll('.cat-divider').forEach(d => {
+            d.style.display = (cat === 'all' || d.dataset.divider === cat) ? '' : 'none';
+        });
+        const visible = cat === 'all' ? products.length : products.filter(p => p.category === cat).length;
+        document.getElementById('section-label').textContent  = cat === 'all' ? 'All Products' : (CAT_LABELS[cat] || cat);
+        document.getElementById('product-count').textContent = visible + ' products';
+    });
 </script>
 
 </body>

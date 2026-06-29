@@ -753,7 +753,7 @@ const products = [
         trending: "Glass Skin ↑",
         image1: "images/cosmetics9.jpg",
         image2: "images/cosmetics9.jpg",
-        affiliateLink: "https://a.co/d/00QECh5q",
+        affiliateLink: "https://amzn.to/44GLVOB",
         buttonText: "Shop on Amazon"
     },
     {
@@ -768,7 +768,7 @@ const products = [
         trending: "Skincare Essentials ↑",
         image1: "images/cosmetics10.jpg",
         image2: "images/cosmetics10.jpg",
-        affiliateLink: "https://a.co/d/0hLkwZOn",
+        affiliateLink: "https://amzn.to/441AJvS",
         buttonText: "Shop on Amazon"
     },
     {
@@ -783,7 +783,7 @@ const products = [
         trending: "K-Beauty ↑",
         image1: "images/cosmetics11.jpg",
         image2: "images/cosmetics11.jpg",
-        affiliateLink: "https://a.co/d/00GvifJN",
+        affiliateLink: "https://amzn.to/4eNmtMh",
         buttonText: "Shop on Amazon"
     },
     {
@@ -798,7 +798,7 @@ const products = [
         trending: "Barrier Repair ↑",
         image1: "images/cosmetics12.jpg",
         image2: "images/cosmetics12.jpg",
-        affiliateLink: "https://a.co/d/0irLYRWG",
+        affiliateLink: "https://amzn.to/4gvolvJ",
         buttonText: "Shop on Amazon"
     },
     {
@@ -813,7 +813,7 @@ const products = [
         trending: "Vitamin C ↑",
         image1: "images/cosmetics13.jpg",
         image2: "images/cosmetics13.jpg",
-        affiliateLink: "https://a.co/d/01TGKSeI",
+        affiliateLink: "https://amzn.to/4xSl27M",
         buttonText: "Shop on Amazon"
     },
     // HOME — GARDEN
