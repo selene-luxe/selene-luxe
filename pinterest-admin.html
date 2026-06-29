@@ -389,6 +389,9 @@
 <script>
     const BASE = 'https://seleneluxe.fashion';
 
+    /* ── Affiliate disclosure — required by FTC + Amazon Associates ToS + Pinterest policy ── */
+    const AFFILIATE_DISCLOSURE = 'As an Amazon Associate, I earn from qualifying purchases. #ad #AmazonFinds #AmazonAffiliate';
+
     /* ── Category defaults for auto-generating content on future products ── */
     const CAT = {
         cosmetics: { label: 'Beauty Edit',      hashtags: '#BeautyEdit #Skincare #MakeupLovers #SeleneLuxe',              topics: 'Beauty › Beauty Products' },
@@ -552,7 +555,7 @@
 
     /* ── Helpers ── */
     function absoluteImage(product) {
-        return BASE + '/' + product.image1.replace('.webp', '.jpg').replace('.jpeg', '.jpg');
+        return BASE + '/' + product.image1;
     }
 
     function productUrl(product) {
@@ -601,7 +604,8 @@
 
     /* ── Build card DOM ── */
     function buildCard(product) {
-        const pin = PIN[product.id] || autoPin(product);
+        const pinBase = PIN[product.id] || autoPin(product);
+        const pin = { ...pinBase, desc: pinBase.desc + ' ' + AFFILIATE_DISCLOSURE };
         const pUrl = buildPinterestUrl(product, pin.desc);
 
         const card = document.createElement('div');
