@@ -730,7 +730,11 @@
                         /* Sidebar color swatch */
                         const swatch = document.createElement('div');
                         swatch.className = 'color-swatch' + (index === 0 ? ' active' : '');
-                        swatch.style.backgroundColor = variant.colorCode;
+                        if (variant.colorCode === 'multicolor') {
+                            swatch.style.background = 'linear-gradient(135deg,#ff6b6b 0%,#ffd93d 25%,#6bcb77 50%,#4d96ff 75%,#c084fc 100%)';
+                        } else {
+                            swatch.style.backgroundColor = variant.colorCode;
+                        }
                         swatch.setAttribute('data-color', variant.color);
                         swatch.title = variant.color;
                         swatch.addEventListener('click', () => {
@@ -745,7 +749,7 @@
                     function selectVariant(index) {
                         const variant = product.variants[index];
                         img1.src = variant.image;
-                        btn.href = variant.affiliateLink;
+                        btn.href = product.affiliateLink;
                         selectedColorName.innerText = variant.color;
 
                         thumbEls.forEach((t, i) => t.classList.toggle('active', i === index));
@@ -761,7 +765,7 @@
                     /* Set initial state */
                     selectedColorName.innerText = product.variants[0].color;
                     img1.src  = product.variants[0].image;
-                    btn.href  = product.variants[0].affiliateLink;
+                    btn.href = product.affiliateLink;
 
                     function startAutoRotate() {
                         autoRotateInterval = setInterval(() => {

@@ -134,6 +134,37 @@
             margin-top: 0.5rem;
         }
         .drop-sm:hover, .drop-sm.drag-over { border-color: var(--warm); color: var(--warm); }
+        .pattern-btn {
+            flex-shrink: 0; height: 36px; padding: 0 0.5rem;
+            background: none; border: 1px solid var(--border); border-radius: 7px;
+            cursor: pointer; font-size: 0.88rem; transition: border-color 0.15s;
+        }
+        .pattern-btn:hover { border-color: var(--warm); }
+        .pattern-btn.active {
+            border-color: transparent; outline: none;
+            background: linear-gradient(90deg,#ff6b6b,#ffd93d,#6bcb77,#4d96ff,#c084fc);
+        }
+        .v-first-hint { font-size: 0.72rem; color: #B8834A; margin-top: 0.5rem; line-height: 1.4; }
+
+        /* ── Variant card grid ── */
+        .bulk-drop {
+            border: 2px dashed var(--border); border-radius: var(--radius);
+            padding: 1.5rem; text-align: center; cursor: pointer;
+            background: var(--bg); transition: border-color .15s, background .15s;
+        }
+        .bulk-drop:hover, .bulk-drop.drag-over { border-color: var(--warm); background: #FBF8F5; }
+        .bulk-drop-icon { font-size: 1.5rem; margin-bottom: .3rem; }
+        .bulk-drop-text { font-size: .76rem; color: var(--muted); line-height: 1.6; }
+        .variant-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 1rem; margin-top: .75rem; }
+        .variant-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; }
+        .vc-thumb-wrap { aspect-ratio: 3/4; background: var(--bg); overflow: hidden; cursor: pointer; display: flex; align-items: center; justify-content: center; position: relative; transition: opacity .15s; }
+        .vc-thumb-wrap:hover { opacity: .88; }
+        .vc-thumb-wrap.drag-over { outline: 2px dashed var(--warm); outline-offset: -4px; }
+        .vc-thumb { width: 100%; height: 100%; object-fit: cover; display: none; position: absolute; inset: 0; }
+        .vc-thumb-empty { display: flex; flex-direction: column; align-items: center; gap: .45rem; font-size: .72rem; color: var(--muted); text-align: center; padding: .5rem; pointer-events: none; }
+        .vc-fields { padding: .7rem; display: flex; flex-direction: column; gap: .5rem; flex: 1; }
+        .vc-remove { width: 100%; padding: .42rem; border: none; border-top: 1px solid var(--border); background: none; color: var(--muted); font-size: .68rem; font-weight: 500; cursor: pointer; transition: all .12s; font-family: var(--sans); }
+        .vc-remove:hover { background: #FFF5F5; color: #CC3333; }
 
         /* ── Submit ── */
         .submit-btn {
@@ -293,9 +324,14 @@
                 <div class="variants-section">
                     <div class="variants-header">
                         <span class="variants-title">Color Variants <span class="opt" style="text-transform:none;letter-spacing:0;">— optional</span></span>
-                        <button type="button" class="add-variant-btn" id="add-variant-btn">+ Add Variant</button>
+                        <button type="button" class="add-variant-btn" id="add-variant-btn">+ Add Single</button>
                     </div>
-                    <div id="variants-container"></div>
+                    <div class="bulk-drop" id="bulk-drop">
+                        <div class="bulk-drop-icon">📁</div>
+                        <div class="bulk-drop-text"><strong>Drop all variant images at once</strong> — or click to browse<br><span style="font-size:.68rem;opacity:.7;">Hold Ctrl / Cmd to select multiple files</span></div>
+                    </div>
+                    <input type="file" id="bulk-file-input" accept="image/*" multiple style="display:none">
+                    <div id="variant-cards" class="variant-cards"></div>
                 </div>
             </div>
 
@@ -549,7 +585,7 @@
         );
         if (hasVariants) {
             const varLines = p.variants.map(v =>
-                `            { color: "${q(v.color)}", colorCode: "${q(v.colorCode)}", image: "images/${v.imageFile}", affiliateLink: "${q(v.affiliateLink)}" }`
+                `            { color: "${q(v.color)}", colorCode: "${q(v.colorCode)}", image: "images/${v.imageFile}" }`
             );
             lines.push(
                 `        variants: [`,
@@ -610,20 +646,17 @@
                 buttonText:   document.getElementById('f-btn').value.trim()
             };
 
-            /* Collect color variants from form */
-            const variantRows = document.querySelectorAll('.variant-row');
+            /* Collect color variants from cards */
             const variants = [];
-            variantRows.forEach(row => {
-                const colorName = row.querySelector('.v-color-name').value.trim();
-                const colorCode = row.querySelector('.v-color-code').value.trim();
-                const link      = row.querySelector('.v-link').value.trim();
-                const vFile     = row.querySelector('.v-img-filename').value.trim();
+            document.querySelectorAll('.variant-card').forEach(card => {
+                const colorName = card.querySelector('.vc-color-name').value.trim();
+                const colorCode = card.querySelector('.vc-color-code').value.trim();
+                const vFile     = card.querySelector('.vc-img-filename').value.trim();
                 if (colorName && vFile) {
                     variants.push({
-                        color:        colorName,
-                        colorCode:    /^#[0-9a-fA-F]{6}$/.test(colorCode) ? colorCode : '#000000',
-                        imageFile:    vFile,
-                        affiliateLink: link || product.affiliateLink
+                        color:     colorName,
+                        colorCode: colorCode === 'multicolor' ? 'multicolor' : (/^#[0-9a-fA-F]{6}$/.test(colorCode) ? colorCode : '#000000'),
+                        imageFile: vFile
                     });
                 }
             });
@@ -652,9 +685,9 @@
 
             /* Upload variant images to GitHub */
             for (const [idxStr, vFile] of Object.entries(variantFiles)) {
-                const vRow = document.querySelector(`.variant-row[data-idx="${idxStr}"]`);
-                if (!vRow) continue;
-                const vFilename = vRow.querySelector('.v-img-filename').value.trim();
+                const vCard = document.querySelector(`.variant-card[data-idx="${idxStr}"]`);
+                if (!vCard) continue;
+                const vFilename = vCard.querySelector('.vc-img-filename').value.trim();
                 if (!vFilename) continue;
                 const vCompressed = await compressImage(vFile);
                 const vContent    = await blobToBase64(vCompressed);
@@ -703,7 +736,7 @@
         imgDrop.querySelector('.drop-icon').textContent = '🖼️';
         imgDrop.querySelector('.drop-text').textContent = 'Click to select or drag & drop\nyour AI-generated product image';
         ['img-filename', 'f-badge', 'f-btn'].forEach(id => document.getElementById(id).dataset.edited = '');
-        document.getElementById('variants-container').innerHTML = '';
+        document.getElementById('variant-cards').innerHTML = '';
         Object.keys(variantFiles).forEach(k => delete variantFiles[k]);
         showState('state-form');
     });
@@ -712,83 +745,142 @@
         showState(getToken() ? 'state-form' : 'state-setup')
     );
 
-    /* ── Color Variants ── */
+    /* ── Color Variants — card grid with bulk upload ── */
     let variantCounter = 0;
     const variantFiles = {};
 
-    function addVariantRow() {
+    function slugify(s) {
+        return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 38);
+    }
+
+    function createVariantCard(file) {
         variantCounter++;
         const idx = variantCounter;
-        const container = document.getElementById('variants-container');
-        const row = document.createElement('div');
-        row.className = 'variant-row';
-        row.dataset.idx = idx;
-        row.innerHTML = `
-            <div class="variant-row-header">
-                <span class="variant-row-label">Variant ${idx}</span>
-                <button type="button" class="remove-variant-btn" data-idx="${idx}">Remove</button>
-            </div>
-            <div class="form-row">
-                <div class="field-group">
-                    <label class="field-label">Color Name</label>
-                    <input type="text" class="form-input v-color-name" placeholder="e.g. White">
+        const card = document.createElement('div');
+        card.className = 'variant-card';
+        card.dataset.idx = idx;
+        card.innerHTML = `
+            <div class="vc-thumb-wrap">
+                <img class="vc-thumb" src="" alt="">
+                <div class="vc-thumb-empty">
+                    <span style="font-size:1.6rem">📁</span>
+                    <span>Click or drop<br>to upload image</span>
                 </div>
-                <div class="field-group">
-                    <label class="field-label">Color Code</label>
-                    <div class="color-picker-wrapper">
-                        <input type="color" class="color-input v-color-picker" value="#C4956A">
-                        <input type="text" class="form-input color-hex v-color-code" placeholder="#C4956A" value="#C4956A">
-                    </div>
+                <input type="file" class="vc-file-input" accept="image/*" style="display:none">
+            </div>
+            <div class="vc-fields">
+                <input type="text" class="form-input vc-color-name" placeholder="Color name (e.g. Red)">
+                <div class="color-picker-wrapper" style="margin-top:.1rem;">
+                    <input type="color" class="color-input vc-color-picker" value="#C4956A">
+                    <input type="text" class="form-input color-hex vc-color-code" placeholder="#C4956A" value="#C4956A">
+                    <button type="button" class="pattern-btn" title="Pattern / Multicolor">🌈</button>
                 </div>
+                <input type="text" class="form-input vc-img-filename" placeholder="filename.jpg">
             </div>
-            <div class="field-group">
-                <label class="field-label">Affiliate Link</label>
-                <input type="url" class="form-input v-link" placeholder="https://amzn.to/xxxxxxx">
-            </div>
-            <div class="field-group">
-                <label class="field-label">Image Filename</label>
-                <input type="text" class="form-input v-img-filename" placeholder="e.g. product-white.jpg">
-                <p class="field-hint">Auto-filled from color name. Use <code>.jpg</code> or <code>.webp</code>.</p>
-            </div>
-            <div class="drop-sm v-img-drop">📁 Click to upload variant image <span class="opt">(optional — skip if reusing main image)</span></div>
-            <input type="file" class="v-img-file" accept="image/*" style="display:none">
+            <button type="button" class="vc-remove">✕ Remove</button>
         `;
-        container.appendChild(row);
 
-        const picker     = row.querySelector('.v-color-picker');
-        const hexInput   = row.querySelector('.v-color-code');
-        const dropZone   = row.querySelector('.v-img-drop');
-        const fileInput  = row.querySelector('.v-img-file');
-        const fnInput    = row.querySelector('.v-img-filename');
+        const thumb      = card.querySelector('.vc-thumb');
+        const thumbEmpty = card.querySelector('.vc-thumb-empty');
+        const thumbWrap  = card.querySelector('.vc-thumb-wrap');
+        const fileInput  = card.querySelector('.vc-file-input');
+        const fnInput    = card.querySelector('.vc-img-filename');
+        const colorInput = card.querySelector('.vc-color-name');
+        const picker     = card.querySelector('.vc-color-picker');
+        const hexInput   = card.querySelector('.vc-color-code');
+        const patternBtn = card.querySelector('.pattern-btn');
+
+        function loadFile(f) {
+            variantFiles[idx] = f;
+            const reader = new FileReader();
+            reader.onload = e => {
+                thumb.src = e.target.result;
+                thumb.style.display = 'block';
+                thumbEmpty.style.display = 'none';
+            };
+            reader.readAsDataURL(f);
+            if (!fnInput.dataset.edited) {
+                const ext  = f.name.split('.').pop().toLowerCase();
+                const base = document.getElementById('f-name').value.trim();
+                fnInput.value = slugify(base + '-' + (colorInput.value.trim() || 'variant-' + idx)) + '.' + ext;
+            }
+        }
+
+        thumbWrap.addEventListener('click',    () => fileInput.click());
+        thumbWrap.addEventListener('dragover',  e => { e.preventDefault(); thumbWrap.classList.add('drag-over'); });
+        thumbWrap.addEventListener('dragleave', () => thumbWrap.classList.remove('drag-over'));
+        thumbWrap.addEventListener('drop', e => {
+            e.preventDefault(); thumbWrap.classList.remove('drag-over');
+            if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+        });
+        fileInput.addEventListener('change', e => { if (e.target.files[0]) loadFile(e.target.files[0]); });
+
+        if (file) loadFile(file);
+
+        /* First variant: inherit main product filename + link */
+        if (idx === 1) {
+            const mainFile = document.getElementById('img-filename').value.trim();
+            if (mainFile && !file) fnInput.value = mainFile;
+        }
 
         picker.addEventListener('input', () => { hexInput.value = picker.value; });
         hexInput.addEventListener('input', () => {
             if (/^#[0-9a-fA-F]{6}$/.test(hexInput.value)) picker.value = hexInput.value;
         });
-
-        dropZone.addEventListener('click', () => fileInput.click());
-        fileInput.addEventListener('change', e => {
-            const f = e.target.files[0];
-            if (!f) return;
-            variantFiles[idx] = f;
-            dropZone.textContent = '✓ ' + f.name + ' — click to change';
-            if (!fnInput.dataset.edited) {
-                const ext   = f.name.split('.').pop().toLowerCase();
-                const color = row.querySelector('.v-color-name').value.trim();
-                const base  = document.getElementById('f-name').value.trim();
-                fnInput.value = (base + '-' + (color || 'variant-' + idx)).toLowerCase()
-                    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 38) + '.' + ext;
+        colorInput.addEventListener('input', () => {
+            if (!fnInput.dataset.edited && variantFiles[idx]) {
+                const ext  = variantFiles[idx].name.split('.').pop().toLowerCase();
+                fnInput.value = slugify(document.getElementById('f-name').value.trim() + '-' + (colorInput.value.trim() || 'variant-' + idx)) + '.' + ext;
             }
         });
         fnInput.addEventListener('input', function () { this.dataset.edited = '1'; });
 
-        row.querySelector('.remove-variant-btn').addEventListener('click', () => {
-            delete variantFiles[idx];
-            row.remove();
+        let isMulticolor = false;
+        patternBtn.addEventListener('click', () => {
+            isMulticolor = !isMulticolor;
+            if (isMulticolor) {
+                hexInput.value = 'multicolor'; hexInput.readOnly = true;
+                hexInput.style.color = 'transparent';
+                hexInput.style.background = 'linear-gradient(90deg,#ff6b6b,#ffd93d,#6bcb77,#4d96ff,#c084fc)';
+                picker.style.opacity = '0.25'; picker.style.pointerEvents = 'none';
+                patternBtn.classList.add('active');
+            } else {
+                hexInput.value = '#C4956A'; hexInput.readOnly = false;
+                hexInput.style.color = ''; hexInput.style.background = '';
+                picker.style.opacity = ''; picker.style.pointerEvents = '';
+                patternBtn.classList.remove('active');
+            }
         });
+
+        card.querySelector('.vc-remove').addEventListener('click', () => {
+            delete variantFiles[idx];
+            card.remove();
+        });
+
+        return card;
     }
 
-    document.getElementById('add-variant-btn').addEventListener('click', addVariantRow);
+    function handleBulkFiles(files) {
+        const container = document.getElementById('variant-cards');
+        Array.from(files).forEach(f => container.appendChild(createVariantCard(f)));
+    }
+
+    document.getElementById('add-variant-btn').addEventListener('click', () => {
+        document.getElementById('variant-cards').appendChild(createVariantCard(null));
+    });
+
+    const bulkDrop  = document.getElementById('bulk-drop');
+    const bulkInput = document.getElementById('bulk-file-input');
+    bulkDrop.addEventListener('click',    () => bulkInput.click());
+    bulkDrop.addEventListener('dragover',  e => { e.preventDefault(); bulkDrop.classList.add('drag-over'); });
+    bulkDrop.addEventListener('dragleave', () => bulkDrop.classList.remove('drag-over'));
+    bulkDrop.addEventListener('drop', e => {
+        e.preventDefault(); bulkDrop.classList.remove('drag-over');
+        if (e.dataTransfer.files.length) handleBulkFiles(e.dataTransfer.files);
+    });
+    bulkInput.addEventListener('change', e => {
+        if (e.target.files.length) { handleBulkFiles(e.target.files); e.target.value = ''; }
+    });
 </script>
 </body>
 </html>

@@ -333,62 +333,53 @@ const products = [
         trending: "Ballet Core ↑",
         image1: "images/HEAWISH Women's Floral Ballet Flats white.webp",
         image2: "images/HEAWISH Women's Floral Ballet Flats white.webp",
-        affiliateLink: "https://amzn.to/3OLY4h2",
+        affiliateLink: "https://www.amazon.com/dp/B08CDGSKJH?tag=seleneluxe05-20",
         buttonText: "Shop on Amazon",
         variants: [
             {
                 color: "White",
                 colorCode: "#ffffff",
-                image: "images/HEAWISH Women's Floral Ballet Flats white.webp",
-                affiliateLink: "https://amzn.to/3OLY4h2"
+                image: "images/HEAWISH Women's Floral Ballet Flats white.webp"
             },
             {
                 color: "Beige",
                 colorCode: "#f5f5dc",
-                image: "images/HEAWISH Women's Floral Ballet Flats beige.webp",
-                affiliateLink: "https://amzn.to/4eBg3kC"
+                image: "images/HEAWISH Women's Floral Ballet Flats beige.webp"
             },
             {
                 color: "Black",
                 colorCode: "#000000",
-                image: "images/HEAWISH Women's Floral Ballet Flats black.webp",
-                affiliateLink: "https://amzn.to/4dQhz2a"
+                image: "images/HEAWISH Women's Floral Ballet Flats black.webp"
             },
             {
                 color: "Grey",
                 colorCode: "#808080",
-                image: "images/HEAWISH Women's Floral Ballet Flats grey.webp",
-                affiliateLink: "https://amzn.to/4cAPcTo"
+                image: "images/HEAWISH Women's Floral Ballet Flats grey.webp"
             },
             {
                 color: "Chocolate",
                 colorCode: "#7b3f00",
-                image: "images/HEAWISH Women's Floral Ballet Flats chocolate.webp",
-                affiliateLink: "https://amzn.to/4tVIm1B"
+                image: "images/HEAWISH Women's Floral Ballet Flats chocolate.webp"
             },
             {
                 color: "Light Blue",
                 colorCode: "#add8e6",
-                image: "images/HEAWISH Women's Floral Ballet Flats light blue.webp",
-                affiliateLink: "https://amzn.to/4dVhQ3Z"
+                image: "images/HEAWISH Women's Floral Ballet Flats light blue.webp"
             },
             {
                 color: "Light Green",
                 colorCode: "#90ee90",
-                image: "images/HEAWISH Women's Floral Ballet Flats light green.webp",
-                affiliateLink: "https://amzn.to/41IeutF"
+                image: "images/HEAWISH Women's Floral Ballet Flats light green.webp"
             },
             {
                 color: "Pink",
                 colorCode: "#ffc0cb",
-                image: "images/HEAWISH Women's Floral Ballet Flats pink.webp",
-                affiliateLink: "https://amzn.to/4evx2Vu"
+                image: "images/HEAWISH Women's Floral Ballet Flats pink.webp"
             },
             {
                 color: "Red",
                 colorCode: "#ff0000",
-                image: "images/HEAWISH Women's Floral Ballet Flats red.webp",
-                affiliateLink: "https://amzn.to/4mIOt7q"
+                image: "images/HEAWISH Women's Floral Ballet Flats red.webp"
             }
         ]
     },
@@ -404,32 +395,28 @@ const products = [
         trending: "Trending Now",
         image1: "images/WOOSEA Women's Split Bodycon Mermaid Evening Dress black.webp",
         image2: "images/WOOSEA Women's Split Bodycon Mermaid Evening Dress black.webp",
-        affiliateLink: "https://amzn.to/4t3Hibn",
+        affiliateLink: "https://www.amazon.com/WOOSEA-Bodycon-Mermaid-Evening-Cocktail/dp/B08CHKPR4H?tag=seleneluxe05-20",
         buttonText: "Shop on Amazon",
         variants: [
             {
                 color: "Black",
                 colorCode: "#000000",
-                image: "images/WOOSEA Women's Split Bodycon Mermaid Evening Dress black.webp",
-                affiliateLink: "https://amzn.to/4t3Hibn"
+                image: "images/WOOSEA Women's Split Bodycon Mermaid Evening Dress black.webp"
             },
             {
                 color: "Purple",
                 colorCode: "#800080",
-                image: "images/WOOSEA Women's Split Bodycon Mermaid Evening Dress purple.webp",
-                affiliateLink: "https://amzn.to/4tFC6vq"
+                image: "images/WOOSEA Women's Split Bodycon Mermaid Evening Dress purple.webp"
             },
             {
                 color: "Navy Blue",
                 colorCode: "#000080",
-                image: "images/WOOSEA Women's Split Bodycon Mermaid Evening Dress navy blue.webp",
-                affiliateLink: "https://amzn.to/4u6BxdG"
+                image: "images/WOOSEA Women's Split Bodycon Mermaid Evening Dress navy blue.webp"
             },
             {
                 color: "Royal Blue",
                 colorCode: "#4169E1",
-                image: "images/WOOSEA Women's Split Bodycon Mermaid Evening Dress royal blue.webp",
-                affiliateLink: "https://amzn.to/4cUPuok"
+                image: "images/WOOSEA Women's Split Bodycon Mermaid Evening Dress royal blue.webp"
             }
         ]
     },
@@ -445,62 +432,53 @@ const products = [
         trending: "Trending Now",
         image1: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress black.webp",
         image2: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress black.webp",
-        affiliateLink: "https://amzn.to/3QO8xsU",
+        affiliateLink: "https://www.amazon.com/WOOSEA-Bodycon-Mermaid-Evening-Cocktail/dp/B07HFQSDZ6?tag=seleneluxe05-20",
         buttonText: "Shop on Amazon",
         variants: [
             {
                 color: "Purple",
                 colorCode: "#800080",
-                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress purple.webp",
-                affiliateLink: "https://amzn.to/3OQvsDd"
+                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress purple.webp"
             },
             {
                 color: "Green",
                 colorCode: "#008000",
-                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress green.webp",
-                affiliateLink: "https://amzn.to/4eNvdTZ"
+                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress green.webp"
             },
             {
                 color: "Red",
                 colorCode: "#ff0000",
-                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress red.webp",
-                affiliateLink: "https://amzn.to/4ucVW0G"
+                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress red.webp"
             },
             {
                 color: "Black",
                 colorCode: "#000000",
-                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress black.webp",
-                affiliateLink: "https://amzn.to/3QO8xsU"
+                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress black.webp"
             },
             {
                 color: "Navy Blue",
                 colorCode: "#000080",
-                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress navy blue.webp",
-                affiliateLink: "https://amzn.to/42150Kk"
+                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress navy blue.webp"
             },
             {
                 color: "Royal Blue",
                 colorCode: "#4169E1",
-                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress royal blue.webp",
-                affiliateLink: "https://amzn.to/3Qzgoup"
+                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress royal blue.webp"
             },
             {
                 color: "Burgundy Dark",
                 colorCode: "#4a0404",
-                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress burgundy.webp",
-                affiliateLink: "https://amzn.to/4vXyoii"
+                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress burgundy.webp"
             },
             {
                 color: "Burgundy",
                 colorCode: "#800020",
-                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress burgundy2.webp",
-                affiliateLink: "https://amzn.to/4ukXwhn"
+                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress burgundy2.webp"
             },
             {
                 color: "Magenta",
                 colorCode: "#ff00ff",
-                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress magenta.webp",
-                affiliateLink: "https://amzn.to/48W0WPe"
+                image: "images/WOOSEA Women's High Neck Split Bodycon Mermaid Evening Cocktail Long Dress magenta.webp"
             }
         ]
     },
