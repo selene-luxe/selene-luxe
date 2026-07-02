@@ -287,6 +287,72 @@
             line-height: 1;
         }
         .nav-actions .icon-btn { position: relative; }
+        /* VARIANT THUMBNAIL STRIP */
+        .variant-thumbs-wrap { margin-top: 0.75rem; }
+        .variant-thumbs {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 0.4rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-color) transparent;
+        }
+        .variant-thumbs::-webkit-scrollbar { height: 3px; }
+        .variant-thumbs::-webkit-scrollbar-track { background: transparent; }
+        .variant-thumbs::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 2px; }
+        .variant-thumb {
+            flex: 0 0 auto;
+            width: 68px;
+            height: 90px;
+            object-fit: cover;
+            cursor: pointer;
+            opacity: 0.45;
+            transition: opacity 0.25s ease, outline 0.25s ease;
+            scroll-snap-align: start;
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+        }
+        .variant-thumb.active { opacity: 1; outline-color: var(--text-color); }
+        .variant-thumb:hover { opacity: 0.8; }
+
+        /* PROGRESS DOTS */
+        .variant-dots {
+            display: flex;
+            gap: 0.45rem;
+            justify-content: center;
+            margin-top: 0.85rem;
+        }
+        .variant-dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--border-color);
+            transition: background 0.3s, transform 0.3s;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .variant-dot.active { background: var(--text-color); transform: scale(1.4); }
+        .variant-dot:hover { background: var(--text-muted); }
+
+        /* VARIANTS COUNT BADGE (overlaid on main image) */
+        .variants-badge {
+            position: absolute;
+            bottom: 1rem; left: 1rem;
+            background: rgba(26,26,24,0.78);
+            color: white;
+            font-size: 0.58rem;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+            font-weight: 700;
+            padding: 0.35rem 0.8rem;
+            border-radius: 2rem;
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 1.2s ease;
+            backdrop-filter: blur(4px);
+        }
+        .variants-badge.hide { opacity: 0; }
+
         /* RELATED PRODUCTS CARDS */
         .related-card {
             display: flex;
@@ -351,10 +417,13 @@
             
             <!-- LEFT SIDE: IMAGE -->
             <div class="product-gallery">
-                <div class="main-image-container">
+                <div class="main-image-container" style="position:relative;">
                     <img id="img1" src="" alt="Product Image">
                 </div>
-                
+                <div id="variant-thumbs-wrap" class="variant-thumbs-wrap" style="display:none;">
+                    <div id="variant-thumbs" class="variant-thumbs"></div>
+                    <div id="variant-dots" class="variant-dots"></div>
+                </div>
             </div>
 
             <!-- RIGHT SIDE: DETAILS -->
@@ -599,64 +668,111 @@
                 
                 // HANDLE COLOR VARIANTS
                 if (product.variants && product.variants.length > 0) {
-                    const variantSelector = document.getElementById('variant-selector');
-                    const colorSwatches = document.getElementById('color-swatches');
+                    const variantSelector      = document.getElementById('variant-selector');
+                    const colorSwatches        = document.getElementById('color-swatches');
                     const selectedColorContainer = document.getElementById('selected-color-container');
-                    const selectedColorName = document.getElementById('selected-color-name');
-                    const img1 = document.getElementById('img1');
-                    const btn = document.getElementById('btn');
-                    
+                    const selectedColorName    = document.getElementById('selected-color-name');
+                    const img1                 = document.getElementById('img1');
+                    const btn                  = document.getElementById('btn');
+                    const thumbsWrap           = document.getElementById('variant-thumbs-wrap');
+                    const thumbsContainer      = document.getElementById('variant-thumbs');
+                    const dotsContainer        = document.getElementById('variant-dots');
+
                     variantSelector.style.display = 'block';
                     selectedColorContainer.style.display = 'block';
-                    
+                    thumbsWrap.style.display = 'block';
+
                     let currentVariantIndex = 0;
                     let autoRotateInterval;
                     let isAutoRotating = true;
                     let isPaused = false;
-                    
-                    function selectVariant(index) {
-                        const variant = product.variants[index];
-                        document.querySelectorAll('.color-swatch').forEach((s, i) => {
-                            if (i === index) s.classList.add('active');
-                            else s.classList.remove('active');
-                        });
-                        img1.src = variant.image;
-                        btn.href = variant.affiliateLink;
-                        selectedColorName.innerText = variant.color;
-                    }
-                    
+
+                    /* "N colors available" badge — fades after 3.5s */
+                    const badge = document.createElement('div');
+                    badge.className = 'variants-badge';
+                    badge.textContent = product.variants.length + ' colors available';
+                    img1.parentElement.appendChild(badge);
+                    setTimeout(() => badge.classList.add('hide'), 3500);
+
+                    const thumbEls = [];
+                    const dotEls   = [];
+
                     product.variants.forEach((variant, index) => {
+                        /* Thumbnail image */
+                        const thumb = document.createElement('img');
+                        thumb.src          = variant.image;
+                        thumb.alt          = variant.color;
+                        thumb.className    = 'variant-thumb' + (index === 0 ? ' active' : '');
+                        thumb.loading      = 'lazy';
+                        thumb.title        = variant.color;
+                        thumb.addEventListener('click', () => {
+                            isAutoRotating = false;
+                            clearInterval(autoRotateInterval);
+                            currentVariantIndex = index;
+                            selectVariant(index);
+                        });
+                        thumbsContainer.appendChild(thumb);
+                        thumbEls.push(thumb);
+
+                        /* Progress dot */
+                        const dot = document.createElement('div');
+                        dot.className = 'variant-dot' + (index === 0 ? ' active' : '');
+                        dot.title     = variant.color;
+                        dot.addEventListener('click', () => {
+                            isAutoRotating = false;
+                            clearInterval(autoRotateInterval);
+                            currentVariantIndex = index;
+                            selectVariant(index);
+                        });
+                        dotsContainer.appendChild(dot);
+                        dotEls.push(dot);
+
+                        /* Sidebar color swatch */
                         const swatch = document.createElement('div');
                         swatch.className = 'color-swatch' + (index === 0 ? ' active' : '');
                         swatch.style.backgroundColor = variant.colorCode;
                         swatch.setAttribute('data-color', variant.color);
                         swatch.title = variant.color;
-                        
                         swatch.addEventListener('click', () => {
                             isAutoRotating = false;
                             clearInterval(autoRotateInterval);
                             currentVariantIndex = index;
                             selectVariant(index);
                         });
-                        
                         colorSwatches.appendChild(swatch);
                     });
-                    
+
+                    function selectVariant(index) {
+                        const variant = product.variants[index];
+                        img1.src = variant.image;
+                        btn.href = variant.affiliateLink;
+                        selectedColorName.innerText = variant.color;
+
+                        thumbEls.forEach((t, i) => t.classList.toggle('active', i === index));
+                        thumbEls[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+
+                        dotEls.forEach((d, i) => d.classList.toggle('active', i === index));
+
+                        document.querySelectorAll('.color-swatch').forEach((s, i) => {
+                            s.classList.toggle('active', i === index);
+                        });
+                    }
+
+                    /* Set initial state */
                     selectedColorName.innerText = product.variants[0].color;
-                    img1.src = product.variants[0].image;
-                    btn.href = product.variants[0].affiliateLink;
-                    
+                    img1.src  = product.variants[0].image;
+                    btn.href  = product.variants[0].affiliateLink;
+
                     function startAutoRotate() {
                         autoRotateInterval = setInterval(() => {
                             if (!isPaused && isAutoRotating) {
                                 currentVariantIndex = (currentVariantIndex + 1) % product.variants.length;
                                 selectVariant(currentVariantIndex);
                             }
-                        }, 5000);
+                        }, 4000);
                     }
-                    
                     startAutoRotate();
-                    
+
                     const imageContainer = img1.parentElement;
                     imageContainer.addEventListener('mouseenter', () => isPaused = true);
                     imageContainer.addEventListener('mouseleave', () => isPaused = false);
