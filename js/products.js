@@ -830,6 +830,19 @@ const products = [
         image2: "images/turtle1.jpg",
         affiliateLink: "https://amzn.to/4ekaSFn",
         buttonText: "Shop on Amazon"
+    },
+    {
+        id: 58,
+        category: "women",
+        type: "fashion",
+        brand: "Colornival",
+        name: "Elegant Lace Beach Cover Up",
+        description: "Loose, long design, one size fits all heights and body shapes. Perfect for wearing at tanning salons, beaches, pools, or swimming pools. The unique lace floral pattern paired with bikinis, camisoles, or shorts enhances your fashion appeal. If you're wearing a bikini on a beach vacation, this beach cover-up not only protects you from strong UV rays but also makes you stand out in the crowd. A great gift for mothers, wives, girlfriends, or the woman you love. Whether for daily wear or vacation, it will surely bring you joy",
+        badge: "New Arrival",
+        image1: "images/colornival-elegant-lace-beach-cover-up.png",
+        image2: "images/colornival-elegant-lace-beach-cover-up.png",
+        affiliateLink: "https://amzn.to/44HlCrG",
+        buttonText: "Shop on Amazon"
     }
 ];
 
@@ -870,17 +883,4 @@ const outfits = [
         heroImage: "images/cosmetics-hero.webp",
         category: "Beauty"
     }
-    {
-        id: 58,
-        category: "women",
-        type: "fashion",
-        brand: "Colornival",
-        name: "Elegant Lace Beach Cover Up",
-        description: "Loose, long design, one size fits all heights and body shapes. Perfect for wearing at tanning salons, beaches, pools, or swimming pools. The unique lace floral pattern paired with bikinis, camisoles, or shorts enhances your fashion appeal. If you're wearing a bikini on a beach vacation, this beach cover-up not only protects you from strong UV rays but also makes you stand out in the crowd. A great gift for mothers, wives, girlfriends, or the woman you love. Whether for daily wear or vacation, it will surely bring you joy",
-        badge: "New Arrival",
-        image1: "images/colornival-elegant-lace-beach-cover-up.png",
-        image2: "images/colornival-elegant-lace-beach-cover-up.png",
-        affiliateLink: "https://amzn.to/44HlCrG",
-        buttonText: "Shop on Amazon"
-    },
 ];

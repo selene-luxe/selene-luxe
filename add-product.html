@@ -555,11 +555,11 @@
                 buttonText:   document.getElementById('f-btn').value.trim()
             };
 
-            /* Insert new entry before final ]; */
+            /* Insert new entry before the end of the products array (not outfits) */
             const entry    = buildEntry(product, nextId, imageFilename);
-            const insertAt = rawText.lastIndexOf('];');
+            const insertAt = rawText.indexOf('];\n\nconst outfits');
             if (insertAt === -1) throw new Error('Could not find end of products array in products.js');
-            const updated  = rawText.slice(0, insertAt) + entry + '\n];';
+            const updated  = rawText.slice(0, insertAt) + entry + '\n' + rawText.slice(insertAt);
 
             /* Upload image to GitHub */
             if (imgContent && imageFilename) {
