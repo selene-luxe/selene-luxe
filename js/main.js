@@ -1,4 +1,50 @@
+// ── Selene Luxe — Universal Affiliate Click Tracker ──────────────────────────
+// Fires GA4 + Pinterest Tag + Meta Pixel on every affiliate link click.
+// Attach data-track="affiliate" to any <a> to opt it in automatically.
+function trackAffiliateClick(productId, productName, platform, destinationUrl) {
+    if (typeof gtag === 'function') {
+        gtag('event', 'affiliate_click', {
+            event_category:     'Affiliate',
+            event_label:        productName,
+            product_id:         productId,
+            affiliate_platform: platform,
+            destination_url:    destinationUrl,
+            value:              1
+        });
+    }
+    if (typeof pintrk === 'function') {
+        pintrk('track', 'checkout', {
+            event_id:     'click_' + productId + '_' + Date.now(),
+            product_id:   String(productId),
+            product_name: productName,
+            currency:     'USD',
+            value:        0,
+            order_quantity: 1
+        });
+    }
+    if (typeof fbq === 'function') {
+        fbq('track', 'ViewContent', {
+            content_ids:  [String(productId)],
+            content_name: productName,
+            content_type: 'product',
+            currency:     'USD'
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('a[data-track="affiliate"]').forEach(function(link) {
+        link.addEventListener('click', function() {
+            trackAffiliateClick(
+                this.dataset.productId   || '',
+                this.dataset.productName || '',
+                this.dataset.platform    || 'unknown',
+                this.href
+            );
+        });
+    });
+
+
     // Header Scroll Effect
     const header = document.getElementById('main-header');
     const logo = document.getElementById('header-logo');
