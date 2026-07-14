@@ -821,7 +821,7 @@ const products = [
         image2: "images/colornival-elegant-lace-beach-cover-up.png",
         affiliateLink: "https://amzn.to/44HlCrG",
         buttonText: "Shop on Amazon"
-    }
+    },
     {
         id: 59,
         category: "men",
