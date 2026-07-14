@@ -822,6 +822,19 @@ const products = [
         affiliateLink: "https://amzn.to/44HlCrG",
         buttonText: "Shop on Amazon"
     }
+    {
+        id: 59,
+        category: "men",
+        type: "fashion",
+        brand: "COOFANDY",
+        name: "Men's Linen Shirts",
+        description: "These linen shirts are perfect for summer. Light, breathable, and great for any occasion!",
+        price: "Check Price",
+        image1: "images/coofandy-men-s-linen-shirts.jpg",
+        image2: "images/coofandy-men-s-linen-shirts.jpg",
+        affiliateLink: "https://amzn.to/4yfZoKV",
+        buttonText: "Shop on Amazon"
+    },
 ];
 
 const outfits = [
