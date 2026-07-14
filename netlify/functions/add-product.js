@@ -20,9 +20,7 @@ exports.handler = async (event) => {
     if (!token) {
         return {
             statusCode: 500, headers,
-            body: JSON.stringify({
-                error: 'GITHUB_TOKEN is not configured. Go to Netlify dashboard → Site settings → Environment variables and add GITHUB_TOKEN.'
-            })
+            body: JSON.stringify({ error: 'GITHUB_TOKEN is not configured. Go to Netlify dashboard → Site configuration → Environment variables and add GITHUB_TOKEN.' })
         };
     }
 
@@ -31,6 +29,12 @@ exports.handler = async (event) => {
         body = JSON.parse(event.body || '{}');
     } catch {
         return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid request body' }) };
+    }
+
+    /* ── PIN authentication ── */
+    const adminPin = process.env.ADMIN_PIN;
+    if (adminPin && body.pin !== adminPin) {
+        return { statusCode: 401, headers, body: JSON.stringify({ error: 'Invalid PIN' }) };
     }
 
     const { product, imageBase64, imageFilename } = body;
@@ -45,16 +49,17 @@ exports.handler = async (event) => {
 
         /* ── 2. Determine next ID ── */
         const ids = [...raw.matchAll(/\bid\s*:\s*(\d+)/g)].map(m => parseInt(m[1]));
-        const nextId = ids.length ? Math.max(...ids) + 1 : 58;
+        const nextId = ids.length ? Math.max(...ids) + 1 : 60;
 
         /* ── 3. Generate new product entry ── */
         const imgFile = imageFilename || 'product-' + nextId + '.jpg';
         const entry   = buildEntry(product, nextId, imgFile);
 
-        /* ── 4. Insert before final ]; ── */
-        const insertAt = raw.lastIndexOf('];');
+        /* ── 4. Insert before ];\n\nconst outfits (not inside outfits array) ── */
+        const MARKER = '];\n\nconst outfits';
+        const insertAt = raw.indexOf(MARKER);
         if (insertAt === -1) throw new Error('Could not find end of products array in products.js');
-        const updated = raw.slice(0, insertAt) + entry + '\n];';
+        const updated = raw.slice(0, insertAt) + entry + '\n' + raw.slice(insertAt);
 
         /* ── 5. Upload image (if provided) ── */
         if (imageBase64 && imageFilename) {
@@ -63,7 +68,7 @@ exports.handler = async (event) => {
             try {
                 const existing = await ghGet(`/repos/${OWNER}/${REPO}/contents/images/${imageFilename}`, token);
                 imgSha = existing.sha;
-            } catch (_) { /* New file — no sha needed */ }
+            } catch (_) { /* New file */ }
 
             await ghPut(`/repos/${OWNER}/${REPO}/contents/images/${imageFilename}`, {
                 message: `Add product image: ${imageFilename}`,

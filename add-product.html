@@ -257,7 +257,7 @@
     <div id="state-form">
     <div class="page-header">
         <h1 class="page-title">Add a New Product</h1>
-        <p class="page-desc">Upload your image, fill in the details, and click <strong>Add to My Website</strong>. Your product will appear on the site automatically — no coding needed.</p>
+        <p class="page-desc">Fill in the product details and upload a photo, then tap <strong>Add to My Website</strong>. Your product will appear on the live site within 1–2 minutes — no coding needed.</p>
     </div>
 
     <form id="product-form" novalidate>
@@ -317,18 +317,6 @@
                     <input type="text" id="f-btn" class="form-input" value="Check Availability on Amazon">
                 </div>
 
-                <div class="variants-section">
-                    <div class="variants-header">
-                        <span class="variants-title">Color Variants <span class="opt" style="text-transform:none;letter-spacing:0;">— optional</span></span>
-                        <button type="button" class="add-variant-btn" id="add-variant-btn">+ Add Single</button>
-                    </div>
-                    <div class="bulk-drop" id="bulk-drop">
-                        <div class="bulk-drop-icon">📁</div>
-                        <div class="bulk-drop-text"><strong>Drop all variant images at once</strong> — or click to browse<br><span style="font-size:.68rem;opacity:.7;">Hold Ctrl / Cmd to select multiple files</span></div>
-                    </div>
-                    <input type="file" id="bulk-file-input" accept="image/*" multiple style="display:none">
-                    <div id="variant-cards" class="variant-cards"></div>
-                </div>
             </div>
 
             <!-- Right: image -->
@@ -339,8 +327,8 @@
                     <img id="img-preview" class="image-preview" alt="Preview">
 
                     <div class="image-drop" id="img-drop">
-                        <div class="drop-icon">🖼️</div>
-                        <div class="drop-text">Click to select or drag &amp; drop<br>your AI-generated product image</div>
+                        <div class="drop-icon">�</div>
+                        <div class="drop-text">Tap here to upload a photo<br><span style="font-size:0.68rem;opacity:0.7;">Screenshot the product on Amazon, then pick from your camera roll</span></div>
                     </div>
                     <input type="file" id="img-file" accept="image/*" style="display:none">
 
@@ -357,16 +345,15 @@
     </form>
     </div><!-- /state-form -->
 
-    <!-- ── Setup state (first time only) ── -->
+    <!-- ── Setup state: PIN entry ── -->
     <div id="state-setup" class="status-screen">
-        <div class="status-icon">🔑</div>
-        <div class="status-title">One-time setup</div>
-        <div class="status-body">Paste your GitHub Personal Access Token below.<br>It's saved only in <em>this browser</em> — never shared anywhere else.</div>
-        <div style="width:100%;max-width:420px;text-align:left;">
-            <input type="password" id="token-input" class="form-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" style="margin-bottom:0.75rem;font-family:monospace;font-size:0.8rem;">
-            <button class="btn-primary" id="save-token-btn" style="width:100%;justify-content:center;">Save &amp; Continue →</button>
+        <div class="status-icon">�</div>
+        <div class="status-title">Enter your PIN</div>
+        <div class="status-body">Enter the admin PIN to access the product manager.</div>
+        <div style="width:100%;max-width:320px;text-align:left;">
+            <input type="password" id="token-input" class="form-input" placeholder="PIN" inputmode="numeric" autocomplete="current-password" style="margin-bottom:0.75rem;font-size:1.4rem;letter-spacing:0.5em;text-align:center;">
+            <button class="btn-primary" id="save-token-btn" style="width:100%;justify-content:center;">Unlock →</button>
         </div>
-        <p style="font-size:0.72rem;color:var(--muted);margin-top:1.5rem;">Token must have <strong>repo</strong> scope. <a href="https://github.com/settings/tokens" target="_blank" style="color:var(--warm);">Create one on GitHub →</a></p>
     </div>
 
     <!-- ── Loading state ── -->
@@ -399,7 +386,7 @@
         <div class="status-actions">
             <button class="btn-primary" id="retry-btn">Try Again</button>
         </div>
-        <p style="font-size:0.75rem;color:var(--muted);margin-top:1.5rem;">If the error says <em>bad credentials</em> or <em>401</em>, your token has expired — click Try Again to enter a new one.</p>
+        <p style="font-size:0.75rem;color:var(--muted);margin-top:1.5rem;">If the error says <em>Incorrect PIN</em>, click Try Again and re-enter your PIN.</p>
     </div>
 
 </main>
@@ -407,12 +394,8 @@
 <div class="toast" id="toast"></div>
 
 <script>
-    const OWNER  = 'selene-luxe';
-    const REPO   = 'selene-luxe';
-    const BRANCH = 'main';
-
-    /* ── Token helpers ── */
-    const getToken = () => localStorage.getItem('selene_gh_token');
+    /* ── PIN helpers ── */
+    const getPin = () => sessionStorage.getItem('selene_admin_pin');
 
     /* ── State machine ── */
     function showState(id) {
@@ -423,14 +406,14 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /* ── Init: show setup if no token saved ── */
-    showState(getToken() ? 'state-form' : 'state-setup');
+    /* ── Init: show PIN screen if not authenticated ── */
+    showState(getPin() ? 'state-form' : 'state-setup');
 
-    /* ── Save token ── */
+    /* ── Save PIN ── */
     document.getElementById('save-token-btn').addEventListener('click', () => {
         const val = document.getElementById('token-input').value.trim();
         if (!val) return;
-        localStorage.setItem('selene_gh_token', val);
+        sessionStorage.setItem('selene_admin_pin', val);
         showState('state-form');
     });
     document.getElementById('token-input').addEventListener('keydown', e => {
@@ -522,81 +505,10 @@
         });
     }
 
-    /* ── GitHub API helpers ── */
-    async function ghGet(path) {
-        const res = await fetch(`https://api.github.com${path}`, {
-            headers: {
-                Authorization: `Bearer ${getToken()}`,
-                Accept: 'application/vnd.github+json',
-                'X-GitHub-Api-Version': '2022-11-28'
-            }
-        });
-        if (!res.ok) {
-            const d = await res.json().catch(() => ({}));
-            throw new Error(d.message || `GitHub error ${res.status}`);
-        }
-        return res.json();
-    }
-
-    async function ghPut(path, body) {
-        const res = await fetch(`https://api.github.com${path}`, {
-            method: 'PUT',
-            headers: {
-                Authorization: `Bearer ${getToken()}`,
-                Accept: 'application/vnd.github+json',
-                'X-GitHub-Api-Version': '2022-11-28',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-        });
-        if (!res.ok) {
-            const d = await res.json().catch(() => ({}));
-            throw new Error(d.message || `GitHub error ${res.status}`);
-        }
-        return res.json();
-    }
-
-    /* ── Build products.js entry ── */
-    function buildEntry(p, id, imgFile) {
-        const q    = s => String(s || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"');
-        const type = ['cosmetics', 'home'].includes(p.category) ? 'lifestyle' : 'fashion';
-        const lines = [
-            `    {`,
-            `        id: ${id},`,
-            `        category: "${p.category}",`,
-            `        type: "${type}",`,
-            `        brand: "${q(p.brand)}",`,
-            `        name: "${q(p.name)}",`,
-            `        description: "${q(p.description)}",`
-        ];
-        lines.push(`        price: "Check Price",`);
-        if (p.badge)    lines.push(`        badge: "${q(p.badge)}",`);
-        if (p.trending) lines.push(`        trending: "${q(p.trending)}",`);
-        const hasVariants = p.variants && p.variants.length > 0;
-        lines.push(
-            `        image1: "images/${imgFile}",`,
-            `        image2: "images/${imgFile}",`,
-            `        affiliateLink: "${q(p.affiliateLink)}",`,
-            `        buttonText: "${q(p.buttonText)}"${hasVariants ? ',' : ''}`
-        );
-        if (hasVariants) {
-            const varLines = p.variants.map(v =>
-                `            { color: "${q(v.color)}", colorCode: "${q(v.colorCode)}", image: "images/${v.imageFile}" }`
-            );
-            lines.push(
-                `        variants: [`,
-                varLines.join(',\n'),
-                `        ]`
-            );
-        }
-        lines.push(`    },`);
-        return lines.join('\n');
-    }
-
-    /* ── Form submit → GitHub API (runs entirely in browser) ── */
+    /* ── Form submit → Netlify Function ── */
     document.getElementById('product-form').addEventListener('submit', async function (e) {
         e.preventDefault();
-        if (!getToken()) { showState('state-setup'); return; }
+        if (!getPin()) { showState('state-setup'); return; }
 
         const required = ['f-category', 'f-brand', 'f-name', 'f-desc', 'f-link', 'img-filename'];
         for (const fid of required) {
@@ -613,112 +525,52 @@
         try {
             const imageFilename = document.getElementById('img-filename').value.trim();
 
-            /* Compress & base64-encode image */
             let imgContent = null;
             if (uploadedFile) {
                 const compressed = await compressImage(uploadedFile);
                 imgContent = await blobToBase64(compressed);
             }
 
-            /* Fetch current products.js from GitHub */
-            const fileData = await ghGet(`/repos/${OWNER}/${REPO}/contents/js/products.js`);
-            const rawBytes = Uint8Array.from(atob(fileData.content.replace(/\n/g, '')), c => c.charCodeAt(0));
-            const rawText  = new TextDecoder().decode(rawBytes);
-
-            /* Find next product ID */
-            const ids   = [...rawText.matchAll(/\bid\s*:\s*(\d+)/g)].map(m => parseInt(m[1]));
-            const nextId = ids.length ? Math.max(...ids) + 1 : 58;
-
-            /* Build product from form */
             const product = {
-                category:     document.getElementById('f-category').value,
-                brand:        document.getElementById('f-brand').value.trim(),
-                name:         document.getElementById('f-name').value.trim(),
-                description:  document.getElementById('f-desc').value.trim(),
-                badge:        document.getElementById('f-badge').value.trim(),
-                trending:     document.getElementById('f-trending').value.trim(),
+                category:      document.getElementById('f-category').value,
+                brand:         document.getElementById('f-brand').value.trim(),
+                name:          document.getElementById('f-name').value.trim(),
+                description:   document.getElementById('f-desc').value.trim(),
+                badge:         document.getElementById('f-badge').value.trim(),
+                trending:      document.getElementById('f-trending').value.trim(),
                 affiliateLink: document.getElementById('f-link').value.trim(),
-                buttonText:   document.getElementById('f-btn').value.trim()
+                buttonText:    document.getElementById('f-btn').value.trim()
             };
 
-            /* Collect color variants from cards */
-            const variants = [];
-            document.querySelectorAll('.variant-card').forEach(card => {
-                const colorName = card.querySelector('.vc-color-name').value.trim();
-                const colorCode = card.querySelector('.vc-color-code').value.trim();
-                const vFile     = card.querySelector('.vc-img-filename').value.trim();
-                if (colorName && vFile) {
-                    variants.push({
-                        color:     colorName,
-                        colorCode: colorCode === 'multicolor' ? 'multicolor' : (/^#[0-9a-fA-F]{6}$/.test(colorCode) ? colorCode : '#000000'),
-                        imageFile: vFile
-                    });
+            const res = await fetch('/.netlify/functions/add-product', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    pin:           getPin(),
+                    product,
+                    imageBase64:   imgContent,
+                    imageFilename: imgContent ? imageFilename : null
+                })
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                if (res.status === 401) {
+                    sessionStorage.removeItem('selene_admin_pin');
+                    document.getElementById('error-msg').textContent = 'Incorrect PIN — please try again.';
+                } else {
+                    document.getElementById('error-msg').textContent = data.error || 'Unknown error. Please try again.';
                 }
-            });
-            if (variants.length) product.variants = variants;
-
-            /* Insert new entry before the end of the products array (not outfits) */
-            const entry    = buildEntry(product, nextId, imageFilename);
-            const insertAt = rawText.indexOf('];\n\nconst outfits');
-            if (insertAt === -1) throw new Error('Could not find end of products array in products.js');
-            const updated  = rawText.slice(0, insertAt) + entry + '\n' + rawText.slice(insertAt);
-
-            /* Upload image to GitHub */
-            if (imgContent && imageFilename) {
-                let imgSha;
-                try {
-                    const ex = await ghGet(`/repos/${OWNER}/${REPO}/contents/images/${imageFilename}`);
-                    imgSha = ex.sha;
-                } catch (_) {}
-                await ghPut(`/repos/${OWNER}/${REPO}/contents/images/${imageFilename}`, {
-                    message: `Add image: ${imageFilename}`,
-                    content: imgContent,
-                    branch: BRANCH,
-                    ...(imgSha ? { sha: imgSha } : {})
-                });
+                showState('state-error');
+                return;
             }
-
-            /* Upload variant images to GitHub */
-            for (const [idxStr, vFile] of Object.entries(variantFiles)) {
-                const vCard = document.querySelector(`.variant-card[data-idx="${idxStr}"]`);
-                if (!vCard) continue;
-                const vFilename = vCard.querySelector('.vc-img-filename').value.trim();
-                if (!vFilename) continue;
-                const vCompressed = await compressImage(vFile);
-                const vContent    = await blobToBase64(vCompressed);
-                let vSha;
-                try {
-                    const ex = await ghGet(`/repos/${OWNER}/${REPO}/contents/images/${vFilename}`);
-                    vSha = ex.sha;
-                } catch (_) {}
-                await ghPut(`/repos/${OWNER}/${REPO}/contents/images/${vFilename}`, {
-                    message: `Add variant image: ${vFilename}`,
-                    content: vContent,
-                    branch: BRANCH,
-                    ...(vSha ? { sha: vSha } : {})
-                });
-            }
-
-            /* Update products.js on GitHub */
-            const encoded = btoa(String.fromCharCode(...new TextEncoder().encode(updated)));
-            await ghPut(`/repos/${OWNER}/${REPO}/contents/js/products.js`, {
-                message: `Add product #${nextId}: ${product.brand} – ${product.name}`,
-                content: encoded,
-                sha: fileData.sha,
-                branch: BRANCH
-            });
 
             document.getElementById('success-name').textContent = product.brand + ' ' + product.name;
             showState('state-success');
 
         } catch (err) {
-            const isAuth = /bad credential|401|unauthorized/i.test(err.message);
-            if (isAuth) {
-                localStorage.removeItem('selene_gh_token');
-                document.getElementById('error-msg').textContent = 'Token invalid or expired — click Try Again to re-enter it.';
-            } else {
-                document.getElementById('error-msg').textContent = err.message;
-            }
+            document.getElementById('error-msg').textContent = err.message;
             showState('state-error');
         }
     });
@@ -728,154 +580,15 @@
         document.getElementById('product-form').reset();
         uploadedFile = null;
         imgPreview.style.display = 'none';
-        imgDrop.querySelector('.drop-icon').textContent = '🖼️';
-        imgDrop.querySelector('.drop-text').textContent = 'Click to select or drag & drop\nyour AI-generated product image';
+        imgDrop.querySelector('.drop-icon').textContent = '📷';
+        imgDrop.querySelector('.drop-text').innerHTML = 'Tap here to upload a photo<br><span style="font-size:0.68rem;opacity:0.7;">Screenshot the product on Amazon, then pick from your camera roll</span>';
         ['img-filename', 'f-badge', 'f-btn'].forEach(id => document.getElementById(id).dataset.edited = '');
-        document.getElementById('variant-cards').innerHTML = '';
-        Object.keys(variantFiles).forEach(k => delete variantFiles[k]);
         showState('state-form');
     });
 
     document.getElementById('retry-btn').addEventListener('click', () =>
-        showState(getToken() ? 'state-form' : 'state-setup')
+        showState(getPin() ? 'state-form' : 'state-setup')
     );
-
-    /* ── Color Variants — card grid with bulk upload ── */
-    let variantCounter = 0;
-    const variantFiles = {};
-
-    function slugify(s) {
-        return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 38);
-    }
-
-    function createVariantCard(file) {
-        variantCounter++;
-        const idx = variantCounter;
-        const card = document.createElement('div');
-        card.className = 'variant-card';
-        card.dataset.idx = idx;
-        card.innerHTML = `
-            <div class="vc-thumb-wrap">
-                <img class="vc-thumb" src="" alt="">
-                <div class="vc-thumb-empty">
-                    <span style="font-size:1.6rem">📁</span>
-                    <span>Click or drop<br>to upload image</span>
-                </div>
-                <input type="file" class="vc-file-input" accept="image/*" style="display:none">
-            </div>
-            <div class="vc-fields">
-                <input type="text" class="form-input vc-color-name" placeholder="Color name (e.g. Red)">
-                <div class="color-picker-wrapper" style="margin-top:.1rem;">
-                    <input type="color" class="color-input vc-color-picker" value="#C4956A">
-                    <input type="text" class="form-input color-hex vc-color-code" placeholder="#C4956A" value="#C4956A">
-                    <button type="button" class="pattern-btn" title="Pattern / Multicolor">🌈</button>
-                </div>
-                <input type="text" class="form-input vc-img-filename" placeholder="filename.jpg">
-            </div>
-            <button type="button" class="vc-remove">✕ Remove</button>
-        `;
-
-        const thumb      = card.querySelector('.vc-thumb');
-        const thumbEmpty = card.querySelector('.vc-thumb-empty');
-        const thumbWrap  = card.querySelector('.vc-thumb-wrap');
-        const fileInput  = card.querySelector('.vc-file-input');
-        const fnInput    = card.querySelector('.vc-img-filename');
-        const colorInput = card.querySelector('.vc-color-name');
-        const picker     = card.querySelector('.vc-color-picker');
-        const hexInput   = card.querySelector('.vc-color-code');
-        const patternBtn = card.querySelector('.pattern-btn');
-
-        function loadFile(f) {
-            variantFiles[idx] = f;
-            const reader = new FileReader();
-            reader.onload = e => {
-                thumb.src = e.target.result;
-                thumb.style.display = 'block';
-                thumbEmpty.style.display = 'none';
-            };
-            reader.readAsDataURL(f);
-            if (!fnInput.dataset.edited) {
-                const ext  = f.name.split('.').pop().toLowerCase();
-                const base = document.getElementById('f-name').value.trim();
-                fnInput.value = slugify(base + '-' + (colorInput.value.trim() || 'variant-' + idx)) + '.' + ext;
-            }
-        }
-
-        thumbWrap.addEventListener('click',    () => fileInput.click());
-        thumbWrap.addEventListener('dragover',  e => { e.preventDefault(); thumbWrap.classList.add('drag-over'); });
-        thumbWrap.addEventListener('dragleave', () => thumbWrap.classList.remove('drag-over'));
-        thumbWrap.addEventListener('drop', e => {
-            e.preventDefault(); thumbWrap.classList.remove('drag-over');
-            if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
-        });
-        fileInput.addEventListener('change', e => { if (e.target.files[0]) loadFile(e.target.files[0]); });
-
-        if (file) loadFile(file);
-
-        /* First variant: inherit main product filename + link */
-        if (idx === 1) {
-            const mainFile = document.getElementById('img-filename').value.trim();
-            if (mainFile && !file) fnInput.value = mainFile;
-        }
-
-        picker.addEventListener('input', () => { hexInput.value = picker.value; });
-        hexInput.addEventListener('input', () => {
-            if (/^#[0-9a-fA-F]{6}$/.test(hexInput.value)) picker.value = hexInput.value;
-        });
-        colorInput.addEventListener('input', () => {
-            if (!fnInput.dataset.edited && variantFiles[idx]) {
-                const ext  = variantFiles[idx].name.split('.').pop().toLowerCase();
-                fnInput.value = slugify(document.getElementById('f-name').value.trim() + '-' + (colorInput.value.trim() || 'variant-' + idx)) + '.' + ext;
-            }
-        });
-        fnInput.addEventListener('input', function () { this.dataset.edited = '1'; });
-
-        let isMulticolor = false;
-        patternBtn.addEventListener('click', () => {
-            isMulticolor = !isMulticolor;
-            if (isMulticolor) {
-                hexInput.value = 'multicolor'; hexInput.readOnly = true;
-                hexInput.style.color = 'transparent';
-                hexInput.style.background = 'linear-gradient(90deg,#ff6b6b,#ffd93d,#6bcb77,#4d96ff,#c084fc)';
-                picker.style.opacity = '0.25'; picker.style.pointerEvents = 'none';
-                patternBtn.classList.add('active');
-            } else {
-                hexInput.value = '#C4956A'; hexInput.readOnly = false;
-                hexInput.style.color = ''; hexInput.style.background = '';
-                picker.style.opacity = ''; picker.style.pointerEvents = '';
-                patternBtn.classList.remove('active');
-            }
-        });
-
-        card.querySelector('.vc-remove').addEventListener('click', () => {
-            delete variantFiles[idx];
-            card.remove();
-        });
-
-        return card;
-    }
-
-    function handleBulkFiles(files) {
-        const container = document.getElementById('variant-cards');
-        Array.from(files).forEach(f => container.appendChild(createVariantCard(f)));
-    }
-
-    document.getElementById('add-variant-btn').addEventListener('click', () => {
-        document.getElementById('variant-cards').appendChild(createVariantCard(null));
-    });
-
-    const bulkDrop  = document.getElementById('bulk-drop');
-    const bulkInput = document.getElementById('bulk-file-input');
-    bulkDrop.addEventListener('click',    () => bulkInput.click());
-    bulkDrop.addEventListener('dragover',  e => { e.preventDefault(); bulkDrop.classList.add('drag-over'); });
-    bulkDrop.addEventListener('dragleave', () => bulkDrop.classList.remove('drag-over'));
-    bulkDrop.addEventListener('drop', e => {
-        e.preventDefault(); bulkDrop.classList.remove('drag-over');
-        if (e.dataTransfer.files.length) handleBulkFiles(e.dataTransfer.files);
-    });
-    bulkInput.addEventListener('change', e => {
-        if (e.target.files.length) { handleBulkFiles(e.target.files); e.target.value = ''; }
-    });
 </script>
 </body>
 </html>
