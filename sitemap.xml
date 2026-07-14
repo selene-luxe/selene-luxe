@@ -35,4 +35,14 @@
     <lastmod>2026-07-01</lastmod>
     <priority>0.3</priority>
   </url>
+  <url>
+    <loc>https://seleneluxe.fashion/lists.html</loc>
+    <lastmod>2026-07-14</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://seleneluxe.fashion/trending.html</loc>
+    <lastmod>2026-07-01</lastmod>
+    <priority>0.7</priority>
+  </url>
 </urlset>

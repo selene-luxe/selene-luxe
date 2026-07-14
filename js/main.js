@@ -1,3 +1,25 @@
+// ── Amazon OneLink — International Visitor Localisation ───────────────────────
+// Automatically converts amazon.com links → visitor's local Amazon store.
+// HOW TO ACTIVATE (one-time setup):
+//   1. Associates Central → Tools → OneLink → Set Up Your OneLink
+//   2. Link US account to UK / CA / DE / JP / AU etc.
+//   3. Copy the value of `amzn_assoc_linkid` from the script snippet provided
+//   4. Paste it below, replacing the empty string (leave empty to disable)
+var AMAZON_ONELINK_ID = ''; // ← e.g. 'a1b2c3d4e5f678901234'
+(function () {
+    if (!AMAZON_ONELINK_ID) return;
+    window.amzn_assoc_ad_type     = 'link_enhancement_widget';
+    window.amzn_assoc_tracking_id = 'seleneluxe05-20';
+    window.amzn_assoc_marketplace = 'amazon';
+    window.amzn_assoc_region      = 'US';
+    window.amzn_assoc_linkid      = AMAZON_ONELINK_ID;
+    var s = document.createElement('script');
+    s.type  = 'text/javascript';
+    s.async = true;
+    s.src   = '//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=' + AMAZON_ONELINK_ID + '&script=0';
+    (document.head || document.body).appendChild(s);
+}());
+
 // ── Selene Luxe — Universal Affiliate Click Tracker ──────────────────────────
 // Fires GA4 + Pinterest Tag + Meta Pixel on every affiliate link click.
 // Attach data-track="affiliate" to any <a> to opt it in automatically.
