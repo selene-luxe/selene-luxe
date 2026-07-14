@@ -593,32 +593,12 @@
         }).catch(() => showToast('Please copy the text manually.'));
     }
 
-    /* ── Open Pinterest popup (title already on clipboard from copy-btn click OR copy here) ── */
+    /* ── Open Pinterest popup + auto-copy title ── */
     function openPinterest(url, title) {
-        /* Use synchronous execCommand first — navigator.clipboard is async and loses
-           the user-gesture context once window.open() shifts browser focus away. */
-        let copied = false;
-        try {
-            const ta = document.createElement('textarea');
-            ta.value = title;
-            ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0;pointer-events:none';
-            document.body.appendChild(ta);
-            ta.focus();
-            ta.select();
-            copied = document.execCommand('copy');
-            document.body.removeChild(ta);
-        } catch (e) { /* fall through */ }
-
-        if (copied) {
-            showToast('✓ Title copied — paste it in Pinterest\'s title field!');
-        } else {
-            /* Async fallback (may or may not win the race with the popup) */
-            navigator.clipboard.writeText(title)
-                .then(() => showToast('✓ Title copied — paste it in Pinterest\'s title field!'))
-                .catch(() => showToast('⚠ Could not auto-copy — copy the title manually first!'));
-        }
-
         window.open(url, 'pinterest-create', 'width=760,height=680,left=200,top=80');
+        navigator.clipboard.writeText(title)
+            .then(() => showToast('✓ Title copied — paste it in Pinterest\'s title field!'))
+            .catch(() => showToast('⚠ Could not auto-copy — click "Copy Title" button first.'));
     }
 
     /* ── SVG icons ── */

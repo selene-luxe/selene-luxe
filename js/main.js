@@ -105,3 +105,93 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// ── Email Capture Popup — Trigger Logic ──────────────────────────────────────
+(function () {
+    const STORAGE_KEY  = 'sl_popup_last_shown';
+    const COOLDOWN_MS  = 7 * 24 * 60 * 60 * 1000; // 7 days
+
+    // Skip on admin pages
+    const adminPaths = ['/add-product', '/manage-products', '/pinterest-admin'];
+    if (adminPaths.some(function (p) { return location.pathname.includes(p); })) return;
+
+    // Respect cooldown
+    var last = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
+    if (Date.now() - last < COOLDOWN_MS) return;
+
+    var overlay = document.getElementById('sl-capture-overlay');
+    if (!overlay) return;
+
+    var shown = false;
+
+    function showPopup() {
+        if (shown) return;
+        shown = true;
+        overlay.style.display = 'flex';
+        overlay.setAttribute('aria-hidden', 'false');
+        localStorage.setItem(STORAGE_KEY, Date.now().toString());
+    }
+
+    // Trigger 1: 45 seconds
+    var timer = setTimeout(showPopup, 45000);
+
+    // Trigger 2: 60% scroll depth
+    function onScroll() {
+        var scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        if (scrolled >= 0.6) {
+            clearTimeout(timer);
+            showPopup();
+            window.removeEventListener('scroll', onScroll);
+        }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Trigger 3: exit intent (desktop only)
+    document.addEventListener('mouseleave', function onLeave(e) {
+        if (e.clientY < 10) {
+            clearTimeout(timer);
+            showPopup();
+            document.removeEventListener('mouseleave', onLeave);
+        }
+    });
+
+    // Close — X button
+    var closeBtn = document.getElementById('sl-capture-close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function () {
+            overlay.style.display = 'none';
+        });
+    }
+
+    // Close — backdrop click
+    overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) overlay.style.display = 'none';
+    });
+
+    // Form submit (connect to email provider endpoint when ready)
+    var form = document.getElementById('sl-capture-form');
+    if (form) {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.textContent = 'You\'re in ✓';
+            submitBtn.classList.add('sl-success');
+            setTimeout(function () { overlay.style.display = 'none'; }, 1200);
+            // Uncomment & replace URL when email provider is set up:
+            // var email = form.querySelector('input[type=email]').value;
+            // fetch('https://your-mailchimp-or-convertkit-endpoint', {
+            //     method: 'POST',
+            //     body: JSON.stringify({ email: email }),
+            //     headers: { 'Content-Type': 'application/json' }
+            // });
+        });
+    }
+}());
+
+// Google Sign-In callback (fires when user completes Google one-tap)
+function handleGoogleSignIn(response) {
+    // response.credential is a JWT — pass to your backend or Firebase Auth
+    console.log('Google Sign-In credential received');
+    var overlay = document.getElementById('sl-capture-overlay');
+    if (overlay) overlay.style.display = 'none';
+}

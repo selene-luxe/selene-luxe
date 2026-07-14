@@ -675,3 +675,126 @@ button {
     transform: none;
     box-shadow: none;
 }
+
+/* ==========================================================================
+   EMAIL CAPTURE POPUP (Pillar 4)
+   ========================================================================== */
+#sl-capture-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: sl-fadein 0.4s ease;
+}
+@keyframes sl-fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+#sl-capture-card {
+  background: #faf8f4;
+  max-width: 420px;
+  width: 90%;
+  padding: 3rem 2.5rem;
+  border-radius: 2px;
+  text-align: center;
+  position: relative;
+  font-family: var(--font-serif);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+}
+#sl-capture-card h2 {
+  font-size: 1.75rem;
+  margin: 0.5rem 0 0.75rem;
+  color: var(--text-color);
+  font-weight: 500;
+}
+.sl-eyebrow {
+  letter-spacing: 0.18em;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  font-family: var(--font-sans);
+  font-weight: 700;
+}
+.sl-sub {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 0;
+  font-family: var(--font-sans);
+}
+#sl-capture-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  line-height: 1;
+  padding: 0.25rem;
+  transition: color 0.2s;
+}
+#sl-capture-close:hover { color: var(--text-color); }
+#sl-capture-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 1.5rem 0 1rem;
+}
+#sl-capture-form input[type="email"] {
+  border: 1px solid var(--border-color);
+  padding: 0.85rem 1rem;
+  font-size: 0.9rem;
+  outline: none;
+  background: #fff;
+  font-family: var(--font-sans);
+  transition: border-color 0.2s;
+}
+#sl-capture-form input[type="email"]:focus {
+  border-color: var(--text-color);
+}
+#sl-capture-form button[type="submit"] {
+  background: var(--text-color);
+  color: #fff;
+  padding: 0.9rem;
+  font-size: 0.72rem;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+#sl-capture-form button[type="submit"]:hover { opacity: 0.8; }
+.sl-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.5rem 0;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.sl-divider::before,
+.sl-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-color);
+}
+.sl-legal {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  margin-top: 1rem;
+  font-family: var(--font-sans);
+  opacity: 0.7;
+}

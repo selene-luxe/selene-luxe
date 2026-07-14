@@ -380,6 +380,65 @@
         </div>
     </footer>
 
+    <!-- ── EMAIL CAPTURE POPUP ── -->
+    <div id="sl-capture-overlay" aria-hidden="true" style="display:none;">
+      <div id="sl-capture-card">
+        <button id="sl-capture-close" aria-label="Close">&times;</button>
+        <p class="sl-eyebrow">The Selene Edit</p>
+        <h2>Discover what&rsquo;s curated for you.</h2>
+        <p class="sl-sub">New edits, exclusive finds, and style intel &mdash; delivered quietly.</p>
+        <form id="sl-capture-form">
+          <input type="email" placeholder="your@email.com" required autocomplete="email">
+          <button type="submit">Join the Edit</button>
+        </form>
+        <div class="sl-divider"><span>or continue with</span></div>
+        <div id="g_id_onload"
+             data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
+             data-callback="handleGoogleSignIn"
+             data-auto_prompt="false">
+        </div>
+        <div class="g_id_signin"
+             data-type="standard"
+             data-shape="pill"
+             data-theme="outline"
+             data-text="continue_with"
+             data-size="large"
+             data-logo_alignment="left">
+        </div>
+        <p class="sl-legal">No spam. Unsubscribe any time.</p>
+      </div>
+    </div>
+    <style>
+      #sl-capture-overlay {
+        position: fixed; inset: 0; z-index: 9999;
+        background: rgba(0,0,0,0.6);
+        backdrop-filter: blur(6px);
+        display: flex; align-items: center; justify-content: center;
+        animation: sl-fadein .4s ease;
+      }
+      @keyframes sl-fadein { from { opacity:0 } to { opacity:1 } }
+      #sl-capture-card {
+        background: #fff;
+        max-width: 420px; width: 90%;
+        padding: 3rem 2.5rem;
+        border-radius: 2px;
+        text-align: center;
+        position: relative;
+        font-family: 'Cormorant Garamond', Georgia, serif;
+      }
+      #sl-capture-card h2 { font-size: 1.8rem; margin: .5rem 0; color: #1a1a1a; }
+      .sl-eyebrow { letter-spacing: .15em; font-size: .75rem; text-transform: uppercase; color: #C4956A; margin-bottom: .25rem; }
+      .sl-sub { font-size: .95rem; color: #555; line-height: 1.6; margin: .5rem 0 0; font-family: 'Inter', sans-serif; }
+      #sl-capture-close { position:absolute; top:1rem; right:1.2rem; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#888; line-height:1; }
+      #sl-capture-form { display:flex; flex-direction:column; gap:.75rem; margin:1.5rem 0 1rem; }
+      #sl-capture-form input { border:1px solid #ddd; padding:.75rem 1rem; font-size:1rem; outline:none; font-family: 'Inter', sans-serif; }
+      #sl-capture-form input:focus { border-color: #1a1a1a; }
+      #sl-capture-form button { background:#1a1a1a; color:#fff; padding:.8rem; font-size:.75rem; border:none; cursor:pointer; letter-spacing:.1em; text-transform: uppercase; font-family: 'Inter', sans-serif; font-weight: 600; transition: background .2s; }
+      #sl-capture-form button:hover { background:#333; }
+      #sl-capture-form button.sl-success { background: #3a7d44; }
+      .sl-legal { font-size:.72rem; color:#aaa; margin-top:.75rem; font-family: 'Inter', sans-serif; }
+    </style>
+
     <script src="js/products.js"></script>
     <script src="js/main.js"></script>
     <script>
@@ -543,6 +602,52 @@
                 lifestyleProducts.forEach(p => { grid.innerHTML += renderCard(p); });
             }
         });
+    </script>
+    <script>
+        (function() {
+            const STORAGE_KEY = 'sl_popup_last_shown';
+            const COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000;
+            const last = parseInt(localStorage.getItem(STORAGE_KEY) || '0');
+            if (Date.now() - last < COOLDOWN_MS) return;
+
+            const overlay = document.getElementById('sl-capture-overlay');
+            if (!overlay) return;
+
+            let shown = false;
+            function showPopup() {
+                if (shown) return;
+                shown = true;
+                overlay.style.display = 'flex';
+                overlay.setAttribute('aria-hidden', 'false');
+                localStorage.setItem(STORAGE_KEY, Date.now().toString());
+            }
+
+            const timer = setTimeout(showPopup, 45000);
+
+            function onScroll() {
+                const scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+                if (scrolled >= 0.7) { clearTimeout(timer); showPopup(); window.removeEventListener('scroll', onScroll); }
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+
+            document.addEventListener('mouseleave', function onLeave(e) {
+                if (e.clientY < 10) { clearTimeout(timer); showPopup(); document.removeEventListener('mouseleave', onLeave); }
+            });
+
+            document.getElementById('sl-capture-close').addEventListener('click', () => {
+                overlay.style.display = 'none';
+            });
+            overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.style.display = 'none'; });
+
+            document.getElementById('sl-capture-form').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const btn = this.querySelector('button[type=submit]');
+                btn.textContent = 'Thank you!';
+                btn.classList.add('sl-success');
+                btn.disabled = true;
+                setTimeout(() => { overlay.style.display = 'none'; }, 1400);
+            });
+        })();
     </script>
 </body>
 </html>
