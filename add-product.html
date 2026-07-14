@@ -284,10 +284,6 @@
                         <label class="field-label" for="f-brand">Brand Name</label>
                         <input type="text" id="f-brand" class="form-input" placeholder="e.g. CERAVE" required>
                     </div>
-                    <div class="field-group">
-                        <label class="field-label" for="f-price">Price <span class="opt">(optional)</span></label>
-                        <input type="text" id="f-price" class="form-input" placeholder="e.g. $24.99">
-                    </div>
                 </div>
 
                 <div class="field-group">
@@ -573,7 +569,7 @@
             `        name: "${q(p.name)}",`,
             `        description: "${q(p.description)}",`
         ];
-        if (p.price)    lines.push(`        price: "${q(p.price)}",`);
+        lines.push(`        price: "Check Price",`);
         if (p.badge)    lines.push(`        badge: "${q(p.badge)}",`);
         if (p.trending) lines.push(`        trending: "${q(p.trending)}",`);
         const hasVariants = p.variants && p.variants.length > 0;
@@ -639,7 +635,6 @@
                 brand:        document.getElementById('f-brand').value.trim(),
                 name:         document.getElementById('f-name').value.trim(),
                 description:  document.getElementById('f-desc').value.trim(),
-                price:        document.getElementById('f-price').value.trim(),
                 badge:        document.getElementById('f-badge').value.trim(),
                 trending:     document.getElementById('f-trending').value.trim(),
                 affiliateLink: document.getElementById('f-link').value.trim(),
