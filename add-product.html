@@ -553,7 +553,11 @@
                 })
             });
 
-            const data = await res.json();
+            const rawText = await res.text();
+            let data = {};
+            try { data = JSON.parse(rawText); } catch {
+                throw new Error(`Function not reachable (got HTML ${res.status}). Open this page at benevolent-semolina-55a046.netlify.app/add-product.html`);
+            }
 
             if (!res.ok) {
                 if (res.status === 401) {
